@@ -18,7 +18,7 @@ if [ -f "$BOX_FILE_PATH" ]; then
         echo "No changes detected."
     else
         git add "Project REST.docx"
-        git commit -m "Updated document from Box Drive"
+        git commit -m "*AUTOMATED PUSH* Updating document from Box Drive"
         git push origin main
         echo "Changes pushed to GitHub."
     fi
