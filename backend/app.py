@@ -2,11 +2,11 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend access
+CORS(app)  
 
 @app.route('/api/menu', methods=['GET'])
 def get_menu():
-    print("API was called!")  # Debugging: Print when the API is accessed
+    print("API was called!")  
     menu_items = [
         {"id": 1, "name": "Chicken Wings", "price": 12.99},
         {"id": 2, "name": "Burger", "price": 9.99},
@@ -17,5 +17,5 @@ def get_menu():
     return jsonify(menu_items)
 
 if __name__ == '__main__':
-    print("Flask is starting...")  # Debugging: Show when Flask starts
+    print("Flask is starting...") 
     app.run(debug=True, port=5000)

@@ -2,7 +2,7 @@
 
 This is the **Flask backend** for Project REST, providing APIs for restaurant analytics.
 
-## 📌 Features
+## Features
 - Serves restaurant menu data via a RESTful API.
 - Supports CORS for frontend integration.
 - Lightweight and easy to deploy.

@@ -18,9 +18,9 @@ Project REST is a **full-stack tool** that aggregates, analyzes, and visualizes 
 | **Component**       | **Technology** |
 |---------------------|---------------|
 | **Backend**        | Python (Flask/Django) |
-| **NLP & AI**       | tbd |
+| **AI**             | tbd |
 | **Web Scraping**   | tbd |
-| **Database**       | PostgreSQL / Firebase |
+| **Database**       |  Firebase |
 | **Frontend**       | React.js / Next.js |
 | **Deployment**     | tbd |
 
@@ -39,8 +39,7 @@ cd Project-REST
 
 ## 👨‍💻 Contributors
 
-| Name            | NetID  | GitHub         |
+| Name            | NetID  | GitHub       |
 |----------------|--------|---------------|
 | Ahmed Abdulla  | aaa384 | @ahmed-52 |
 | Farhan Mashrur | fm454  | @fm454|
-
