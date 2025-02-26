@@ -6,6 +6,8 @@ _A Data-Driven Review Analysis Tool for the Restaurant & Hospitality Industry_
 ## **📌 Overview**
 Project REST is a **full-stack tool** that aggregates, analyzes, and visualizes customer reviews from multiple platforms. Using **web scraping and NLP**, it provides restaurant owners with actionable insights to improve their business.
 
+#### Note changes to the Project Rest.docx locally wont sync, if you would like to make any edits please use 'box' so changes are saved. The document that lives here is a reflection and is updated weekly, some changes might not show up.
+
 ## **🛠 Features**
 ✅ **Automated Sentiment Analysis** – Understand customer feedback in real time.  
 ✅ **Multi-Source Data Aggregation** – Scrape reviews from Yelp, Google, TripAdvisor, and more.  
