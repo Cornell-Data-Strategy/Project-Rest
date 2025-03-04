@@ -1,0 +1,3182 @@
+[
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnTURnc3BDMDVBRRAB",
+        "review": "My partner has a treenut allergy. She told them this when ordering the food, but not 10 min after eating it she had to go to the hospital after using her EpiPen. They have zero regard for allergies. If you are sensitive to cross contamination do not eat here.",
+        "sentiment_score": -0.6000000238418579,
+        "sentiment_magnitude": 2.5999999046325684,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "partner",
+                "type": "PERSON",
+                "salience": 0.7207488417625427
+            },
+            {
+                "name": "treenut allergy",
+                "type": "OTHER",
+                "salience": 0.1950443834066391
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.02319038286805153
+            },
+            {
+                "name": "hospital",
+                "type": "LOCATION",
+                "salience": 0.021558240056037903
+            },
+            {
+                "name": "EpiPen",
+                "type": "OTHER",
+                "salience": 0.012955526821315289
+            },
+            {
+                "name": "contamination",
+                "type": "OTHER",
+                "salience": 0.011330303736031055
+            },
+            {
+                "name": "allergies",
+                "type": "OTHER",
+                "salience": 0.008122259750962257
+            },
+            {
+                "name": "regard",
+                "type": "OTHER",
+                "salience": 0.0070500667206943035
+            },
+            {
+                "name": "zero",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "10",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNaamItTUpnEAE",
+        "review": "Food is extremely mid and over priced, and it's constantly packed. Happy hour is nice in college town",
+        "sentiment_score": 0.10000000149011612,
+        "sentiment_magnitude": 1.5,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "Food",
+                "type": "OTHER",
+                "salience": 0.9340705871582031
+            },
+            {
+                "name": "college town",
+                "type": "LOCATION",
+                "salience": 0.06592941284179688
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNfbnJYUHpRRRAB",
+        "review": "Historic and go see why! So many options and places to hang out for a relaxing time.",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 1.7000000476837158,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.5197057723999023
+            },
+            {
+                "name": "places",
+                "type": "LOCATION",
+                "salience": 0.48029422760009766
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUR2eDliaThnRRAB",
+        "review": "Memories~",
+        "sentiment_score": 0.5,
+        "sentiment_magnitude": 0.5,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "Memories",
+                "type": "OTHER",
+                "salience": 1.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUR2dzh2ZW13RRAB",
+        "review": "The bagels are expensive but good, the coffee is passable, but the sanitary practices and customer service are lacking.  I waited at the register while an employee, wearing gloves, sat using her phone for about two minutes before another worker came to take my order. I then watched as the same employee, still without changing her gloves, wiped surfaces with a sanitation rag, flipped through a magazine, chatted with coworkers, and continued using her phone all while preparing food.  By the time I left, she had yet to change gloves, handling food for multiple customers after touching various unsanitary surfaces and potentially spreading bleach from the sanitation bucket. Absolutely unacceptable and frankly disgusting.",
+        "sentiment_score": -0.699999988079071,
+        "sentiment_magnitude": 3.5,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "gloves",
+                "type": "OTHER",
+                "salience": 0.2673116624355316
+            },
+            {
+                "name": "employee",
+                "type": "PERSON",
+                "salience": 0.14192260801792145
+            },
+            {
+                "name": "coffee",
+                "type": "OTHER",
+                "salience": 0.11054792255163193
+            },
+            {
+                "name": "sanitary practices",
+                "type": "OTHER",
+                "salience": 0.09287374466657639
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.09072917699813843
+            },
+            {
+                "name": "employee",
+                "type": "PERSON",
+                "salience": 0.07090908288955688
+            },
+            {
+                "name": "phone",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.04410764202475548
+            },
+            {
+                "name": "customer service",
+                "type": "OTHER",
+                "salience": 0.036277782171964645
+            },
+            {
+                "name": "register",
+                "type": "OTHER",
+                "salience": 0.01757712848484516
+            },
+            {
+                "name": "gloves",
+                "type": "OTHER",
+                "salience": 0.014928079210221767
+            },
+            {
+                "name": "worker",
+                "type": "PERSON",
+                "salience": 0.013768749311566353
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.013768749311566353
+            },
+            {
+                "name": "surfaces",
+                "type": "OTHER",
+                "salience": 0.012816285714507103
+            },
+            {
+                "name": "sanitation rag",
+                "type": "OTHER",
+                "salience": 0.010992973111569881
+            },
+            {
+                "name": "magazine",
+                "type": "WORK_OF_ART",
+                "salience": 0.010992973111569881
+            },
+            {
+                "name": "coworkers",
+                "type": "PERSON",
+                "salience": 0.010992973111569881
+            },
+            {
+                "name": "customers",
+                "type": "PERSON",
+                "salience": 0.009404188953340054
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.008737500756978989
+            },
+            {
+                "name": "surfaces",
+                "type": "OTHER",
+                "salience": 0.006589802913367748
+            },
+            {
+                "name": "sanitation bucket",
+                "type": "OTHER",
+                "salience": 0.005789912771433592
+            },
+            {
+                "name": "bleach",
+                "type": "OTHER",
+                "salience": 0.005512408912181854
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.003448651172220707
+            },
+            {
+                "name": "two",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUN2bDlEUllREAE",
+        "review": "Slow service. Waited 20+ minutes for a single bagel. Food is good but not worth the wait",
+        "sentiment_score": -0.6000000238418579,
+        "sentiment_magnitude": 2.0,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.6950696110725403
+            },
+            {
+                "name": "Food",
+                "type": "OTHER",
+                "salience": 0.12876935303211212
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.11787202209234238
+            },
+            {
+                "name": "wait",
+                "type": "OTHER",
+                "salience": 0.058289021253585815
+            },
+            {
+                "name": "20",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUN2MmJyWTRnRRAB",
+        "review": "Love this place. Repeat customer. Will be coming back. But come on\ud83d\ude2d. What are we doing here. 15 bucks on breakfast wraps later \u2026",
+        "sentiment_score": 0.20000000298023224,
+        "sentiment_magnitude": 3.5999999046325684,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.6883280873298645
+            },
+            {
+                "name": "Repeat customer",
+                "type": "OTHER",
+                "salience": 0.14038385450839996
+            },
+            {
+                "name": "bucks",
+                "type": "OTHER",
+                "salience": 0.06677623093128204
+            },
+            {
+                "name": "\ud83d\ude2d",
+                "type": "OTHER",
+                "salience": 0.05752206966280937
+            },
+            {
+                "name": "breakfast wraps",
+                "type": "OTHER",
+                "salience": 0.046989746391773224
+            },
+            {
+                "name": "15 bucks",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "15",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUQzNTRXRWx3RRAB",
+        "review": "Good bagels",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 1.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUQzMW9XYUFnEAE",
+        "review": "Ordered a cappuccino which was completely flat with a thin layer of foam on top (as opposed to properly frothed/steamed). It was also scalding hot (AKA over-steamed) and I burned myself trying to drink it. Got a nova lox bagel ($13) and came out to be $17 after subbing for allergens, making one addition, and tax.  The additional fees for subs seems excessive and borderline exploitive to people who require these accommodations to eat, especially when the sub ingredients are likely basement price/quality (basing this off the tofutti cream cheese, which is terrible), and in consideration to the fact these are NOT additions, but substitutions.  I would say overall maybe try to incorporate allergy friendly ingredients without overpricing for them and train employees to actually make a drink properly so people are getting what they pay for instead of a hot mess (literally). I will say in light of this, the guy who helped me order my food was very easy to talk to and helpful, though he didn\u2019t mention the additional fees for subs.",
+        "sentiment_score": -0.4000000059604645,
+        "sentiment_magnitude": 3.0999999046325684,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "cappuccino",
+                "type": "OTHER",
+                "salience": 0.24891261756420135
+            },
+            {
+                "name": "people",
+                "type": "PERSON",
+                "salience": 0.09774865955114365
+            },
+            {
+                "name": "layer",
+                "type": "OTHER",
+                "salience": 0.09145507961511612
+            },
+            {
+                "name": "foam",
+                "type": "OTHER",
+                "salience": 0.09145507961511612
+            },
+            {
+                "name": "top",
+                "type": "OTHER",
+                "salience": 0.09145507961511612
+            },
+            {
+                "name": "people",
+                "type": "PERSON",
+                "salience": 0.07298071682453156
+            },
+            {
+                "name": "guy",
+                "type": "PERSON",
+                "salience": 0.045887384563684464
+            },
+            {
+                "name": "tofutti cream cheese",
+                "type": "OTHER",
+                "salience": 0.03232648968696594
+            },
+            {
+                "name": "additions",
+                "type": "OTHER",
+                "salience": 0.015221355482935905
+            },
+            {
+                "name": "addition",
+                "type": "OTHER",
+                "salience": 0.015089104883372784
+            },
+            {
+                "name": "quality",
+                "type": "OTHER",
+                "salience": 0.014574913308024406
+            },
+            {
+                "name": "subs",
+                "type": "OTHER",
+                "salience": 0.01422585267573595
+            },
+            {
+                "name": "fees",
+                "type": "OTHER",
+                "salience": 0.01330175157636404
+            },
+            {
+                "name": "substitutions",
+                "type": "OTHER",
+                "salience": 0.013217181898653507
+            },
+            {
+                "name": "allergens",
+                "type": "OTHER",
+                "salience": 0.013025425374507904
+            },
+            {
+                "name": "sub ingredients",
+                "type": "OTHER",
+                "salience": 0.012821395881474018
+            },
+            {
+                "name": "basement price",
+                "type": "OTHER",
+                "salience": 0.01154617965221405
+            },
+            {
+                "name": "tax",
+                "type": "OTHER",
+                "salience": 0.0114457281306386
+            },
+            {
+                "name": "nova lox bagel",
+                "type": "OTHER",
+                "salience": 0.010633420199155807
+            },
+            {
+                "name": "fact",
+                "type": "OTHER",
+                "salience": 0.010595949366688728
+            },
+            {
+                "name": "consideration",
+                "type": "OTHER",
+                "salience": 0.010595949366688728
+            },
+            {
+                "name": "AKA over-steamed",
+                "type": "OTHER",
+                "salience": 0.010082962922751904
+            },
+            {
+                "name": "mess",
+                "type": "OTHER",
+                "salience": 0.007967392913997173
+            },
+            {
+                "name": "light",
+                "type": "OTHER",
+                "salience": 0.007949570193886757
+            },
+            {
+                "name": "subs",
+                "type": "OTHER",
+                "salience": 0.006946585141122341
+            },
+            {
+                "name": "fees",
+                "type": "OTHER",
+                "salience": 0.00633655022829771
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.006294474005699158
+            },
+            {
+                "name": "accommodations",
+                "type": "LOCATION",
+                "salience": 0.005663441494107246
+            },
+            {
+                "name": "ingredients",
+                "type": "OTHER",
+                "salience": 0.003980245906859636
+            },
+            {
+                "name": "employees",
+                "type": "PERSON",
+                "salience": 0.0034961409401148558
+            },
+            {
+                "name": "drink",
+                "type": "OTHER",
+                "salience": 0.002767319092527032
+            },
+            {
+                "name": "$13",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "$17",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "17",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "13",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "one",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUMzaWFLc3NRRRAB",
+        "review": "This was my sandwich.",
+        "sentiment_score": -0.20000000298023224,
+        "sentiment_magnitude": 0.20000000298023224,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "sandwich",
+                "type": "OTHER",
+                "salience": 1.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUMzbm9pQTV3RRAB",
+        "review": "Best Bagels in New York.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "Bagels",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.8674015998840332
+            },
+            {
+                "name": "New York",
+                "type": "LOCATION",
+                "salience": 0.132598415017128
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUMzbkpMcVJREAE",
+        "review": "Wait was so long. If you're too busy, turn people away. I watched people come and go and asked about my order and received no help. It was super crowded as well",
+        "sentiment_score": -0.5,
+        "sentiment_magnitude": 2.299999952316284,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "Wait",
+                "type": "PERSON",
+                "salience": 0.6070001125335693
+            },
+            {
+                "name": "people",
+                "type": "PERSON",
+                "salience": 0.18304842710494995
+            },
+            {
+                "name": "help",
+                "type": "OTHER",
+                "salience": 0.09520372003316879
+            },
+            {
+                "name": "people",
+                "type": "PERSON",
+                "salience": 0.07651305943727493
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.0382346473634243
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURYNzd6aV93RRAB",
+        "review": "If you actually like a good bagel, you won't be tricked by the cute and quaint interior. The bagels are no better than Wegmans. And all the sandwiches are just cheap deli sandwiches with cute names to justify the $13 price.  It's bewildering to see so many 5 star reviews with such sad pictures of bagel sandwiches.",
+        "sentiment_score": 0.0,
+        "sentiment_magnitude": 2.0,
+        "sentiment_description": "Neutral",
+        "entities": [
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.43330395221710205
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.22937871515750885
+            },
+            {
+                "name": "interior",
+                "type": "OTHER",
+                "salience": 0.099672831594944
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.059004269540309906
+            },
+            {
+                "name": "names",
+                "type": "OTHER",
+                "salience": 0.04497110843658447
+            },
+            {
+                "name": "star reviews",
+                "type": "WORK_OF_ART",
+                "salience": 0.03600737452507019
+            },
+            {
+                "name": "bagel sandwiches",
+                "type": "OTHER",
+                "salience": 0.029636617749929428
+            },
+            {
+                "name": "Wegmans",
+                "type": "ORGANIZATION",
+                "salience": 0.029253888875246048
+            },
+            {
+                "name": "pictures",
+                "type": "WORK_OF_ART",
+                "salience": 0.02378247305750847
+            },
+            {
+                "name": "price",
+                "type": "OTHER",
+                "salience": 0.014988771639764309
+            },
+            {
+                "name": "$13",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "5",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "13",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURYMXVQLXJ3RRAB",
+        "review": "Serves a $7 beer in a plastic cup, really? But atmosphere and location is nice.",
+        "sentiment_score": 0.0,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Neutral",
+        "entities": [
+            {
+                "name": "beer",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.4747004210948944
+            },
+            {
+                "name": "cup",
+                "type": "OTHER",
+                "salience": 0.33961328864097595
+            },
+            {
+                "name": "location",
+                "type": "LOCATION",
+                "salience": 0.12086217850446701
+            },
+            {
+                "name": "atmosphere",
+                "type": "OTHER",
+                "salience": 0.06482410430908203
+            },
+            {
+                "name": "$7",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "7",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNYdXVyak1nEAE",
+        "review": "Classic place on the Cornell University campus collegetown area. We had the everything toasted bagels with cream cheese and several choices of pastries. I like that they don\u2019t skimp on the cream cheese.  It\u2019s nice that you can sit outside and enjoy your meal while admiring the foliage and people watching.",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 3.4000000953674316,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.3202795088291168
+            },
+            {
+                "name": "Cornell University",
+                "type": "ORGANIZATION",
+                "salience": 0.19662880897521973
+            },
+            {
+                "name": "campus collegetown area",
+                "type": "LOCATION",
+                "salience": 0.12841616570949554
+            },
+            {
+                "name": "everything",
+                "type": "OTHER",
+                "salience": 0.0627683699131012
+            },
+            {
+                "name": "cream cheese",
+                "type": "OTHER",
+                "salience": 0.048392586410045624
+            },
+            {
+                "name": "cream cheese",
+                "type": "OTHER",
+                "salience": 0.04476844519376755
+            },
+            {
+                "name": "pastries",
+                "type": "OTHER",
+                "salience": 0.04309280216693878
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.042571719735860825
+            },
+            {
+                "name": "choices",
+                "type": "OTHER",
+                "salience": 0.042571719735860825
+            },
+            {
+                "name": "meal",
+                "type": "OTHER",
+                "salience": 0.028926825150847435
+            },
+            {
+                "name": "foliage",
+                "type": "OTHER",
+                "salience": 0.020791523158550262
+            },
+            {
+                "name": "people",
+                "type": "PERSON",
+                "salience": 0.020791523158550262
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURuck1UYXlnRRAB",
+        "review": "Never disappoints. Whenever I'm in Ithaca CTB all days all ways!",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.7999999523162842,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "ways",
+                "type": "OTHER",
+                "salience": 0.3773801028728485
+            },
+            {
+                "name": "Ithaca",
+                "type": "LOCATION",
+                "salience": 0.3243165910243988
+            },
+            {
+                "name": "CTB",
+                "type": "ORGANIZATION",
+                "salience": 0.2983033061027527
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNucEtDUW1BRRAB",
+        "review": "Don\u2019t order a simple breakfast sandwich and/or bagel unless you\u2019re willing and able to wait 45 minutes or more for your order.  I placed an in person order at a quarter after noon for a pizza bagel and BEC, at half past we were assured the order would be ready 15-20 minutes after ordering, yet our order was not completed until 12:53p.  The unfortunate part is that I raised the need to leave at 12:50p about 25 minutes after I placed my order, but the staff was unwilling to adjust the order of food preparation and effectively told us \u2018too bad\u2019. If the business made it apparent that wait times were nearly 45 minutes, I simply would have ordered food elsewhere. I hope that this experience is not the standard but I wouldn\u2019t be shocked if it were.",
+        "sentiment_score": -0.6000000238418579,
+        "sentiment_magnitude": 3.4000000953674316,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.22975093126296997
+            },
+            {
+                "name": "breakfast sandwich",
+                "type": "OTHER",
+                "salience": 0.2030695229768753
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.11698556691408157
+            },
+            {
+                "name": "person order",
+                "type": "OTHER",
+                "salience": 0.05686921626329422
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.04737888276576996
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.03897906839847565
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.03739143908023834
+            },
+            {
+                "name": "part",
+                "type": "OTHER",
+                "salience": 0.031291574239730835
+            },
+            {
+                "name": "pizza bagel",
+                "type": "OTHER",
+                "salience": 0.029416147619485855
+            },
+            {
+                "name": "staff",
+                "type": "PERSON",
+                "salience": 0.02701829932630062
+            },
+            {
+                "name": "half",
+                "type": "LOCATION",
+                "salience": 0.02585499733686447
+            },
+            {
+                "name": "need",
+                "type": "OTHER",
+                "salience": 0.023904073983430862
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.020447103306651115
+            },
+            {
+                "name": "business",
+                "type": "OTHER",
+                "salience": 0.01796726882457733
+            },
+            {
+                "name": "elsewhere",
+                "type": "LOCATION",
+                "salience": 0.01796726882457733
+            },
+            {
+                "name": "standard",
+                "type": "OTHER",
+                "salience": 0.0160447396337986
+            },
+            {
+                "name": "BEC",
+                "type": "OTHER",
+                "salience": 0.01530972309410572
+            },
+            {
+                "name": "experience",
+                "type": "OTHER",
+                "salience": 0.015089656226336956
+            },
+            {
+                "name": "order",
+                "type": "OTHER",
+                "salience": 0.013359706848859787
+            },
+            {
+                "name": "times",
+                "type": "OTHER",
+                "salience": 0.007987230084836483
+            },
+            {
+                "name": "food preparation",
+                "type": "OTHER",
+                "salience": 0.007917579263448715
+            },
+            {
+                "name": "25",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "53",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "20",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "45",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "15",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "50",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "12",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "12",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "45",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNub0tyeG9BRRAB",
+        "review": "It\u2019s corporate now.",
+        "sentiment_score": -0.10000000149011612,
+        "sentiment_magnitude": 0.10000000149011612,
+        "sentiment_description": "Negative",
+        "entities": []
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURINmVHT1ZnEAE",
+        "review": "#New York #NewYork #Ithaca #CollegeTown_Bagels #Main Store  \"The best multi-purpose place in Ithaca\"  Ithaca is also in the U.S. and New York State, so wouldn't it be a place where bagels are delicious? Sure enough, the bagel shop loved by everyone in Ithaca is College Town Bagels, aka #CTB.  First opened in 1976, it has been in business for almost 50 years, and is known to have become an opportunity for expansion and leap forward by merging with Ithaca Bakery, the best bakery in Ithaca, in the 1980s. What's interesting is that this restaurant is not just a place that sells bagels, cream cheese, and sandwiches, but is also an axis of culture.  It's the best bagel and brunch place in the morning, but it also has a bar and sells alcohol like beer, so it's a fountain that touches on the small drinking culture in this small town. In addition, CTB goods are also popular as they have been loved over a long history.  The food is of course delicious. In addition to bagels, they also bake ciabatta in-house and make sandwiches. Basically, the delicious sandwich combinations are explained well, so you can choose the one you like and, of course, customize it.  The novel sandwich I found this time is Jonah's Jive, a vegetarian sandwich, and with the addition of bacon, the combination is also amazing. Light hummus and fresh vegetables, including tomatoes and cucumbers, ensure the texture and taste, and the added salty bacon adds to the balance of the dish.  Having eaten here three times during my visit to Ithaca, including the main branch and the downtown branch, I can say that CTB is a must-visit for any visitor to Ithaca.  PS: Coffee is delicious.",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 10.699999809265137,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "LOCATION",
+                "salience": 0.18156680464744568
+            },
+            {
+                "name": "Ithaca",
+                "type": "LOCATION",
+                "salience": 0.11753351241350174
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.07916785776615143
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.07231414318084717
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.06549488753080368
+            },
+            {
+                "name": "Store",
+                "type": "LOCATION",
+                "salience": 0.0452880822122097
+            },
+            {
+                "name": "NewYork #Ithaca #CollegeTown_Bagels",
+                "type": "ORGANIZATION",
+                "salience": 0.030630171298980713
+            },
+            {
+                "name": "New York State",
+                "type": "LOCATION",
+                "salience": 0.030388958752155304
+            },
+            {
+                "name": "U.S.",
+                "type": "LOCATION",
+                "salience": 0.026937320828437805
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.02253110334277153
+            },
+            {
+                "name": "First",
+                "type": "ORGANIZATION",
+                "salience": 0.02152804471552372
+            },
+            {
+                "name": "goods",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.019883403554558754
+            },
+            {
+                "name": "bagel shop",
+                "type": "LOCATION",
+                "salience": 0.010000307112932205
+            },
+            {
+                "name": "College Town Bagels",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.009386027231812477
+            },
+            {
+                "name": "opportunity",
+                "type": "OTHER",
+                "salience": 0.008801190182566643
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.008385641500353813
+            },
+            {
+                "name": "everyone",
+                "type": "PERSON",
+                "salience": 0.008318408392369747
+            },
+            {
+                "name": "bagels",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.00830602552741766
+            },
+            {
+                "name": "business",
+                "type": "OTHER",
+                "salience": 0.00827709212899208
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.007907089777290821
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.0076505569741129875
+            },
+            {
+                "name": "axis",
+                "type": "OTHER",
+                "salience": 0.007205524016171694
+            },
+            {
+                "name": "restaurant",
+                "type": "LOCATION",
+                "salience": 0.006693453993648291
+            },
+            {
+                "name": "addition",
+                "type": "OTHER",
+                "salience": 0.006420856341719627
+            },
+            {
+                "name": "culture",
+                "type": "OTHER",
+                "salience": 0.006414998788386583
+            },
+            {
+                "name": "addition",
+                "type": "OTHER",
+                "salience": 0.0063981967978179455
+            },
+            {
+                "name": "drinking culture",
+                "type": "OTHER",
+                "salience": 0.006397431716322899
+            },
+            {
+                "name": "bakery",
+                "type": "LOCATION",
+                "salience": 0.006359089631587267
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.006175074726343155
+            },
+            {
+                "name": "#CTB",
+                "type": "OTHER",
+                "salience": 0.006140096113085747
+            },
+            {
+                "name": "town",
+                "type": "LOCATION",
+                "salience": 0.005870067980140448
+            },
+            {
+                "name": "beer",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.005619976203888655
+            },
+            {
+                "name": "fountain",
+                "type": "LOCATION",
+                "salience": 0.005619976203888655
+            },
+            {
+                "name": "bar",
+                "type": "LOCATION",
+                "salience": 0.005619976203888655
+            },
+            {
+                "name": "brunch",
+                "type": "OTHER",
+                "salience": 0.005619976203888655
+            },
+            {
+                "name": "alcohol",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.005619976203888655
+            },
+            {
+                "name": "expansion",
+                "type": "EVENT",
+                "salience": 0.0055862837471067905
+            },
+            {
+                "name": "cream cheese",
+                "type": "OTHER",
+                "salience": 0.005566563457250595
+            },
+            {
+                "name": "combination",
+                "type": "OTHER",
+                "salience": 0.005275136791169643
+            },
+            {
+                "name": "history",
+                "type": "OTHER",
+                "salience": 0.005145031958818436
+            },
+            {
+                "name": "ciabatta",
+                "type": "OTHER",
+                "salience": 0.005126866512000561
+            },
+            {
+                "name": "addition",
+                "type": "OTHER",
+                "salience": 0.0048092566430568695
+            },
+            {
+                "name": "hummus",
+                "type": "OTHER",
+                "salience": 0.004460766911506653
+            },
+            {
+                "name": "bacon",
+                "type": "OTHER",
+                "salience": 0.004386640153825283
+            },
+            {
+                "name": "bacon",
+                "type": "OTHER",
+                "salience": 0.004381501581519842
+            },
+            {
+                "name": "must-visit",
+                "type": "EVENT",
+                "salience": 0.004295744001865387
+            },
+            {
+                "name": "vegetables",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "cucumbers",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "texture",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "taste",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "balance",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "dish",
+                "type": "OTHER",
+                "salience": 0.0038486835546791553
+            },
+            {
+                "name": "Ithaca Bakery",
+                "type": "ORGANIZATION",
+                "salience": 0.003759989282116294
+            },
+            {
+                "name": "visitor",
+                "type": "PERSON",
+                "salience": 0.00335889239795506
+            },
+            {
+                "name": "visit",
+                "type": "EVENT",
+                "salience": 0.00335889239795506
+            },
+            {
+                "name": "PS",
+                "type": "OTHER",
+                "salience": 0.0032331242691725492
+            },
+            {
+                "name": "times",
+                "type": "OTHER",
+                "salience": 0.003063582582399249
+            },
+            {
+                "name": "downtown branch",
+                "type": "LOCATION",
+                "salience": 0.003063582582399249
+            },
+            {
+                "name": "sandwich",
+                "type": "OTHER",
+                "salience": 0.0028880296740680933
+            },
+            {
+                "name": "Coffee",
+                "type": "OTHER",
+                "salience": 0.002688222099095583
+            },
+            {
+                "name": "tomatoes",
+                "type": "OTHER",
+                "salience": 0.0025643666740506887
+            },
+            {
+                "name": "sandwich",
+                "type": "OTHER",
+                "salience": 0.002401237143203616
+            },
+            {
+                "name": "branch",
+                "type": "LOCATION",
+                "salience": 0.0020410572178661823
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.0019057452445849776
+            },
+            {
+                "name": "course",
+                "type": "OTHER",
+                "salience": 0.0016916299937292933
+            },
+            {
+                "name": "Jive",
+                "type": "ORGANIZATION",
+                "salience": 0.0012769504683092237
+            },
+            {
+                "name": "sandwich combinations",
+                "type": "OTHER",
+                "salience": 0.0012064037146046758
+            },
+            {
+                "name": "Jonah",
+                "type": "PERSON",
+                "salience": 0.0009982180781662464
+            },
+            {
+                "name": "1976",
+                "type": "DATE",
+                "salience": 0.0
+            },
+            {
+                "name": "one",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "1980",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "1976",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "50",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "three",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURIbHA2VlhBEAE",
+        "review": "Been there thrice have only had the New Yorker - the meat literally melts in your mouth, so I always get double meat.  The last time I went they had matzo ball soup, a bit salty for my taste but it was cold in April and I loved it.",
+        "sentiment_score": 0.5,
+        "sentiment_magnitude": 1.100000023841858,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "meat",
+                "type": "OTHER",
+                "salience": 0.3320785164833069
+            },
+            {
+                "name": "meat",
+                "type": "OTHER",
+                "salience": 0.2537737190723419
+            },
+            {
+                "name": "mouth",
+                "type": "OTHER",
+                "salience": 0.1745571792125702
+            },
+            {
+                "name": "New Yorker",
+                "type": "LOCATION",
+                "salience": 0.15351110696792603
+            },
+            {
+                "name": "taste",
+                "type": "OTHER",
+                "salience": 0.0597492940723896
+            },
+            {
+                "name": "matzo ball soup",
+                "type": "OTHER",
+                "salience": 0.026330189779400826
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNIdThuY2VREAE",
+        "review": "CTB is the biggest collegetown staple I can think of. The bagels themselves are actually quite good, and I think if you\u2019re getting breakfast, a simple bagel with a spread is the safest bet here. However, breakfast sandwiches are not quite as appealing, made with premade eggs and almost never warmed enough in my experience. The other issue is you\u2019ll be waiting for a long, long time \u2014 think 30 minutes for one breakfast sandwich, which is how long it took for me on three separate occasions.  Lunch here has been much better in my experience, though it\u2019s been a bit longer since I\u2019ve tried it. All in all, there are solid options here, but you have to order carefully and know you\u2019ll be there a while.",
+        "sentiment_score": 0.10000000149011612,
+        "sentiment_magnitude": 4.699999809265137,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.2321425825357437
+            },
+            {
+                "name": "collegetown staple",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.19457346200942993
+            },
+            {
+                "name": "CTB",
+                "type": "ORGANIZATION",
+                "salience": 0.11072833091020584
+            },
+            {
+                "name": "experience",
+                "type": "OTHER",
+                "salience": 0.09315455704927444
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.08362889289855957
+            },
+            {
+                "name": "breakfast sandwich",
+                "type": "OTHER",
+                "salience": 0.062217798084020615
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.049886416643857956
+            },
+            {
+                "name": "breakfast",
+                "type": "OTHER",
+                "salience": 0.03599831834435463
+            },
+            {
+                "name": "spread",
+                "type": "EVENT",
+                "salience": 0.028889216482639313
+            },
+            {
+                "name": "issue",
+                "type": "OTHER",
+                "salience": 0.02355485036969185
+            },
+            {
+                "name": "breakfast sandwiches",
+                "type": "OTHER",
+                "salience": 0.021575555205345154
+            },
+            {
+                "name": "eggs",
+                "type": "OTHER",
+                "salience": 0.019432304427027702
+            },
+            {
+                "name": "all",
+                "type": "OTHER",
+                "salience": 0.015366137959063053
+            },
+            {
+                "name": "bit",
+                "type": "OTHER",
+                "salience": 0.013532099314033985
+            },
+            {
+                "name": "Lunch",
+                "type": "EVENT",
+                "salience": 0.009362222626805305
+            },
+            {
+                "name": "occasions",
+                "type": "EVENT",
+                "salience": 0.00595724955201149
+            },
+            {
+                "name": "one",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "30",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "three",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURIbUlTYkNnEAE",
+        "review": "My friends and me hang out here everyday, I\u2019m obsessed, I want to try everything from their menu: bagels, baked goods, bowls, shakes\u2026I wouldn\u2019t know where to start. The chocolate chip cookies SLAP too and the vibe is immaculate. The other day we spent 5 hours sitting in the sun drinking reasonably priced mimosas and kombucha. 10/10",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 2.799999952316284,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "friends",
+                "type": "PERSON",
+                "salience": 0.37567949295043945
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.18986313045024872
+            },
+            {
+                "name": "everything",
+                "type": "OTHER",
+                "salience": 0.1293538510799408
+            },
+            {
+                "name": "bowls",
+                "type": "OTHER",
+                "salience": 0.059025347232818604
+            },
+            {
+                "name": "shakes",
+                "type": "OTHER",
+                "salience": 0.059025347232818604
+            },
+            {
+                "name": "menu",
+                "type": "OTHER",
+                "salience": 0.058319125324487686
+            },
+            {
+                "name": "goods",
+                "type": "OTHER",
+                "salience": 0.058319125324487686
+            },
+            {
+                "name": "chocolate chip cookies",
+                "type": "OTHER",
+                "salience": 0.026295185089111328
+            },
+            {
+                "name": "sun",
+                "type": "OTHER",
+                "salience": 0.019759636372327805
+            },
+            {
+                "name": "mimosas",
+                "type": "OTHER",
+                "salience": 0.013856147415935993
+            },
+            {
+                "name": "vibe",
+                "type": "OTHER",
+                "salience": 0.010503602214157581
+            },
+            {
+                "name": "5",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "10/10",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUN3MVpLbEVREAE",
+        "review": "Impressively slow, it takes at least half an hour for them to make a bagel. It's commendable actually. They've changed locations and the service is as glacial as ever. Well done.",
+        "sentiment_score": 0.0,
+        "sentiment_magnitude": 3.299999952316284,
+        "sentiment_description": "Neutral",
+        "entities": [
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.7046289443969727
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.1611454039812088
+            },
+            {
+                "name": "locations",
+                "type": "LOCATION",
+                "salience": 0.13422563672065735
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNINEpDVDhRRRAB",
+        "review": "Excellent cold coffee",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "cold coffee",
+                "type": "OTHER",
+                "salience": 1.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUQ3eHZmU1FnEAE",
+        "review": "Amazing sandwiches and great vegetarian options",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.6507119536399841
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.34928804636001587
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUQ3X0tpTGxnRRAB",
+        "review": "Espresso was cold, avocado toast was tired mashed avocado on bread that was untoasted and soggy - all after waiting 20 minutes. Staff were very polite and apologetic but if you charge someone $9 for two pieces of toast with not-very-fresh avocado on the top, it\u2019s pretty fundamental to actually toast the bread and serve it warm.",
+        "sentiment_score": -0.5,
+        "sentiment_magnitude": 1.100000023841858,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "avocado toast",
+                "type": "OTHER",
+                "salience": 0.6798141598701477
+            },
+            {
+                "name": "Espresso",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.13548330962657928
+            },
+            {
+                "name": "bread",
+                "type": "OTHER",
+                "salience": 0.05550616979598999
+            },
+            {
+                "name": "all",
+                "type": "OTHER",
+                "salience": 0.03351211175322533
+            },
+            {
+                "name": "bread",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.023095261305570602
+            },
+            {
+                "name": "toast",
+                "type": "OTHER",
+                "salience": 0.017230987548828125
+            },
+            {
+                "name": "someone",
+                "type": "PERSON",
+                "salience": 0.015159659087657928
+            },
+            {
+                "name": "pieces",
+                "type": "WORK_OF_ART",
+                "salience": 0.015159659087657928
+            },
+            {
+                "name": "top",
+                "type": "OTHER",
+                "salience": 0.01145594846457243
+            },
+            {
+                "name": "Staff",
+                "type": "PERSON",
+                "salience": 0.007288617547601461
+            },
+            {
+                "name": "avocado",
+                "type": "OTHER",
+                "salience": 0.0062941256910562515
+            },
+            {
+                "name": "$9",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "9",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "20",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "two",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUQ3bEw3NFdnEAE",
+        "review": "They cannot attend the demand at peak time. 35 minutes for a bagel is crazy",
+        "sentiment_score": -0.800000011920929,
+        "sentiment_magnitude": 1.600000023841858,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "demand",
+                "type": "OTHER",
+                "salience": 0.8337863087654114
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.166213721036911
+            },
+            {
+                "name": "35",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUM3c2FiZFVREAE",
+        "review": "Great Bagels.  Service can be erratic but worth it!",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.7999999523162842,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "Bagels",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.8209866285324097
+            },
+            {
+                "name": "Service",
+                "type": "OTHER",
+                "salience": 0.17901340126991272
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUM3Z3FUVFdBEAE",
+        "review": "Why visit CTB? 1) This is the main and beloved joint for all Cornell students 2) Walking distance from the Ivy league Cornell university 3) As a tourist if you just finished hiking the beautiful Cascadilla gorge trail...refuel yourself steps away from the trail upper end. 4) Their sandwiches , Panini is super delicious. Try the lox and cream bagel and any sandwich or Panini with pesto. 5) Amazing ambience and great vibes 6) Bright yellow umbrella patio for spring,summer and fall \ud83c\udf41 sitting outside 7) Great fun place to hang out with friends ( playing board games ) or working on Ur laptop.",
+        "sentiment_score": 0.5,
+        "sentiment_magnitude": 2.799999952316284,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "CTB",
+                "type": "ORGANIZATION",
+                "salience": 0.5514858365058899
+            },
+            {
+                "name": "joint",
+                "type": "OTHER",
+                "salience": 0.08805441856384277
+            },
+            {
+                "name": "Walking distance",
+                "type": "OTHER",
+                "salience": 0.026667626574635506
+            },
+            {
+                "name": "students",
+                "type": "PERSON",
+                "salience": 0.026667626574635506
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.02549365721642971
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.024827804416418076
+            },
+            {
+                "name": "gorge trail",
+                "type": "LOCATION",
+                "salience": 0.020524032413959503
+            },
+            {
+                "name": "sandwich",
+                "type": "OTHER",
+                "salience": 0.01891198754310608
+            },
+            {
+                "name": "Panini",
+                "type": "OTHER",
+                "salience": 0.01891198754310608
+            },
+            {
+                "name": "end",
+                "type": "OTHER",
+                "salience": 0.018264546990394592
+            },
+            {
+                "name": "tourist",
+                "type": "PERSON",
+                "salience": 0.01804254576563835
+            },
+            {
+                "name": "Cornell",
+                "type": "ORGANIZATION",
+                "salience": 0.01799963414669037
+            },
+            {
+                "name": "lox",
+                "type": "OTHER",
+                "salience": 0.01662410795688629
+            },
+            {
+                "name": "cream",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.01662410795688629
+            },
+            {
+                "name": "Ivy league",
+                "type": "ORGANIZATION",
+                "salience": 0.0158214271068573
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.012697773985564709
+            },
+            {
+                "name": "Panini",
+                "type": "ORGANIZATION",
+                "salience": 0.012253301218152046
+            },
+            {
+                "name": "Cascadilla",
+                "type": "LOCATION",
+                "salience": 0.010689247399568558
+            },
+            {
+                "name": "laptop",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.008788513019680977
+            },
+            {
+                "name": "friends",
+                "type": "PERSON",
+                "salience": 0.008788513019680977
+            },
+            {
+                "name": "ambience",
+                "type": "OTHER",
+                "salience": 0.005510556045919657
+            },
+            {
+                "name": "vibes",
+                "type": "OTHER",
+                "salience": 0.005510556045919657
+            },
+            {
+                "name": "umbrella patio",
+                "type": "OTHER",
+                "salience": 0.005510556045919657
+            },
+            {
+                "name": "Ur",
+                "type": "LOCATION",
+                "salience": 0.005198870785534382
+            },
+            {
+                "name": "board games",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.0043093301355838776
+            },
+            {
+                "name": "5",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "2",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "1",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "3",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "6",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "7",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "4",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNieV9pSlRBEAE",
+        "review": "I only had coffee here, but the service and atmosphere were great.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "coffee",
+                "type": "OTHER",
+                "salience": 0.6522796750068665
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.1985655426979065
+            },
+            {
+                "name": "atmosphere",
+                "type": "OTHER",
+                "salience": 0.14915479719638824
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNidnZ1SXd3RRAB",
+        "review": "Great atmosphere and wide options for sandwiches and drinks.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "atmosphere",
+                "type": "OTHER",
+                "salience": 0.5309633016586304
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.17772191762924194
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.16444508731365204
+            },
+            {
+                "name": "drinks",
+                "type": "OTHER",
+                "salience": 0.12686969339847565
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNiLXQzYTl3RRAB",
+        "review": "Very nice to sit outside, lots of delicious types of bagels, good IPAs, friendly service and a cool shop to look at.  I can definitely highly recommend it.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.899999976158142,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "lots",
+                "type": "OTHER",
+                "salience": 0.2720891237258911
+            },
+            {
+                "name": "types",
+                "type": "OTHER",
+                "salience": 0.18842169642448425
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.18842169642448425
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.17569978535175323
+            },
+            {
+                "name": "IPAs",
+                "type": "ORGANIZATION",
+                "salience": 0.11527980864048004
+            },
+            {
+                "name": "shop",
+                "type": "LOCATION",
+                "salience": 0.0600878931581974
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURydVB5RVJREAE",
+        "review": "It's a great place but food isn't prepared on site and I've had to return stuff that wasn't fresh. Also the checkout process is fiddly for when there's long lines, especially as regards having to retype your email for each receipt.",
+        "sentiment_score": -0.5,
+        "sentiment_magnitude": 1.100000023841858,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.4795072376728058
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.2276734560728073
+            },
+            {
+                "name": "stuff",
+                "type": "OTHER",
+                "salience": 0.13006941974163055
+            },
+            {
+                "name": "site",
+                "type": "OTHER",
+                "salience": 0.07895959168672562
+            },
+            {
+                "name": "checkout process",
+                "type": "OTHER",
+                "salience": 0.029406536370515823
+            },
+            {
+                "name": "regards",
+                "type": "OTHER",
+                "salience": 0.0185372456908226
+            },
+            {
+                "name": "email",
+                "type": "OTHER",
+                "salience": 0.01301264762878418
+            },
+            {
+                "name": "receipt",
+                "type": "OTHER",
+                "salience": 0.01301264762878418
+            },
+            {
+                "name": "lines",
+                "type": "OTHER",
+                "salience": 0.009821208193898201
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNycllHV2lBRRAB",
+        "review": "Collegetown Bagel got us hooked! We visited three times in just 24 hours! It's a breakfast (and lunch) champion, offering tons of choices beyond just their delicious bagels. From refreshing smoothies and thick milkshakes (and a surprising selection of beers), there's something for everyone.  We also loved the salads and the variety of prepared meals and snacks you can grab and go for a picnic lunch. Plus, shoutout to Collegetown Bagel for offering gluten-free bread and bagels!  The only thing missing was a bit more friendly service. The staff were efficient, but a touch of warmth would have made our visits even better.  Overall, Collegetown Bagel is a fantastic choice for a delicious and convenient breakfast or lunch. The extensive menu, grab-and-go options, and gluten-free selections are a huge perk.  With a little extra friendliness from the staff, Collegetown Bagel would be an absolute delight!",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 9.300000190734863,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "champion",
+                "type": "OTHER",
+                "salience": 0.12848903238773346
+            },
+            {
+                "name": "Collegetown Bagel",
+                "type": "ORGANIZATION",
+                "salience": 0.0869690552353859
+            },
+            {
+                "name": "times",
+                "type": "OTHER",
+                "salience": 0.04868275672197342
+            },
+            {
+                "name": "breakfast",
+                "type": "OTHER",
+                "salience": 0.04673665389418602
+            },
+            {
+                "name": "lunch",
+                "type": "OTHER",
+                "salience": 0.04673665389418602
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.03692668303847313
+            },
+            {
+                "name": "tons",
+                "type": "OTHER",
+                "salience": 0.035460155457258224
+            },
+            {
+                "name": "menu",
+                "type": "OTHER",
+                "salience": 0.021794939413666725
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.0213718693703413
+            },
+            {
+                "name": "choices",
+                "type": "OTHER",
+                "salience": 0.01632946915924549
+            },
+            {
+                "name": "milkshakes",
+                "type": "OTHER",
+                "salience": 0.014303097501397133
+            },
+            {
+                "name": "bagels",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.013317218981683254
+            },
+            {
+                "name": "smoothies",
+                "type": "OTHER",
+                "salience": 0.013290115632116795
+            },
+            {
+                "name": "picnic lunch",
+                "type": "EVENT",
+                "salience": 0.01216807495802641
+            },
+            {
+                "name": "selection",
+                "type": "OTHER",
+                "salience": 0.010997120290994644
+            },
+            {
+                "name": "bread",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.010873032733798027
+            },
+            {
+                "name": "salads",
+                "type": "OTHER",
+                "salience": 0.010246660560369492
+            },
+            {
+                "name": "snacks",
+                "type": "OTHER",
+                "salience": 0.009756156243383884
+            },
+            {
+                "name": "everyone",
+                "type": "PERSON",
+                "salience": 0.009663640521466732
+            },
+            {
+                "name": "something",
+                "type": "OTHER",
+                "salience": 0.009663640521466732
+            },
+            {
+                "name": "beers",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.009663640521466732
+            },
+            {
+                "name": "meals",
+                "type": "OTHER",
+                "salience": 0.009637228213250637
+            },
+            {
+                "name": "variety",
+                "type": "OTHER",
+                "salience": 0.009637228213250637
+            },
+            {
+                "name": "breakfast",
+                "type": "OTHER",
+                "salience": 0.00836228672415018
+            },
+            {
+                "name": "lunch",
+                "type": "EVENT",
+                "salience": 0.00836228672415018
+            },
+            {
+                "name": "selections",
+                "type": "OTHER",
+                "salience": 0.007618882693350315
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.006693813484162092
+            },
+            {
+                "name": "staff",
+                "type": "PERSON",
+                "salience": 0.005329469218850136
+            },
+            {
+                "name": "friendliness",
+                "type": "OTHER",
+                "salience": 0.004681795369833708
+            },
+            {
+                "name": "staff",
+                "type": "PERSON",
+                "salience": 0.004504552576690912
+            },
+            {
+                "name": "touch",
+                "type": "OTHER",
+                "salience": 0.0029455339536070824
+            },
+            {
+                "name": "warmth",
+                "type": "OTHER",
+                "salience": 0.0029455339536070824
+            },
+            {
+                "name": "visits",
+                "type": "EVENT",
+                "salience": 0.0029455339536070824
+            },
+            {
+                "name": "three",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "24",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNycmFDZlJnEAE",
+        "review": "Pretty good spot for breakfast. Lots of bagel choices and coffee choices.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.7999999523162842,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "spot",
+                "type": "OTHER",
+                "salience": 0.40524351596832275
+            },
+            {
+                "name": "breakfast",
+                "type": "OTHER",
+                "salience": 0.2844744026660919
+            },
+            {
+                "name": "Lots",
+                "type": "OTHER",
+                "salience": 0.14438608288764954
+            },
+            {
+                "name": "coffee choices",
+                "type": "OTHER",
+                "salience": 0.11467062681913376
+            },
+            {
+                "name": "bagel choices",
+                "type": "OTHER",
+                "salience": 0.05122537165880203
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURMazZQOFVnEAE",
+        "review": "Fantastic food and great options for me as a vegan who hates vegetables! The staff is amazing. My biggest issue is the way they play on the ignorance of its customers (which I assume are primarily college students with little to no money).  When paying, there is an electronic option to add a tip. Typical, yes. However, my around $31 bill had the option to tip 15% at $7.34. PLEASE TELL ME HOW 15% OF $31 IS $7.34!?!? After further examination, all of the tip options are significantly higher than that of the actual percentage of the bill. Super frustrating the way the payment software plays on the ignorance and unwavering trust of their customers.",
+        "sentiment_score": -0.10000000149011612,
+        "sentiment_magnitude": 5.300000190734863,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "issue",
+                "type": "OTHER",
+                "salience": 0.2238096445798874
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.1269998699426651
+            },
+            {
+                "name": "ignorance",
+                "type": "OTHER",
+                "salience": 0.12553775310516357
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.09611793607473373
+            },
+            {
+                "name": "vegan",
+                "type": "OTHER",
+                "salience": 0.09611793607473373
+            },
+            {
+                "name": "vegetables",
+                "type": "OTHER",
+                "salience": 0.09611793607473373
+            },
+            {
+                "name": "staff",
+                "type": "PERSON",
+                "salience": 0.056474439799785614
+            },
+            {
+                "name": "option",
+                "type": "OTHER",
+                "salience": 0.020943311974406242
+            },
+            {
+                "name": "customers",
+                "type": "PERSON",
+                "salience": 0.020439958199858665
+            },
+            {
+                "name": "college students",
+                "type": "PERSON",
+                "salience": 0.015330574475228786
+            },
+            {
+                "name": "option",
+                "type": "OTHER",
+                "salience": 0.014983936212956905
+            },
+            {
+                "name": "tip",
+                "type": "OTHER",
+                "salience": 0.013944361358880997
+            },
+            {
+                "name": "bill",
+                "type": "WORK_OF_ART",
+                "salience": 0.013875328935682774
+            },
+            {
+                "name": "money",
+                "type": "OTHER",
+                "salience": 0.012149239890277386
+            },
+            {
+                "name": "tip options",
+                "type": "OTHER",
+                "salience": 0.011266411282122135
+            },
+            {
+                "name": "bill",
+                "type": "WORK_OF_ART",
+                "salience": 0.00957350991666317
+            },
+            {
+                "name": "percentage",
+                "type": "OTHER",
+                "salience": 0.00841212086379528
+            },
+            {
+                "name": "way",
+                "type": "OTHER",
+                "salience": 0.007388098631054163
+            },
+            {
+                "name": "customers",
+                "type": "PERSON",
+                "salience": 0.006696883123368025
+            },
+            {
+                "name": "trust",
+                "type": "OTHER",
+                "salience": 0.005883524660021067
+            },
+            {
+                "name": "payment software",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.005670623853802681
+            },
+            {
+                "name": "Super",
+                "type": "PERSON",
+                "salience": 0.0049697174690663815
+            },
+            {
+                "name": "examination",
+                "type": "EVENT",
+                "salience": 0.0036933033261448145
+            },
+            {
+                "name": "all",
+                "type": "OTHER",
+                "salience": 0.003603573888540268
+            },
+            {
+                "name": "$31",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "$7.34",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "$31",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "$7.34",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "15",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "7.34",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "31",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "15",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "31",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "7.34",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURMeFpiZzdBRRAB",
+        "review": "Pretty expensive bagels for what they are. Pretty popular among the college kids.",
+        "sentiment_score": 0.0,
+        "sentiment_magnitude": 1.399999976158142,
+        "sentiment_description": "Neutral",
+        "entities": [
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.9108211994171143
+            },
+            {
+                "name": "college kids",
+                "type": "PERSON",
+                "salience": 0.08917879313230515
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURMdG9LLWZBEAE",
+        "review": "The food here is to die for (not literally) you walk into the building and get a heavenly smell of freshly made bagels and drinks. They do also have a bar for over 21's. The staff are friendly and are always happy to help. What's even better is you walk out the store and down the road a little bit you can walk down the gorge and get some lovely views of the waterfalls.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 3.5999999046325684,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.35468658804893494
+            },
+            {
+                "name": "smell",
+                "type": "OTHER",
+                "salience": 0.15197817981243134
+            },
+            {
+                "name": "building",
+                "type": "LOCATION",
+                "salience": 0.11995622515678406
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.08181340247392654
+            },
+            {
+                "name": "drinks",
+                "type": "OTHER",
+                "salience": 0.08181340247392654
+            },
+            {
+                "name": "bar",
+                "type": "LOCATION",
+                "salience": 0.03971264511346817
+            },
+            {
+                "name": "staff",
+                "type": "PERSON",
+                "salience": 0.03903881087899208
+            },
+            {
+                "name": "road",
+                "type": "LOCATION",
+                "salience": 0.027645708993077278
+            },
+            {
+                "name": "bit",
+                "type": "OTHER",
+                "salience": 0.027645708993077278
+            },
+            {
+                "name": "views",
+                "type": "OTHER",
+                "salience": 0.024765620008111
+            },
+            {
+                "name": "gorge",
+                "type": "OTHER",
+                "salience": 0.01938844472169876
+            },
+            {
+                "name": "waterfalls",
+                "type": "OTHER",
+                "salience": 0.01938844472169876
+            },
+            {
+                "name": "store",
+                "type": "LOCATION",
+                "salience": 0.012166805565357208
+            },
+            {
+                "name": "21",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURMd0xQWU9nEAE",
+        "review": "What a fabulous place. Looked so inviting. Had a yummy sandwich and cookie. Tried a fantastic latte. Everything was fantastic.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 4.699999809265137,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.6595890522003174
+            },
+            {
+                "name": "sandwich",
+                "type": "OTHER",
+                "salience": 0.10227509588003159
+            },
+            {
+                "name": "cookie",
+                "type": "OTHER",
+                "salience": 0.0941096842288971
+            },
+            {
+                "name": "Everything",
+                "type": "OTHER",
+                "salience": 0.08009379357099533
+            },
+            {
+                "name": "latte",
+                "type": "OTHER",
+                "salience": 0.0639323890209198
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUR6Z3NMTlFBEAE",
+        "review": "Great selection of drinks and eats. Enjoyed sitting outside.",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 1.7000000476837158,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "selection",
+                "type": "OTHER",
+                "salience": 0.5871303081512451
+            },
+            {
+                "name": "eats",
+                "type": "OTHER",
+                "salience": 0.20754346251487732
+            },
+            {
+                "name": "drinks",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.20532624423503876
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUR6eEtUWHB3RRAB",
+        "review": "Ctown institution. However the loud music blasting outside is obnoxious",
+        "sentiment_score": -0.20000000298023224,
+        "sentiment_magnitude": 1.0,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "institution",
+                "type": "ORGANIZATION",
+                "salience": 0.5281892418861389
+            },
+            {
+                "name": "Ctown",
+                "type": "LOCATION",
+                "salience": 0.3666653037071228
+            },
+            {
+                "name": "music",
+                "type": "WORK_OF_ART",
+                "salience": 0.10514544695615768
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNvNWVLSlNREAE",
+        "review": "Delicious meals with fair prices. A good place to have lunch close to the campus.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.899999976158142,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "meals",
+                "type": "OTHER",
+                "salience": 0.5731869339942932
+            },
+            {
+                "name": "prices",
+                "type": "OTHER",
+                "salience": 0.2598772943019867
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.09259288012981415
+            },
+            {
+                "name": "campus",
+                "type": "LOCATION",
+                "salience": 0.04578839987516403
+            },
+            {
+                "name": "lunch",
+                "type": "EVENT",
+                "salience": 0.028554508462548256
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURqdnU2V3pBRRAB",
+        "review": "great sandwiches and a great spot to hang!",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.7371235489845276
+            },
+            {
+                "name": "spot",
+                "type": "OTHER",
+                "salience": 0.2628764510154724
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNqMTlLc3dRRRAB",
+        "review": "Good bagels!",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 1.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUQ5bC1uT293RRAB",
+        "review": "Nice bathrooms but $5.87 for a bagel with cream cheese & butter???  #eatherich not their bagels \ud83e\udd6f \u2026",
+        "sentiment_score": -0.5,
+        "sentiment_magnitude": 1.100000023841858,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "bathrooms",
+                "type": "LOCATION",
+                "salience": 0.47685402631759644
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.16611795127391815
+            },
+            {
+                "name": "cream cheese",
+                "type": "OTHER",
+                "salience": 0.14905230700969696
+            },
+            {
+                "name": "butter",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.14905230700969696
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.05892338976264
+            },
+            {
+                "name": "$5.87",
+                "type": "PRICE",
+                "salience": 0.0
+            },
+            {
+                "name": "5.87",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUM5OU9qREhnEAE",
+        "review": "i swear to god this place has given me food poisoning twice.",
+        "sentiment_score": -0.800000011920929,
+        "sentiment_magnitude": 0.800000011920929,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.44474416971206665
+            },
+            {
+                "name": "god",
+                "type": "PERSON",
+                "salience": 0.399454802274704
+            },
+            {
+                "name": "food poisoning",
+                "type": "OTHER",
+                "salience": 0.15580102801322937
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURkOGQzcVhBEAE",
+        "review": "Took a little time, but it was quite busy. That being said the food was delicious and there was a lot of variety!",
+        "sentiment_score": 0.6000000238418579,
+        "sentiment_magnitude": 1.2000000476837158,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.3190149962902069
+            },
+            {
+                "name": "being",
+                "type": "PERSON",
+                "salience": 0.2866819202899933
+            },
+            {
+                "name": "lot",
+                "type": "OTHER",
+                "salience": 0.24258378148078918
+            },
+            {
+                "name": "variety",
+                "type": "OTHER",
+                "salience": 0.15171930193901062
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNka042SHJBRRAB",
+        "review": "I can understand how this type of quirky place would be the center of a college town \u2014 lots of funky options, a cool building, etc.  But bagels do take an eternity to come out, the cashiers are surly, and honestly the bagels just aren\u2019t that good.  I mean, look, I\u2019m a New Yorker.  I\u2019m going to be hard to please on bagels.  But the lox was bland, the bagels were inconsistent in size and flavor, and they were a bit stale.  So not bad \u2014 I mean, it was the best option around by far.  But not an amazing bagel.",
+        "sentiment_score": -0.30000001192092896,
+        "sentiment_magnitude": 2.799999952316284,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "type",
+                "type": "OTHER",
+                "salience": 0.18209920823574066
+            },
+            {
+                "name": "center",
+                "type": "LOCATION",
+                "salience": 0.18209920823574066
+            },
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.14991411566734314
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.0669698640704155
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.05964157357811928
+            },
+            {
+                "name": "college town",
+                "type": "LOCATION",
+                "salience": 0.05902142822742462
+            },
+            {
+                "name": "lots",
+                "type": "OTHER",
+                "salience": 0.05902142822742462
+            },
+            {
+                "name": "building",
+                "type": "LOCATION",
+                "salience": 0.05902142822742462
+            },
+            {
+                "name": "option",
+                "type": "OTHER",
+                "salience": 0.03281049057841301
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.027164777740836143
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.025345081463456154
+            },
+            {
+                "name": "eternity",
+                "type": "OTHER",
+                "salience": 0.022198962047696114
+            },
+            {
+                "name": "cashiers",
+                "type": "PERSON",
+                "salience": 0.01894092932343483
+            },
+            {
+                "name": "bagel",
+                "type": "OTHER",
+                "salience": 0.013334614224731922
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.013257766142487526
+            },
+            {
+                "name": "New Yorker",
+                "type": "PERSON",
+                "salience": 0.0106357391923666
+            },
+            {
+                "name": "lox",
+                "type": "OTHER",
+                "salience": 0.006690045353025198
+            },
+            {
+                "name": "size",
+                "type": "OTHER",
+                "salience": 0.005916668567806482
+            },
+            {
+                "name": "flavor",
+                "type": "OTHER",
+                "salience": 0.005916668567806482
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUROM3ZUUkFnEAE",
+        "review": "Delicious food, friendly employees, fast service, and an excellent array of options. Highly recommended!!!",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 1.7999999523162842,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.4602482318878174
+            },
+            {
+                "name": "employees",
+                "type": "PERSON",
+                "salience": 0.20867198705673218
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.146484375
+            },
+            {
+                "name": "array",
+                "type": "OTHER",
+                "salience": 0.13687904179096222
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.04771638661623001
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSURWdV95YzJnRRAB",
+        "review": "Good place for good sandwiches. Frickin chickin and Milanese are good if you like pesto.",
+        "sentiment_score": 0.6000000238418579,
+        "sentiment_magnitude": 1.2999999523162842,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.5867047309875488
+            },
+            {
+                "name": "sandwiches",
+                "type": "OTHER",
+                "salience": 0.2597739100456238
+            },
+            {
+                "name": "Frickin chickin",
+                "type": "OTHER",
+                "salience": 0.05351589247584343
+            },
+            {
+                "name": "Milanese",
+                "type": "OTHER",
+                "salience": 0.050383925437927246
+            },
+            {
+                "name": "pesto",
+                "type": "OTHER",
+                "salience": 0.04962150380015373
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURaMXJXR09BEAE",
+        "review": "Average food and coffee, horrible service. The workers we encountered were pretty rude which kind of took us off guard because we thought it was a funky place and we were having a good time. Coffee came out, not as ordered but that\u2019s ok. It\u2019s just coffee. Then after asking at the 17, 21 and 25 minute mark, a nice lady grabbed our food that was in a bag, off the shelf. We had been sitting, waiting and patiently asking if our 2 simple bagels were ready and finally the only nice worker discovers them. Waste of time and the establishment wasn\u2019t even busy. Also, the cream dispenser is horrifically dirty. Please clean those nozzles before some brilliant Cornell student gets botulism.",
+        "sentiment_score": -0.5,
+        "sentiment_magnitude": 5.199999809265137,
+        "sentiment_description": "Negative",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.3338671922683716
+            },
+            {
+                "name": "coffee",
+                "type": "OTHER",
+                "salience": 0.13448801636695862
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.12328983098268509
+            },
+            {
+                "name": "service",
+                "type": "OTHER",
+                "salience": 0.10899240523576736
+            },
+            {
+                "name": "coffee",
+                "type": "OTHER",
+                "salience": 0.06341343373060226
+            },
+            {
+                "name": "food",
+                "type": "OTHER",
+                "salience": 0.04149695858359337
+            },
+            {
+                "name": "workers",
+                "type": "PERSON",
+                "salience": 0.02737673744559288
+            },
+            {
+                "name": "guard",
+                "type": "PERSON",
+                "salience": 0.020547175779938698
+            },
+            {
+                "name": "Coffee",
+                "type": "OTHER",
+                "salience": 0.01995784044265747
+            },
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.01497019175440073
+            },
+            {
+                "name": "mark",
+                "type": "OTHER",
+                "salience": 0.013908579014241695
+            },
+            {
+                "name": "lady",
+                "type": "PERSON",
+                "salience": 0.013908579014241695
+            },
+            {
+                "name": "bag",
+                "type": "CONSUMER_GOOD",
+                "salience": 0.012765965424478054
+            },
+            {
+                "name": "shelf",
+                "type": "OTHER",
+                "salience": 0.012765965424478054
+            },
+            {
+                "name": "Waste",
+                "type": "OTHER",
+                "salience": 0.01084116380661726
+            },
+            {
+                "name": "establishment",
+                "type": "ORGANIZATION",
+                "salience": 0.00958999153226614
+            },
+            {
+                "name": "cream dispenser",
+                "type": "OTHER",
+                "salience": 0.008063062094151974
+            },
+            {
+                "name": "nozzles",
+                "type": "OTHER",
+                "salience": 0.006697079166769981
+            },
+            {
+                "name": "student",
+                "type": "PERSON",
+                "salience": 0.006697079166769981
+            },
+            {
+                "name": "botulism",
+                "type": "OTHER",
+                "salience": 0.006697079166769981
+            },
+            {
+                "name": "worker",
+                "type": "PERSON",
+                "salience": 0.0057049039751291275
+            },
+            {
+                "name": "Cornell",
+                "type": "ORGANIZATION",
+                "salience": 0.003960764966905117
+            },
+            {
+                "name": "21",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "17",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "25",
+                "type": "NUMBER",
+                "salience": 0.0
+            },
+            {
+                "name": "2",
+                "type": "NUMBER",
+                "salience": 0.0
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSUNaaDVXd05nEAE",
+        "review": "Good customized bagels, excellent customized smoothies.",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "bagels",
+                "type": "OTHER",
+                "salience": 0.7983086109161377
+            },
+            {
+                "name": "smoothies",
+                "type": "OTHER",
+                "salience": 0.20169135928153992
+            }
+        ]
+    },
+    {
+        "id_review": "ChdDSUhNMG9nS0VJQ0FnSUNac19uUWtBRRAB",
+        "review": "love this place, I\u2019m obsessed with it, affordability is in between Dunkin and Starbucks (depending on what you get), they do not up-charge for dairy alternative milks",
+        "sentiment_score": 0.800000011920929,
+        "sentiment_magnitude": 0.800000011920929,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "place",
+                "type": "OTHER",
+                "salience": 0.5561817288398743
+            },
+            {
+                "name": "affordability",
+                "type": "OTHER",
+                "salience": 0.18170925974845886
+            },
+            {
+                "name": "Dunkin",
+                "type": "ORGANIZATION",
+                "salience": 0.09286120533943176
+            },
+            {
+                "name": "Starbucks",
+                "type": "ORGANIZATION",
+                "salience": 0.09286120533943176
+            },
+            {
+                "name": "milks",
+                "type": "OTHER",
+                "salience": 0.07638659328222275
+            }
+        ]
+    },
+    {
+        "id_review": "ChZDSUhNMG9nS0VJQ0FnSURwLUt2ME5REAE",
+        "review": "Wonderful experience, lots to look at, cool vegan options",
+        "sentiment_score": 0.8999999761581421,
+        "sentiment_magnitude": 0.8999999761581421,
+        "sentiment_description": "Positive",
+        "entities": [
+            {
+                "name": "experience",
+                "type": "OTHER",
+                "salience": 0.6524062752723694
+            },
+            {
+                "name": "lots",
+                "type": "OTHER",
+                "salience": 0.2281540185213089
+            },
+            {
+                "name": "options",
+                "type": "OTHER",
+                "salience": 0.11943967640399933
+            }
+        ]
+    }
+]

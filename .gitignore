@@ -3,3 +3,6 @@ sync_box_to_github.sh
 *.json
 node_modules
 .DS_Store
+!research/service-account-key.json
+!research/real_data_sentiment_analysis_results.json
+
