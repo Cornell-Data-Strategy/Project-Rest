@@ -1,3 +1,4 @@
 sync_box_to_github.sh
 *.json
-service-account-key.json
+!research/service-account-key.json
+!research/real_data_sentiment_analysis_results.json
