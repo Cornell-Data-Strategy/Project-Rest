@@ -1,1 +1,5 @@
 sync_box_to_github.sh
+.venv/
+*.json
+node_modules
+.DS_Store
