@@ -4,3 +4,4 @@ sync_box_to_github.sh
 !research/real_data_sentiment_analysis_results.json
 node_modules
 .DS_Store
+.venv/
