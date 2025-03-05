@@ -91,7 +91,6 @@ class GoogleMapsScraper:
                 df_places = df_places[['search_point_url', 'href', 'name', 'rating', 'num_reviews', 'close_time', 'other']]
                 df_places.to_csv('output/places_wax.csv', index=False)
 
-
             try:
                 self.driver.get(search_point_url)
             except NoSuchElementException:
@@ -157,7 +156,6 @@ class GoogleMapsScraper:
         self.driver.get(url)
         self.__click_on_cookie_agreement()
 
-        # ajax call also for this section
         time.sleep(2)
 
         resp = BeautifulSoup(self.driver.page_source, 'html.parser')
@@ -171,31 +169,27 @@ class GoogleMapsScraper:
         item = {}
 
         try:
-            # TODO: Subject to changes
             id_review = review['data-review-id']
         except Exception as e:
             id_review = None
 
         try:
-            # TODO: Subject to changes
+
             username = review['aria-label']
         except Exception as e:
             username = None
 
         try:
-            # TODO: Subject to changes
             review_text = self.__filter_string(review.find('span', class_='wiI7pd').text)
         except Exception as e:
             review_text = None
 
         try:
-            # TODO: Subject to changes
             rating = float(review.find('span', class_='kvMYJc')['aria-label'].split(' ')[0])
         except Exception as e:
             rating = None
 
         try:
-            # TODO: Subject to changes
             relative_date = review.find('span', class_='rsqaWe').text
         except Exception as e:
             relative_date = None
