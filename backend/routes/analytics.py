@@ -1,7 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.services.sentiment_analyzer import analyze_sentiment
-from backend.models.database import db
-from backend.models.sentiment_analysis import SentimentResult
+from models.database import db
 
 analytics_bp = Blueprint('analytics', __name__)
 

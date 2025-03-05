@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from backend.services.scraper import scrape_reviews_for_business
-from backend.models.database import db
-from backend.models.review import Review
+from services.scraper import scrape_reviews_for_business
+from models.database import db
+from models.review import Review
 
 reviews_bp = Blueprint('reviews', __name__)
 

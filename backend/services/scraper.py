@@ -1,5 +1,5 @@
-from backend.models.review import Review
-from backend.models.database import db
+from models.review import Review
+from models.database import db
 import requests
 from bs4 import BeautifulSoup
 
