@@ -60,7 +60,7 @@ class GoogleMapsScraper:
                 menu_bt.click()
 
                 clicked = True
-                time.sleep(3)
+                time.sleep(1)
             except Exception as e:
                 tries += 1
                 self.logger.warn('Failed to click sorting button')
@@ -74,7 +74,7 @@ class GoogleMapsScraper:
         recent_rating_bt.click()
 
         # wait to load review (ajax call)
-        time.sleep(5)
+        time.sleep(1)
 
         return 0
 
@@ -130,7 +130,7 @@ class GoogleMapsScraper:
         self.__scroll()
 
         # wait for other reviews to load (ajax)
-        time.sleep(4)
+        time.sleep(2)
 
         # expand review text
         self.__expand_reviews()
@@ -156,7 +156,7 @@ class GoogleMapsScraper:
         self.driver.get(url)
         self.__click_on_cookie_agreement()
 
-        time.sleep(2)
+        time.sleep(1)
 
         resp = BeautifulSoup(self.driver.page_source, 'html.parser')
 
@@ -428,7 +428,7 @@ class GoogleMapsScraper:
             offset += len(reviews)
             
             # Optional: Add a small delay to avoid overloading the server
-            time.sleep(2)
+            time.sleep(1)
         
         result = {
             "place_url": url,

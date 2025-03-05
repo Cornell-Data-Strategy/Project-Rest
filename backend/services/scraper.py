@@ -115,7 +115,7 @@ def scrape_reviews_for_business(url):
     Returns:
         dict: Processed review data
     """
-    with GoogleMapsScraper(debug=False) as scraper:
+    with GoogleMapsScraper(debug=True) as scraper:
         raw_reviews = scraper.get_all_reviews(url)
         
         # Extract just the reviews array from the response
