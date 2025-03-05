@@ -5,3 +5,4 @@ sync_box_to_github.sh
 node_modules
 .DS_Store
 .venv/
+cache/

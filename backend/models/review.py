@@ -12,7 +12,7 @@ class Review(db.Model):
 
     # right now we are scrape a relative data, for example 'a month ago' 
     # so we need a function that will convert this to a date
-    review_date = db.Column(db.DateTime, nullable=True) 
+    review_date = db.Column(db.Integer, nullable=True) 
 
     username = db.Column(db.String(50), nullable=True)
 

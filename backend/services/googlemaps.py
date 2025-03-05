@@ -389,3 +389,51 @@ class GoogleMapsScraper:
     def __filter_string(self, str):
         strOut = str.replace('\r', ' ').replace('\n', ' ').replace('\t', ' ')
         return strOut
+    
+    def get_all_reviews(self, url):
+        # """
+        # Scrapes all available reviews from a Google Maps URL.
+        
+        # Args:
+        #     url (str): The Google Maps URL containing reviews
+            
+        # Returns:
+        #     dict: A dictionary containing all scraped reviews
+        # """
+        # Sort reviews by newest first
+        error = self.sort_by(url, 1)  # 1 corresponds to 'newest' in the ind dictionary
+        
+        if error != 0:
+            self.logger.error(f"Failed to sort reviews for URL: {url}")
+            return {"error": "Failed to sort reviews", "reviews": []}
+        
+        all_reviews = []
+        offset = 0
+        total_scraped = 0
+        
+        # Continue scraping until no more reviews are found
+        while True:
+            self.logger.info(f"Fetching reviews starting from offset {offset}")
+            reviews = self.get_reviews(offset)
+            
+            # If no reviews are returned, we've reached the end
+            if len(reviews) == 0:
+                break
+                
+            all_reviews.extend(reviews)
+            total_scraped += len(reviews)
+            self.logger.info(f"Scraped {len(reviews)} reviews. Total so far: {total_scraped}")
+            
+            # Update offset for next batch
+            offset += len(reviews)
+            
+            # Optional: Add a small delay to avoid overloading the server
+            time.sleep(2)
+        
+        result = {
+            "place_url": url,
+            "total_reviews": total_scraped,
+            "reviews": all_reviews
+        }
+        
+        return result

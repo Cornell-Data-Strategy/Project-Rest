@@ -5,7 +5,7 @@ from models.review import Review
 from flask_jwt_extended import create_access_token
 from datetime import datetime, timezone
 from models.business import Business
-
+from services.scraper import scrape_reviews_for_business
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
@@ -70,64 +70,34 @@ def register():
         db.session.add(new_business)
         db.session.flush()
         
-        # fake reviews for now, later invoke the scraping from the utils
-        reviews_data = [
-            {
-                'source': 'Google',
-                'content': 'The best',
-                'rating': 5.0,
-                'retrieved_at': datetime(2025, 2, 28, 17, 21, 31, 818351, tzinfo=timezone.utc),
-                'review_date': datetime(2025, 2, 23, tzinfo=timezone.utc),
-                'username': 'coolguy78521',
-                'user_review_count': 0,
-                'user_profile_url': 'https://www.google.com/maps/contrib/108248640721491614783/reviews?hl=en'
-            },
-            {
-                'source': 'Google',
-                'content': 'Good',
-                'rating': 5.0,
-                'retrieved_at': datetime(2025, 2, 28, 17, 21, 31, 819834, tzinfo=timezone.utc),
-                'review_date': datetime(2025, 2, 23, tzinfo=timezone.utc),
-                'username': 'Yamil Hurtado',
-                'user_review_count': 0,
-                'user_profile_url': 'https://www.google.com/maps/contrib/105565421685024824085/reviews?hl=en'
-            },
-            {
-                'source': 'Google',
-                'content': 'Excellent pizza in NEW YORK and service',
-                'rating': 5.0,
-                'retrieved_at': datetime(2025, 2, 28, 17, 21, 31, 820172, tzinfo=timezone.utc),
-                'review_date': datetime(2025, 2, 23, tzinfo=timezone.utc),
-                'username': 'ABEL YAMIL HURTADO MAZON',
-                'user_review_count': 1,
-                'user_profile_url': 'https://www.google.com/maps/contrib/109084635403838943723/reviews?hl=en'
-            },
-            {
-                'source': 'Google',
-                'content': 'Very delicious and made me full. The staff were really nice and polite. Clean place with friendly faces. 10/10 would recommend',
-                'rating': 5.0,
-                'retrieved_at': datetime(2025, 2, 28, 17, 21, 31, 820502, tzinfo=timezone.utc),
-                'review_date': datetime(2025, 2, 23, tzinfo=timezone.utc),
-                'username': 'انس الشغدري',
-                'user_review_count': 21,
-                'user_profile_url': 'https://www.google.com/maps/contrib/103561383041732287970/reviews?hl=en'
-            }
-        ]
+        # query the reviews HERE
+        try:
+            scraped_data = scrape_reviews_for_business(business_data['url'])
+            reviews_data = scraped_data.get('reviews', [])
+        except Exception as scrape_error:
+            # Log the error but continue with registration
+            print(f"Error scraping reviews: {scrape_error}")
+            reviews_data = []  # Empty list if scraping fails
 
         for review_data in reviews_data:
-            new_review = Review(
-                source=review_data['source'],
-                content=review_data['content'],
-                rating=review_data['rating'],
-                retrieved_at=review_data['retrieved_at'],
-                review_date=review_data['review_date'],
-                username=review_data['username'],
-                user_review_count=review_data['user_review_count'],
-                user_profile_url=review_data['user_profile_url'],
-                business_id=new_business.id
-            )
-            db.session.add(new_review)
+            try:
+                new_review = Review(
+                    source=review_data.get('source', 'Google'),
+                    content=review_data.get('content', ''),
+                    rating=review_data.get('rating', 0.0),
+                    retrieved_at=review_data.get('retrieved_at', datetime.now(timezone.utc)),
+                    review_date=review_data.get('time_period_code', 0),
+                    username=review_data.get('username', ''),
+                    user_review_count=review_data.get('user_review_count', 0),
+                    user_profile_url=review_data.get('user_profile_url', ''),
+                    business_id=new_business.id
+                )
+                db.session.add(new_review)
+            except Exception as review_error:
+                print(f"Error adding review: {review_error}")
         
+
+
         db.session.commit()
 
         return jsonify({
