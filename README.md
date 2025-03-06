@@ -20,7 +20,7 @@ Project REST is a **full-stack tool** that aggregates, analyzes, and visualizes 
 | **Backend**        | Python (Flask/Django) |
 | **AI**             | tbd |
 | **Web Scraping**   | tbd |
-| **Database**       |  Firebase |
+| **Database**       |  SQL |
 | **Frontend**       | React.js / Next.js |
 | **Deployment**     | tbd |
 
