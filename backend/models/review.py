@@ -25,6 +25,14 @@ class Review(db.Model):
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
     business_ref = db.relationship('Business', back_populates='reviews')
 
+    # sentiment score
+    senti_score = db.Column(db.Float, nullable=False)
+    # check
+    is_suggestion = db.Column(db.Boolean, nullable=False )
+    # topics that the review focuses on, maximum 3 topics
+    topics = db.Column(db.String, nullable = True)
+
+
     def to_dict(self):
         return {
             'id': self.id,

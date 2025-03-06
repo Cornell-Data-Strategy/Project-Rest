@@ -92,6 +92,8 @@ def register():
                     user_profile_url=review_data.get('user_profile_url', ''),
                     business_id=new_business.id
                 )
+
+                
                 db.session.add(new_review)
             except Exception as review_error:
                 print(f"Error adding review: {review_error}")
