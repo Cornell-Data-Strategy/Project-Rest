@@ -4,6 +4,9 @@ import csv
 import json 
 import matplotlib.pyplot as plt
 
+# Replace with your service account key path
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './service-account-key.json'
+
 def batch_analyze_reviews(reviews):
     """
     Process reviews in batches to improve performance when calling Google NLP API.
@@ -35,14 +38,27 @@ def batch_analyze_reviews(reviews):
     pass
 
 
-# returns the review with sentiment score
+# returns the review with sentiment_score and sentiment_description
 # score range is inclusive [-1,1]
+# sentinment description is positive, negative, or netural
 def tag_review(review):
     # check if review has content
+    # if content use google nlp averaged with star rating to give score
+    map = [-0.9, -0.7, 0, 0.7, 0.9]
+    rating = review["rating"]
+    valueStar= map[rating-1]
+    if review.get("content") and len(review["content"])>0:
+        content = review["content"]
+        result = analyze_sentiment(content)
+        valueContent = result["sentiment_score"]
+        value = (valueContent+valueStar)/2
     # if not content use stars to give
-
-    # if content use google nlp to give score
-    pass
+    else:
+        value = valueStar
+    sentiment_description = "Positive" if value > 0 else "Negative" if value < 0 else "Neutral"
+    review["score"] = value
+    review["sentiment_description"] = sentiment_description
+    return review
 
 
 def is_suggestion(review):
@@ -71,13 +87,10 @@ def analyze_sentiment(text_content):
     }
 
 
-
-
-
 data =   {
     "source": str,
-    "content": str,
-    "rating": float,
+    "content": "The food is okay",
+    "rating": 5,
     "retrieved_at": str,
     "review_date": str,
     "time_period_code": int,
@@ -87,7 +100,7 @@ data =   {
     "user_profile_url": str
 }
 
-data =   {
+data_return =   {
     "source": str,
     "content": str,
     "rating": float,
@@ -101,3 +114,7 @@ data =   {
     "score": 1
 }
 
+
+
+answer = tag_review(data)
+print(answer)
