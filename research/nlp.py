@@ -46,26 +46,40 @@ def tag_review(review):
     # if content use google nlp averaged with star rating to give score
     map = [-0.9, -0.7, 0, 0.7, 0.9]
     rating = review["rating"]
-    valueStar= map[rating-1]
+    value_star= map[rating-1]
     if review.get("content") and len(review["content"])>0:
         content = review["content"]
         result = analyze_sentiment(content)
-        valueContent = result["sentiment_score"]
-        value = (valueContent+valueStar)/2
+        value_content = result["sentiment_score"]
+        value = (value_content+value_star)/2
     # if not content use stars to give
     else:
-        value = valueStar
+        value = value_star
     sentiment_description = "Positive" if value > 0 else "Negative" if value < 0 else "Neutral"
     review["score"] = value
     review["sentiment_description"] = sentiment_description
     return review
 
 
+# returns the review with topics
+def get_topics(review):
+    if review.get("content") and len(review["content"])>0:
+        content = review["content"]
+        result = analyze_sentiment(content)
+        entities = result["entities"]
+        sorted_entities = sorted(entities, key=lambda e: e[2], reverse=True)
+        if len(sorted_entities)>3:
+            topics = [e[0] for e in sorted_entities[0:3]]
+        else:
+            topics = entity_names = [e[0] for e in sorted_entities]
+        review["topics"] = topics
+    return review
+
 def is_suggestion(review):
     pass
 
 
-
+#help function to use google NLP
 def analyze_sentiment(text_content):
     client = language_v1.LanguageServiceClient()
     
@@ -89,7 +103,7 @@ def analyze_sentiment(text_content):
 
 data =   {
     "source": str,
-    "content": "The food is okay",
+    "content": "The food is okay, but the location is good and it could taste better and slow service but good cake.",
     "rating": 5,
     "retrieved_at": str,
     "review_date": str,
@@ -100,21 +114,8 @@ data =   {
     "user_profile_url": str
 }
 
-data_return =   {
-    "source": str,
-    "content": str,
-    "rating": float,
-    "retrieved_at": str,
-    "review_date": str,
-    "time_period_code": int,
-    "relative_date_original": str,
-    "username": str,
-    "user_review_count": str,
-    "user_profile_url": str,
-    "score": 1
-}
 
 
 
-answer = tag_review(data)
+answer = get_topics(data)
 print(answer)
