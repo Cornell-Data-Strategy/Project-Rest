@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify
-from models.database import db
-from models.user import User
-from models.review import Review
+from backend.models.database import db
+from backend.models.user import User
+from backend.models.review import Review
 from flask_jwt_extended import create_access_token
 from datetime import datetime, timezone
-from models.business import Business
-from services.scraper import scrape_reviews_for_business
+from backend.models.business import Business
+from backend.services.scraper import scrape_reviews_for_business
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])

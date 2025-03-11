@@ -1,9 +1,18 @@
 from flask import Blueprint, request, jsonify
-from services.scraper import scrape_reviews_for_business
-from models.database import db
-from models.review import Review
+from backend.services.scraper import scrape_reviews_for_business
+from backend.services.llm import process_reviews
+from backend.models.database import db
+from backend.models.review import Review
 
 reviews_bp = Blueprint('reviews', __name__)
+
+@reviews_bp.route('/analyze_reviews', methods=['POST'])
+def analyze_reviews():
+    """Analyze a batch of reviews using Google NLP"""
+    data = request.get_json()
+    reviews = data.get('reviews', [])
+    results = process_reviews(reviews)
+    return jsonify(results)
 
 @reviews_bp.route('/scrape', methods=['POST'])
 def initiate_scraping():

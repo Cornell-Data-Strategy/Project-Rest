@@ -1,4 +1,4 @@
-from models.database import db
+from backend.models.database import db
 
 class Business(db.Model):
     """Data model for a business entity"""

@@ -5,19 +5,19 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 import os
 
-
 load_dotenv()
 
-from models.database import db, init_db
-from models.business import Business
-from models.review import Review
-from models.user import User
+from backend.models.database import db, init_db
+from backend.models.business import Business
+from backend.models.review import Review
+from backend.models.user import User
 
 # Import routes
-from routes.auth import auth_bp
-from routes.businesses import business_bp
-from routes.reviews import reviews_bp
-from routes.analytics import analytics_bp
+from backend.routes.auth import auth_bp
+from backend.routes.businesses import business_bp
+from backend.routes.reviews import reviews_bp
+from backend.routes.analytics import analytics_bp
+from backend.routes.ping import ping_bp
 
 def create_app(config_name='development'):
     """Create and configure the Flask application"""
@@ -28,6 +28,7 @@ def create_app(config_name='development'):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project_rest.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-jwt-secret-key')
+    app.config['GOOGLE_CLOUD_API_KEY'] = os.environ.get('GOOGLE_CLOUD_API_KEY', 'dev-google-cloud-api-key')
     
     # Enable CORS
     CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -46,7 +47,8 @@ def create_app(config_name='development'):
     app.register_blueprint(business_bp, url_prefix='/api/businesses')
     app.register_blueprint(reviews_bp, url_prefix='/api/reviews')
     app.register_blueprint(analytics_bp, url_prefix='/api/analytics')
-    
+    app.register_blueprint(ping_bp, url_prefix='/api')
+
     # Error handlers
     @app.errorhandler(404)
     def not_found(error):
