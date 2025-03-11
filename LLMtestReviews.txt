@@ -1,0 +1,94 @@
+# Use this to POST to http://localhost:5000/api/reviews/analyze_reviews
+
+{
+    "reviews": [
+        {
+            "source": "Google",
+            "content": "Great service and food!",
+            "rating": 5,
+            "retrieved_at": "2023-10-01T12:00:00Z",
+            "review_date": "2023-09-30",
+            "username": "user1",
+            "user_review_count": 10,
+            "user_profile_url": "http://example.com",
+            "business_id": 1
+        },
+        {
+            "source": "Google",
+            "content": "The ambiance was wonderful.",
+            "rating": 4,
+            "retrieved_at": "2023-10-01T12:00:00Z",
+            "review_date": "2023-09-30",
+            "username": "user2",
+            "user_review_count": 5,
+            "user_profile_url": "http://example.com",
+            "business_id": 1
+        },
+        {
+            "source": "Yelp",
+            "content": "Terrible experience, the food was cold and the service was slow.",
+            "rating": 1,
+            "retrieved_at": "2023-10-02T14:30:00Z",
+            "review_date": "2023-10-01",
+            "username": "user3",
+            "user_review_count": 2,
+            "user_profile_url": "http://example.com",
+            "business_id": 2
+        },
+        {
+            "source": "TripAdvisor",
+            "content": "Amazing place! The staff was very friendly and the rooms were clean.",
+            "rating": 5,
+            "retrieved_at": "2023-10-03T09:00:00Z",
+            "review_date": "2023-10-02",
+            "username": "user4",
+            "user_review_count": 15,
+            "user_profile_url": "http://example.com",
+            "business_id": 3
+        },
+        {
+            "source": "Google",
+            "content": "Good value for money. Will visit again.",
+            "rating": 4,
+            "retrieved_at": "2023-10-04T11:00:00Z",
+            "review_date": "2023-10-03",
+            "username": "user5",
+            "user_review_count": 8,
+            "user_profile_url": "http://example.com",
+            "business_id": 1
+        },
+        {
+            "source": "Yelp",
+            "content": "Not worth the hype. The food was average and overpriced.",
+            "rating": 2,
+            "retrieved_at": "2023-10-05T16:45:00Z",
+            "review_date": "2023-10-04",
+            "username": "user6",
+            "user_review_count": 3,
+            "user_profile_url": "http://example.com",
+            "business_id": 2
+        },
+        {
+            "source": "TripAdvisor",
+            "content": "A hidden gem! The location is perfect and the amenities are top-notch.",
+            "rating": 5,
+            "retrieved_at": "2023-10-06T08:15:00Z",
+            "review_date": "2023-10-05",
+            "username": "user7",
+            "user_review_count": 20,
+            "user_profile_url": "http://example.com",
+            "business_id": 3
+        },
+        {
+            "source": "Google",
+            "content": "Decent place, but the service could be better.",
+            "rating": 3,
+            "retrieved_at": "2023-10-07T10:00:00Z",
+            "review_date": "2023-10-06",
+            "username": "user8",
+            "user_review_count": 12,
+            "user_profile_url": "http://example.com",
+            "business_id": 1
+        }
+    ]
+}
