@@ -71,20 +71,19 @@ def register():
         db.session.add(new_business)
         db.session.flush()
         
-        # query the reviews HERE
+      
         try:
             print("scraping reviews")
             scraped_data = scrape_reviews_for_business(business_data['url'])
-            # pass this to a function
             reviews_data = scraped_data.get('reviews', [])
         except Exception as scrape_error:
-            # Log the error but continue with registration
             print(f"Error scraping reviews: {scrape_error}")
+            return jsonify({'error': 'Error scraping reviews'}), 500
             reviews_data = []  # Empty list if scraping fails
         
         # process the reviews
         print("processing the reviews")
-        #process_reviews(reviews_data, new_business.id)
+        process_reviews(reviews_data, new_business.id)
         db.session.commit()
 
         return jsonify({

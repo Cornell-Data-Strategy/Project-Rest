@@ -1,30 +1,6 @@
-2025-03-12 04:20:25,059 - INFO - Fetching reviews starting from offset 0
-2025-03-12 04:20:27,154 - INFO - Scraped 4 reviews. Total so far: 4
-2025-03-12 04:20:29,163 - INFO - Fetching reviews starting from offset 4
-2025-03-12 04:20:31,422 - INFO - No more reviews found, breaking loop
-2025-03-12 04:20:31,422 - INFO - Finished scraping loop after 2 iterations
-2025-03-12 04:20:31,422 - INFO - Successfully scraped 4 reviews
-2025-03-12 04:25:00,859 - INFO - Fetching reviews starting from offset 0
-2025-03-12 04:25:02,971 - INFO - Scraped 4 reviews. Total so far: 4
-2025-03-12 04:25:04,976 - INFO - Fetching reviews starting from offset 4
-2025-03-12 04:25:07,071 - INFO - No more reviews found, breaking loop
-2025-03-12 04:25:07,071 - INFO - Finished scraping loop after 2 iterations
-2025-03-12 04:25:07,071 - INFO - Successfully scraped 4 reviews
-2025-03-12 04:32:23,433 - INFO - Fetching reviews starting from offset 0
-2025-03-12 04:32:25,541 - INFO - Scraped 4 reviews. Total so far: 4
-2025-03-12 04:32:27,546 - INFO - Fetching reviews starting from offset 4
-2025-03-12 04:32:29,635 - INFO - No more reviews found, breaking loop
-2025-03-12 04:32:29,635 - INFO - Finished scraping loop after 2 iterations
-2025-03-12 04:32:29,635 - INFO - Successfully scraped 4 reviews
-2025-03-12 04:36:18,690 - INFO - Fetching reviews starting from offset 0
-2025-03-12 04:36:20,808 - INFO - Scraped 4 reviews. Total so far: 4
-2025-03-12 04:36:22,813 - INFO - Fetching reviews starting from offset 4
-2025-03-12 04:36:24,988 - INFO - No more reviews found, breaking loop
-2025-03-12 04:36:24,989 - INFO - Finished scraping loop after 2 iterations
-2025-03-12 04:36:24,989 - INFO - Successfully scraped 4 reviews
-2025-03-12 04:41:26,133 - INFO - Fetching reviews starting from offset 0
-2025-03-12 04:41:28,243 - INFO - Scraped 4 reviews. Total so far: 4
-2025-03-12 04:41:30,248 - INFO - Fetching reviews starting from offset 4
-2025-03-12 04:41:32,338 - INFO - No more reviews found, breaking loop
-2025-03-12 04:41:32,338 - INFO - Finished scraping loop after 2 iterations
-2025-03-12 04:41:32,338 - INFO - Successfully scraped 4 reviews
+2025-03-12 04:55:52,142 - INFO - Fetching reviews starting from offset 0
+2025-03-12 04:55:54,248 - INFO - Scraped 4 reviews. Total so far: 4
+2025-03-12 04:55:56,254 - INFO - Fetching reviews starting from offset 4
+2025-03-12 04:55:58,558 - INFO - No more reviews found, breaking loop
+2025-03-12 04:55:58,559 - INFO - Finished scraping loop after 2 iterations
+2025-03-12 04:55:58,559 - INFO - Successfully scraped 4 reviews

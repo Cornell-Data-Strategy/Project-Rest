@@ -21,26 +21,15 @@ def process_reviews(reviews_data, business_id):
         business_id: The ID of the business to associate with the reviews
     """
     print(f"Starting to process {len(reviews_data)} reviews")
-    start_time = time.time()
+
     
-    count = 0
-    for review_data in reviews_data:
-        count += 1
-        if count % 10 == 0:
-            print(f"Processed {count}/{len(reviews_data)} reviews...")
-        
+    for review_data in reviews_data:    
         try:
-            # Extract content from review_data
-            content = review_data.get('caption', '') or ''
-            
-            # Skip empty content
-            if not content:
-                continue
-                
+
             # Create new review object
             new_review = Review(
                 source=review_data.get('source', 'Google'),
-                content=content,
+                content=review_data.get('content', ''),
                 rating=review_data.get('rating', 0.0),
                 retrieved_at=review_data.get('retrieval_date', datetime.now(timezone.utc)),
                 review_date=review_data.get('time_period_code', 0),
@@ -53,14 +42,12 @@ def process_reviews(reviews_data, business_id):
             # Mock sentiment analysis
             new_review = analyze_sentiment_mock(new_review)
             
-            # Detect if review contains a suggestion - with error handling
             try:
-                new_review.is_suggestion = detector.predict(content)
+                new_review.is_suggestion = detector.predict(new_review.content)
             except Exception as predict_error:
                 print(f"Error predicting suggestion: {predict_error}")
                 new_review.is_suggestion = False
             
-            # Add to session without committing yet
             db.session.add(new_review)
             
         except Exception as review_error:
@@ -69,13 +56,11 @@ def process_reviews(reviews_data, business_id):
     # Commit all reviews at once
     try:
         db.session.commit()
-        print(f"Successfully committed {count} reviews to database")
+        print(f"Successfully committed  reviews to database")
     except Exception as commit_error:
         db.session.rollback()
         print(f"Error committing reviews to database: {commit_error}")
-    
-    end_time = time.time()
-    print(f"Review processing completed in {end_time - start_time:.2f} seconds")
+
 
 
 def analyze_sentiment(review):

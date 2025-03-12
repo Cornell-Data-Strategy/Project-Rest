@@ -37,42 +37,48 @@ class GoogleMapsScraper:
         return self
 
     def __exit__(self, exc_type, exc_value, tb):
-        print("Starting __exit__ method")
-        
-        if exc_type is not None:
-            print(f"Exception occurred: {exc_type}")
-            traceback.print_exception(exc_type, exc_value, tb)
+        if self.debug:
+            print("Starting __exit__ method")
+        if self.debug:
+            if exc_type is not None:
+                print(f"Exception occurred: {exc_type}")
+                traceback.print_exception(exc_type, exc_value, tb)
 
         try:
-            print("Trying to close alert if any")
+            if self.debug:
+                print("Trying to close alert if any")
             try:
                 alert = self.driver.switch_to.alert
                 alert.dismiss()
-                print("Alert dismissed")
+                if self.debug:
+                    print("Alert dismissed")
             except Exception as e:
                 print(f"No alert found: {e}")
             
-            print("Trying to close browser")
+            if self.debug:
+                print("Trying to close browser")
             try:
                 self.driver.close()
-                print("Browser closed successfully")
+                if self.debug:
+                    print("Browser closed successfully")
             except Exception as e:
                 print(f"Error closing browser: {e}")
-            
-            print("Trying to quit driver")
+            if self.debug:
+                print("Trying to quit driver")
             try:
                 self.driver.quit()
-                print("Driver quit successfully")
+                if self.debug:
+                    print("Driver quit successfully")
             except Exception as e:
                 print(f"Error quitting driver: {e}")
             
         except Exception as e:
             print(f"General error in cleanup: {e}")
 
-        
-        print("Active threads:", threading.enumerate())
-        
-        print("Finished __exit__ method")
+        if self.debug:
+            print("Active threads:", threading.enumerate())
+        if self.debug:
+            print("Finished __exit__ method")
         return True
 
     def sort_by(self, url, ind):
