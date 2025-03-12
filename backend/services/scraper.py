@@ -1,7 +1,10 @@
-from .googlemaps import GoogleMapsScraper
+# from .googlemaps import GoogleMapsScraper
+from backend.services.googlemaps import GoogleMapsScraper
 from datetime import datetime, timedelta
 import re
 import json
+import threading
+
 
 def parse_relative_date(relative_date, retrieval_date):
     """
@@ -115,15 +118,21 @@ def scrape_reviews_for_business(url):
     Returns:
         dict: Processed review data
     """
-    with GoogleMapsScraper(debug=True) as scraper:
+    print("Starting scraper...")
+    with GoogleMapsScraper(debug=False) as scraper:
+        print("Getting reviews...")
         raw_reviews = scraper.get_all_reviews(url)
+
+        print(f"Scraped {len(raw_reviews.get('reviews', []))} reviews")
         
         # Extract just the reviews array from the response
         reviews = raw_reviews.get('reviews', [])
         
+        print("Processing review data...")
         # Process the raw review data
         processed_reviews = process_review_data(reviews)
         
+        print("Creating result dictionary...")
         # Create the result dictionary
         result = {
             'place_url': url,
@@ -132,14 +141,19 @@ def scrape_reviews_for_business(url):
             'scraped_at': datetime.now().isoformat()
         }
         
+        print("Saving to file...")
         # Save to file for debugging/backup 
-        # with open('all_reviews.json', 'w', encoding='utf-8') as f:
-        #     json.dump(result, f, ensure_ascii=False, indent=4, default=str)
+        with open('all_reviews.json', 'w', encoding='utf-8') as f:
+            json.dump(result, f, ensure_ascii=False, indent=4, default=str)
 
+        print("Finished within context manager")
+    
+    print("Exited context manager")
+    print("Active threads:", threading.enumerate())
     return result
 
 # Uncomment to test
-# if __name__ == '__main__':
-#     url = "https://www.google.com/maps/place/A.D.+White+House/@42.4482803,-76.4812035,1603m/data=!3m1!1e3!4m8!3m7!1s0x89d0818af370608f:0x1a869c58e0fa205f!8m2!3d42.4482569!4d-76.481923!9m1!1b1!16s%2Fm%2F03gzbrq?entry=ttu&g_ep=EgoyMDI1MDMwMi4wIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D"
-#     result = scrape_reviews_for_business(url)
-#     print(f"Successfully scraped {result['total_reviews']} reviews")
+if __name__ == '__main__':
+    url = "https://www.google.ca/maps/place/Anna+Comstock+Hall+(Latino+Living+Center)/@42.4559129,-76.4775697,16.04z/data=!4m8!3m7!1s0x89d082217810521b:0x315d3df27fb230b!8m2!3d42.4539109!4d-76.4826287!9m1!1b1!16s%2Fg%2F124yjrzjt?entry=ttu&g_ep=EgoyMDI1MDMwOC4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"
+    result = scrape_reviews_for_business(url)
+    print(f"Successfully scraped {result['total_reviews']} reviews")

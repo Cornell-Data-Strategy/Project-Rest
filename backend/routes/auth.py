@@ -6,6 +6,7 @@ from flask_jwt_extended import create_access_token
 from datetime import datetime, timezone
 from backend.models.business import Business
 from backend.services.scraper import scrape_reviews_for_business
+from backend.services.review import process_reviews
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
@@ -72,34 +73,18 @@ def register():
         
         # query the reviews HERE
         try:
+            print("scraping reviews")
             scraped_data = scrape_reviews_for_business(business_data['url'])
+            # pass this to a function
             reviews_data = scraped_data.get('reviews', [])
         except Exception as scrape_error:
             # Log the error but continue with registration
             print(f"Error scraping reviews: {scrape_error}")
             reviews_data = []  # Empty list if scraping fails
-
-        for review_data in reviews_data:
-            try:
-                new_review = Review(
-                    source=review_data.get('source', 'Google'),
-                    content=review_data.get('content', ''),
-                    rating=review_data.get('rating', 0.0),
-                    retrieved_at=review_data.get('retrieved_at', datetime.now(timezone.utc)),
-                    review_date=review_data.get('time_period_code', 0),
-                    username=review_data.get('username', ''),
-                    user_review_count=review_data.get('user_review_count', 0),
-                    user_profile_url=review_data.get('user_profile_url', ''),
-                    business_id=new_business.id
-                )
-
-                
-                db.session.add(new_review)
-            except Exception as review_error:
-                print(f"Error adding review: {review_error}")
         
-
-
+        # process the reviews
+        print("processing the reviews")
+        #process_reviews(reviews_data, new_business.id)
         db.session.commit()
 
         return jsonify({

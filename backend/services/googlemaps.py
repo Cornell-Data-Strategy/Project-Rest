@@ -5,6 +5,7 @@ import re
 import time
 import traceback
 from datetime import datetime
+import threading
 
 import numpy as np
 import pandas as pd
@@ -36,12 +37,42 @@ class GoogleMapsScraper:
         return self
 
     def __exit__(self, exc_type, exc_value, tb):
+        print("Starting __exit__ method")
+        
         if exc_type is not None:
+            print(f"Exception occurred: {exc_type}")
             traceback.print_exception(exc_type, exc_value, tb)
 
-        self.driver.close()
-        self.driver.quit()
+        try:
+            print("Trying to close alert if any")
+            try:
+                alert = self.driver.switch_to.alert
+                alert.dismiss()
+                print("Alert dismissed")
+            except Exception as e:
+                print(f"No alert found: {e}")
+            
+            print("Trying to close browser")
+            try:
+                self.driver.close()
+                print("Browser closed successfully")
+            except Exception as e:
+                print(f"Error closing browser: {e}")
+            
+            print("Trying to quit driver")
+            try:
+                self.driver.quit()
+                print("Driver quit successfully")
+            except Exception as e:
+                print(f"Error quitting driver: {e}")
+            
+        except Exception as e:
+            print(f"General error in cleanup: {e}")
 
+        
+        print("Active threads:", threading.enumerate())
+        
+        print("Finished __exit__ method")
         return True
 
     def sort_by(self, url, ind):
@@ -74,7 +105,7 @@ class GoogleMapsScraper:
         recent_rating_bt.click()
 
         # wait to load review (ajax call)
-        time.sleep(1)
+        time.sleep(2)
 
         return 0
 
@@ -156,7 +187,7 @@ class GoogleMapsScraper:
         self.driver.get(url)
         self.__click_on_cookie_agreement()
 
-        time.sleep(1)
+        time.sleep(2)
 
         resp = BeautifulSoup(self.driver.page_source, 'html.parser')
 
@@ -390,18 +421,12 @@ class GoogleMapsScraper:
         strOut = str.replace('\r', ' ').replace('\n', ' ').replace('\t', ' ')
         return strOut
     
-    def get_all_reviews(self, url):
-        # """
-        # Scrapes all available reviews from a Google Maps URL.
-        
-        # Args:
-        #     url (str): The Google Maps URL containing reviews
-            
-        # Returns:
-        #     dict: A dictionary containing all scraped reviews
-        # """
+    def get_all_reviews(self, url, max_iterations=15):
+        """
+        Scrapes reviews from a Google Maps URL with proper termination.
+        """
         # Sort reviews by newest first
-        error = self.sort_by(url, 1)  # 1 corresponds to 'newest' in the ind dictionary
+        error = self.sort_by(url, 1)
         
         if error != 0:
             self.logger.error(f"Failed to sort reviews for URL: {url}")
@@ -410,30 +435,44 @@ class GoogleMapsScraper:
         all_reviews = []
         offset = 0
         total_scraped = 0
+        iteration = 0
         
-        # Continue scraping until no more reviews are found
-        while True:
+        while iteration < max_iterations:
+            iteration += 1
             self.logger.info(f"Fetching reviews starting from offset {offset}")
-            reviews = self.get_reviews(offset)
             
-            # If no reviews are returned, we've reached the end
-            if len(reviews) == 0:
-                break
+            try:
+                # Get reviews with timeout protection
+                reviews = self.get_reviews(offset)
                 
-            all_reviews.extend(reviews)
-            total_scraped += len(reviews)
-            self.logger.info(f"Scraped {len(reviews)} reviews. Total so far: {total_scraped}")
-            
-            # Update offset for next batch
-            offset += len(reviews)
-            
-            # Optional: Add a small delay to avoid overloading the server
-            time.sleep(1)
+                # IMPORTANT FIX: If this batch has no reviews, break the loop
+                if not reviews or len(reviews) == 0:
+                    self.logger.info("No more reviews found, breaking loop")
+                    break
+                    
+                all_reviews.extend(reviews)
+                total_scraped += len(reviews)
+                self.logger.info(f"Scraped {len(reviews)} reviews. Total so far: {total_scraped}")
+                
+                # Update offset for next batch
+                offset += len(reviews)
+                
+                # Add a small delay
+                time.sleep(2)
+                
+            except Exception as e:
+                self.logger.error(f"Error while fetching reviews: {e}")
+                break
+        
+        # Add this log to confirm we exited the loop
+        self.logger.info(f"Finished scraping loop after {iteration} iterations")
         
         result = {
             "place_url": url,
             "total_reviews": total_scraped,
             "reviews": all_reviews
         }
+        
+        self.logger.info(f"Successfully scraped {total_scraped} reviews")
         
         return result

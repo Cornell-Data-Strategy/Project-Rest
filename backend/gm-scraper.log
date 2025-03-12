@@ -87,3 +87,140 @@
 2025-03-05 02:42:50,980 - INFO - Fetching reviews starting from offset 190
 2025-03-05 02:42:53,447 - INFO - Scraped 10 reviews. Total so far: 200
 2025-03-05 02:42:54,452 - INFO - Fetching reviews starting from offset 200
+2025-03-12 03:13:23,225 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:13:25,646 - INFO - Scraped 8 reviews. Total so far: 8
+2025-03-12 03:13:26,649 - INFO - Fetching reviews starting from offset 8
+2025-03-12 03:23:35,725 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:23:38,168 - INFO - Scraped 20 reviews. Total so far: 20
+2025-03-12 03:23:39,170 - INFO - Fetching reviews starting from offset 20
+2025-03-12 03:23:41,419 - INFO - Scraped 10 reviews. Total so far: 30
+2025-03-12 03:23:42,425 - INFO - Fetching reviews starting from offset 30
+2025-03-12 03:23:44,656 - INFO - Scraped 10 reviews. Total so far: 40
+2025-03-12 03:23:45,662 - INFO - Fetching reviews starting from offset 40
+2025-03-12 03:23:47,987 - INFO - Scraped 10 reviews. Total so far: 50
+2025-03-12 03:23:48,992 - INFO - Fetching reviews starting from offset 50
+2025-03-12 03:23:51,240 - INFO - Scraped 10 reviews. Total so far: 60
+2025-03-12 03:23:52,245 - INFO - Fetching reviews starting from offset 60
+2025-03-12 03:23:54,490 - INFO - Scraped 10 reviews. Total so far: 70
+2025-03-12 03:23:55,495 - INFO - Fetching reviews starting from offset 70
+2025-03-12 03:23:57,739 - INFO - Scraped 10 reviews. Total so far: 80
+2025-03-12 03:23:58,745 - INFO - Fetching reviews starting from offset 80
+2025-03-12 03:24:01,139 - INFO - Scraped 10 reviews. Total so far: 90
+2025-03-12 03:24:02,144 - INFO - Fetching reviews starting from offset 90
+2025-03-12 03:24:04,444 - INFO - Scraped 10 reviews. Total so far: 100
+2025-03-12 03:24:05,449 - INFO - Fetching reviews starting from offset 100
+2025-03-12 03:24:07,859 - INFO - Scraped 10 reviews. Total so far: 110
+2025-03-12 03:24:08,862 - INFO - Fetching reviews starting from offset 110
+2025-03-12 03:24:11,172 - INFO - Scraped 10 reviews. Total so far: 120
+2025-03-12 03:24:12,178 - INFO - Fetching reviews starting from offset 120
+2025-03-12 03:24:14,523 - INFO - Scraped 10 reviews. Total so far: 130
+2025-03-12 03:24:15,529 - INFO - Fetching reviews starting from offset 130
+2025-03-12 03:24:18,006 - INFO - Scraped 10 reviews. Total so far: 140
+2025-03-12 03:24:19,011 - INFO - Fetching reviews starting from offset 140
+2025-03-12 03:24:21,371 - INFO - Scraped 10 reviews. Total so far: 150
+2025-03-12 03:24:22,376 - INFO - Fetching reviews starting from offset 150
+2025-03-12 03:24:24,811 - INFO - Scraped 10 reviews. Total so far: 160
+2025-03-12 03:24:25,817 - INFO - Fetching reviews starting from offset 160
+2025-03-12 03:24:28,183 - INFO - Scraped 10 reviews. Total so far: 170
+2025-03-12 03:24:29,185 - INFO - Fetching reviews starting from offset 170
+2025-03-12 03:24:31,735 - INFO - Scraped 10 reviews. Total so far: 180
+2025-03-12 03:24:32,740 - INFO - Fetching reviews starting from offset 180
+2025-03-12 03:24:35,187 - INFO - Scraped 10 reviews. Total so far: 190
+2025-03-12 03:24:36,189 - INFO - Fetching reviews starting from offset 190
+2025-03-12 03:24:38,761 - INFO - Scraped 10 reviews. Total so far: 200
+2025-03-12 03:24:39,766 - INFO - Fetching reviews starting from offset 200
+2025-03-12 03:28:41,143 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:28:43,569 - INFO - Scraped 20 reviews. Total so far: 20
+2025-03-12 03:28:44,572 - INFO - Fetching reviews starting from offset 20
+2025-03-12 03:28:46,809 - INFO - Scraped 10 reviews. Total so far: 30
+2025-03-12 03:28:47,815 - INFO - Fetching reviews starting from offset 30
+2025-03-12 03:28:50,271 - INFO - Scraped 10 reviews. Total so far: 40
+2025-03-12 03:28:51,276 - INFO - Fetching reviews starting from offset 40
+2025-03-12 03:28:53,490 - INFO - Scraped 10 reviews. Total so far: 50
+2025-03-12 03:28:54,497 - INFO - Fetching reviews starting from offset 50
+2025-03-12 03:28:56,726 - INFO - Scraped 10 reviews. Total so far: 60
+2025-03-12 03:28:57,731 - INFO - Fetching reviews starting from offset 60
+2025-03-12 03:28:59,984 - INFO - Scraped 10 reviews. Total so far: 70
+2025-03-12 03:29:00,990 - INFO - Fetching reviews starting from offset 70
+2025-03-12 03:29:03,353 - INFO - Scraped 10 reviews. Total so far: 80
+2025-03-12 03:29:04,359 - INFO - Fetching reviews starting from offset 80
+2025-03-12 03:29:06,662 - INFO - Scraped 10 reviews. Total so far: 90
+2025-03-12 03:29:07,666 - INFO - Fetching reviews starting from offset 90
+2025-03-12 03:29:09,929 - INFO - Scraped 10 reviews. Total so far: 100
+2025-03-12 03:29:10,935 - INFO - Fetching reviews starting from offset 100
+2025-03-12 03:29:13,327 - INFO - Scraped 10 reviews. Total so far: 110
+2025-03-12 03:29:14,333 - INFO - Fetching reviews starting from offset 110
+2025-03-12 03:29:16,642 - INFO - Scraped 10 reviews. Total so far: 120
+2025-03-12 03:29:17,648 - INFO - Fetching reviews starting from offset 120
+2025-03-12 03:29:20,059 - INFO - Scraped 10 reviews. Total so far: 130
+2025-03-12 03:29:21,064 - INFO - Fetching reviews starting from offset 130
+2025-03-12 03:29:23,404 - INFO - Scraped 10 reviews. Total so far: 140
+2025-03-12 03:29:24,409 - INFO - Fetching reviews starting from offset 140
+2025-03-12 03:29:26,833 - INFO - Scraped 10 reviews. Total so far: 150
+2025-03-12 03:29:27,835 - INFO - Fetching reviews starting from offset 150
+2025-03-12 03:29:30,184 - INFO - Scraped 10 reviews. Total so far: 160
+2025-03-12 03:29:31,189 - INFO - Fetching reviews starting from offset 160
+2025-03-12 03:29:33,661 - INFO - Scraped 10 reviews. Total so far: 170
+2025-03-12 03:29:34,664 - INFO - Fetching reviews starting from offset 170
+2025-03-12 03:29:37,083 - INFO - Scraped 10 reviews. Total so far: 180
+2025-03-12 03:29:38,088 - INFO - Fetching reviews starting from offset 180
+2025-03-12 03:29:40,641 - INFO - Scraped 10 reviews. Total so far: 190
+2025-03-12 03:29:41,644 - INFO - Fetching reviews starting from offset 190
+2025-03-12 03:29:44,127 - INFO - Scraped 10 reviews. Total so far: 200
+2025-03-12 03:29:45,132 - INFO - Fetching reviews starting from offset 200
+2025-03-12 03:31:34,701 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:31:37,170 - INFO - Scraped 20 reviews. Total so far: 20
+2025-03-12 03:31:38,171 - INFO - Fetching reviews starting from offset 20
+2025-03-12 03:31:40,425 - INFO - Scraped 10 reviews. Total so far: 30
+2025-03-12 03:31:41,427 - INFO - Fetching reviews starting from offset 30
+2025-03-12 03:31:43,789 - INFO - Scraped 10 reviews. Total so far: 40
+2025-03-12 03:31:44,795 - INFO - Fetching reviews starting from offset 40
+2025-03-12 03:31:47,003 - INFO - Scraped 10 reviews. Total so far: 50
+2025-03-12 03:31:48,008 - INFO - Fetching reviews starting from offset 50
+2025-03-12 03:31:50,233 - INFO - Scraped 10 reviews. Total so far: 60
+2025-03-12 03:31:51,237 - INFO - Fetching reviews starting from offset 60
+2025-03-12 03:31:53,499 - INFO - Scraped 10 reviews. Total so far: 70
+2025-03-12 03:31:54,500 - INFO - Fetching reviews starting from offset 70
+2025-03-12 03:31:56,860 - INFO - Scraped 10 reviews. Total so far: 80
+2025-03-12 03:31:57,866 - INFO - Fetching reviews starting from offset 80
+2025-03-12 03:32:00,139 - INFO - Scraped 10 reviews. Total so far: 90
+2025-03-12 03:32:01,145 - INFO - Fetching reviews starting from offset 90
+2025-03-12 03:32:03,429 - INFO - Scraped 10 reviews. Total so far: 100
+2025-03-12 03:32:04,434 - INFO - Fetching reviews starting from offset 100
+2025-03-12 03:32:06,822 - INFO - Scraped 10 reviews. Total so far: 110
+2025-03-12 03:32:07,828 - INFO - Fetching reviews starting from offset 110
+2025-03-12 03:32:10,147 - INFO - Scraped 10 reviews. Total so far: 120
+2025-03-12 03:32:11,152 - INFO - Fetching reviews starting from offset 120
+2025-03-12 03:32:13,594 - INFO - Scraped 10 reviews. Total so far: 130
+2025-03-12 03:32:14,596 - INFO - Fetching reviews starting from offset 130
+2025-03-12 03:32:16,922 - INFO - Scraped 10 reviews. Total so far: 140
+2025-03-12 03:32:17,928 - INFO - Fetching reviews starting from offset 140
+2025-03-12 03:32:20,352 - INFO - Scraped 10 reviews. Total so far: 150
+2025-03-12 03:32:21,358 - INFO - Fetching reviews starting from offset 150
+2025-03-12 03:32:23,700 - INFO - Scraped 10 reviews. Total so far: 160
+2025-03-12 03:32:24,705 - INFO - Fetching reviews starting from offset 160
+2025-03-12 03:32:27,160 - INFO - Scraped 10 reviews. Total so far: 170
+2025-03-12 03:32:28,162 - INFO - Fetching reviews starting from offset 170
+2025-03-12 03:32:30,576 - INFO - Scraped 10 reviews. Total so far: 180
+2025-03-12 03:32:31,582 - INFO - Fetching reviews starting from offset 180
+2025-03-12 03:32:34,084 - INFO - Scraped 10 reviews. Total so far: 190
+2025-03-12 03:32:35,084 - INFO - Fetching reviews starting from offset 190
+2025-03-12 03:32:37,579 - INFO - Scraped 10 reviews. Total so far: 200
+2025-03-12 03:32:38,583 - INFO - Fetching reviews starting from offset 200
+2025-03-12 03:33:40,924 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:33:43,456 - INFO - Scraped 20 reviews. Total so far: 20
+2025-03-12 03:33:44,456 - INFO - Fetching reviews starting from offset 20
+2025-03-12 03:36:23,015 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:36:25,142 - INFO - Scraped 20 reviews. Total so far: 20
+2025-03-12 03:36:26,148 - INFO - Fetching reviews starting from offset 20
+2025-03-12 03:36:28,279 - INFO - Scraped 10 reviews. Total so far: 30
+2025-03-12 03:36:29,283 - INFO - Fetching reviews starting from offset 30
+2025-03-12 03:36:31,428 - INFO - Scraped 10 reviews. Total so far: 40
+2025-03-12 03:36:32,433 - INFO - Fetching reviews starting from offset 40
+2025-03-12 03:36:34,748 - INFO - Scraped 10 reviews. Total so far: 50
+2025-03-12 03:36:35,753 - INFO - Fetching reviews starting from offset 50
+2025-03-12 03:36:38,114 - INFO - Scraped 10 reviews. Total so far: 60
+2025-03-12 03:36:39,120 - INFO - Fetching reviews starting from offset 60
+2025-03-12 03:37:14,680 - INFO - Fetching reviews starting from offset 0
+2025-03-12 03:37:16,799 - INFO - Scraped 10 reviews. Total so far: 10
+2025-03-12 03:37:17,801 - INFO - Fetching reviews starting from offset 10

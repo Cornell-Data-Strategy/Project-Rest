@@ -28,6 +28,11 @@ class Review(db.Model):
 
     # sentiment score
     senti_score = db.Column(db.Float, nullable=False)
+
+    sentiment_magnitude = db.Column(db.Float, nullable=False)
+
+    # positive, negative, neutral
+    sentiment_description = db.Column(db.String(50), nullable=False)
     # check
     is_suggestion = db.Column(db.Boolean, nullable=False)
     # topics that the review focuses on, maximum 3 topics
@@ -44,5 +49,8 @@ class Review(db.Model):
             'username': self.username,
             'user_review_count': self.user_review_count,
             'user_profile_url': self.user_profile_url,
-            'business_id': self.business_id
+            'business_id': self.business_id,
+            'senti_score': self.senti_score,
+            'is_suggestion': self.is_suggestion,
+            'topics': self.topics
         }
