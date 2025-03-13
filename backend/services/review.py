@@ -23,7 +23,8 @@ def process_reviews(reviews_data, business_id):
     print(f"Starting to process {len(reviews_data)} reviews")
 
     
-    for review_data in reviews_data:    
+    for review_data in reviews_data:  
+        print(f"Processing review: {review_data}")  
         try:
 
             # Create new review object
