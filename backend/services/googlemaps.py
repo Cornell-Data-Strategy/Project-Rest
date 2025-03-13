@@ -35,51 +35,85 @@ class GoogleMapsScraper:
 
     def __enter__(self):
         return self
-
     def __exit__(self, exc_type, exc_value, tb):
+        """Improved exit method with better cleanup sequence"""
         if self.debug:
             print("Starting __exit__ method")
-        if self.debug:
             if exc_type is not None:
                 print(f"Exception occurred: {exc_type}")
                 traceback.print_exception(exc_type, exc_value, tb)
-
+        
+        # First, try to close all open windows
         try:
-            if self.debug:
-                print("Trying to close alert if any")
-            try:
-                alert = self.driver.switch_to.alert
-                alert.dismiss()
-                if self.debug:
-                    print("Alert dismissed")
-            except Exception as e:
-                print(f"No alert found: {e}")
-            
-            if self.debug:
-                print("Trying to close browser")
-            try:
-                self.driver.close()
-                if self.debug:
-                    print("Browser closed successfully")
-            except Exception as e:
-                print(f"Error closing browser: {e}")
-            if self.debug:
-                print("Trying to quit driver")
-            try:
-                self.driver.quit()
-                if self.debug:
-                    print("Driver quit successfully")
-            except Exception as e:
-                print(f"Error quitting driver: {e}")
-            
+            if self.driver:
+                # Switch to default content first
+                try:
+                    self.driver.switch_to.default_content()
+                except Exception as e:
+                    if self.debug:
+                        print(f"Error switching to default content: {e}")
+                
+                # Try to close all windows
+                try:
+                    original_window = self.driver.current_window_handle
+                    for handle in self.driver.window_handles:
+                        self.driver.switch_to.window(handle)
+                        self.driver.close()
+                except Exception as e:
+                    if self.debug:
+                        print(f"Error closing windows: {e}")
+                
+                # Finally quit the driver
+                try:
+                    self.driver.quit()
+                    if self.debug:
+                        print("Driver quit successfully")
+                except Exception as e:
+                    if self.debug:
+                        print(f"Error quitting driver: {e}")
+                    
+                    # If quitting fails, try to force kill the process
+                    self._force_kill_chromedriver()
         except Exception as e:
-            print(f"General error in cleanup: {e}")
-
+            if self.debug:
+                print(f"General error in cleanup: {e}")
+            self._force_kill_chromedriver()
+        
+        self.driver = None
+        
         if self.debug:
             print("Active threads:", threading.enumerate())
-        if self.debug:
             print("Finished __exit__ method")
         return True
+
+    def _force_kill_chromedriver(self):
+        """Force kill chromedriver processes if needed"""
+        if self.debug:
+            print("Attempting to force kill chromedriver processes")
+        try:
+            import os
+            import signal
+            import subprocess
+            
+            # For macOS/Linux
+            try:
+                chromedriver_pids = subprocess.check_output(["pgrep", "chromedriver"]).decode().strip().split("\n")
+                for pid in chromedriver_pids:
+                    if pid:
+                        os.kill(int(pid), signal.SIGKILL)
+                        if self.debug:
+                            print(f"Killed chromedriver process {pid}")
+            except:
+                pass
+                
+            # For Windows
+            try:
+                os.system("taskkill /f /im chromedriver.exe")
+            except:
+                pass
+        except Exception as e:
+            if self.debug:
+                print(f"Error force killing chromedriver: {e}")
 
     def sort_by(self, url, ind):
 
@@ -183,7 +217,7 @@ class GoogleMapsScraper:
                 parsed_reviews.append(r)
 
                 # logging to std out
-                print(r)
+                print(f"Review by {r.get('username', 'unknown')} with rating {r.get('rating', 'N/A')}")
 
         return parsed_reviews
 
@@ -482,3 +516,4 @@ class GoogleMapsScraper:
         self.logger.info(f"Successfully scraped {total_scraped} reviews")
         
         return result
+    

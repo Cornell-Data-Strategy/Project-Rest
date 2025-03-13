@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 import os
+from backend.routes.user import user_bp
 
 load_dotenv()
 
@@ -41,6 +42,8 @@ def create_app(config_name='development'):
     init_db(app)
 
     migrate = Migrate(app, db)
+
+    
     
     # Register blueprints of the other route
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -48,6 +51,7 @@ def create_app(config_name='development'):
     app.register_blueprint(reviews_bp, url_prefix='/api/reviews')
     app.register_blueprint(analytics_bp, url_prefix='/api/analytics')
     app.register_blueprint(ping_bp, url_prefix='/api')
+    app.register_blueprint(user_bp, url_prefix='/api/user')
 
     # Error handlers
     @app.errorhandler(404)

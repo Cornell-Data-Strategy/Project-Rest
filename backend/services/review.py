@@ -5,13 +5,15 @@ from google.cloud import language_v1
 from datetime import datetime, timezone
 from backend.models.review import Review
 from backend.models.database import db
-from backend.services.suggestion_detector import SuggestionDetector
+
 import random
 import os
 import time
+import pickle
 
-# Initialize detector - Simple pattern detector without dependencies
-detector = SuggestionDetector()
+with open('services/suggestion_detector.pkl', 'rb') as f:
+    suggestion_detector = pickle.load(f)
+
 
 def process_reviews(reviews_data, business_id):
     """Process scraped reviews and add them to the database.
@@ -24,7 +26,7 @@ def process_reviews(reviews_data, business_id):
 
     
     for review_data in reviews_data:  
-        print(f"Processing review: {review_data}")  
+        #print(f"Processing review: {review_data}")  
         try:
 
             # Create new review object
@@ -36,18 +38,27 @@ def process_reviews(reviews_data, business_id):
                 review_date=review_data.get('time_period_code', 0),
                 username=review_data.get('username', ''),
                 user_review_count=review_data.get('n_review_user', 0),
-                user_profile_url=review_data.get('url_user', ''),
+                user_profile_url=review_data.get('user_profile_url', ''),
+                review_date_estimate=review_data.get('review_date_estimate', datetime.now(timezone.utc)), 
                 business_id=business_id
+
             )
             
             # Mock sentiment analysis
             new_review = analyze_sentiment_mock(new_review)
             
             try:
-                new_review.is_suggestion = detector.predict(new_review.content)
+                if new_review.content:
+                    content = new_review.content.lower().strip()   
+                    is_suggestion = suggestion_detector.predict(content)
+                    new_review.is_suggestion = is_suggestion
+                else:
+                    new_review.is_suggestion = False
+
             except Exception as predict_error:
                 print(f"Error predicting suggestion: {predict_error}")
                 new_review.is_suggestion = False
+
             
             db.session.add(new_review)
             
@@ -56,6 +67,7 @@ def process_reviews(reviews_data, business_id):
     
     # Commit all reviews at once
     try:
+
         db.session.commit()
         print(f"Successfully committed  reviews to database")
     except Exception as commit_error:
