@@ -11,3 +11,5 @@ __pycache__/
 venv/
 backend/.env
 instance/project_rest.db
+new_venv/
+new_venv_name/
