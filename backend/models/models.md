@@ -7,7 +7,7 @@ This document provides details about the database models used in Project REST, a
 Project REST uses SQLAlchemy as the ORM (Object-Relational Mapping) with Flask-SQLAlchemy extension to manage database operations. The models represent the core data structures of the application:
 
 1. **User** - Authentication and business ownership
-2. **Business** - Restaurant or hospitality business data
+2. **Business** - Restaurant or hospitality business da[ta
 3. **Review** - Customer reviews from various platforms
 
 ## Database Initialization
