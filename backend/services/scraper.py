@@ -184,7 +184,7 @@ def scrape_reviews_for_business(url):
     print("Cleaning existing orphaned processes...")
     cleanup_orphaned_processes(debug=True)
     print("Starting scraper...")
-    with GoogleMapsScraper(debug=True) as scraper:
+    with GoogleMapsScraper(debug=False) as scraper:
         print("Getting reviews...")
         raw_reviews = scraper.get_all_reviews(url)
 

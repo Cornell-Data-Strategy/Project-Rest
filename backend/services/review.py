@@ -45,7 +45,7 @@ def process_reviews(reviews_data, business_id):
             )
             
             # Mock sentiment analysis
-            new_review = analyze_sentiment(new_review)
+            new_review = analyze_sentiment_mock(new_review)
             
             try:
                 if new_review.content:
@@ -118,36 +118,36 @@ def analyze_sentiment(review):
     return review
 
 
-# # def analyze_sentiment_mock(review):
-#     """
-#     Mock function to analyze the sentiment of a given review and extract the top entities.
-#     This function generates random sentiment scores, magnitudes, descriptions, and topics.
-#     Args:
-#         Review (object): An object representing the review. It must have a 'content' attribute
-#                          containing the text of the review.
-#     Returns:
-#         Review (updated): The updated review object with additional attributes
-#     """
-#     # Generate random sentiment score and magnitude
-#     sentiment_score = random.uniform(-1, 1)
-#     sentiment_magnitude = random.uniform(0, 2)
+def analyze_sentiment_mock(review):
+    """
+    Mock function to analyze the sentiment of a given review and extract the top entities.
+    This function generates random sentiment scores, magnitudes, descriptions, and topics.
+    Args:
+        Review (object): An object representing the review. It must have a 'content' attribute
+                         containing the text of the review.
+    Returns:
+        Review (updated): The updated review object with additional attributes
+    """
+    # Generate random sentiment score and magnitude
+    sentiment_score = random.uniform(-1, 1)
+    sentiment_magnitude = random.uniform(0, 2)
 
-#     # Determine sentiment description based on sentiment score
-#     if sentiment_score > 0.25:
-#         sentiment_description = "Positive"
-#     elif sentiment_score < -0.25:
-#         sentiment_description = "Negative"
-#     else:
-#         sentiment_description = "Neutral"
+    # Determine sentiment description based on sentiment score
+    if sentiment_score > 0.25:
+        sentiment_description = "Positive"
+    elif sentiment_score < -0.25:
+        sentiment_description = "Negative"
+    else:
+        sentiment_description = "Neutral"
 
-#     # Generate random topics
-#     topics = ["service", "food", "ambiance", "price", "location"]
-#     top_entities = random.sample(topics, min(3, len(topics)))
+    # Generate random topics
+    topics = ["service", "food", "ambiance", "price", "location"]
+    top_entities = random.sample(topics, min(3, len(topics)))
 
-#     # Add sentiment analysis fields to the review object
-#     review.senti_score = sentiment_score
-#     review.sentiment_magnitude = sentiment_magnitude
-#     review.sentiment_description = sentiment_description
-#     review.topics = ', '.join(top_entities)
+    # Add sentiment analysis fields to the review object
+    review.senti_score = sentiment_score
+    review.sentiment_magnitude = sentiment_magnitude
+    review.sentiment_description = sentiment_description
+    review.topics = ', '.join(top_entities)
 
-#     return review
+    return review

@@ -37,6 +37,7 @@ def create_app(config_name='development'):
     
     # Initialize JWT
     jwt = JWTManager(app)
+    app.config['JWT_JSON_KEY_ENABLED'] = False
     
     # Initialize database
     init_db(app)
