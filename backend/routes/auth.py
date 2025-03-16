@@ -7,7 +7,9 @@ from datetime import datetime, timezone
 from backend.models.business import Business
 from backend.services.scraper import scrape_reviews_for_business
 from backend.services.review import process_reviews
+import jwt
 auth_bp = Blueprint('auth', __name__)
+
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -23,6 +25,29 @@ def login():
         return jsonify({'error': 'Invalid email or password'}), 401
     
     access_token = create_access_token(identity=str(user.id))
+    try:
+        # Properly decode the JWT token for debugging
+        import base64
+        import json
+        
+        # Split the token and get the payload part (second segment)
+        parts = access_token.split(".")
+        if len(parts) >= 2:
+            # Add padding if needed
+            payload = parts[1]
+            payload += "=" * ((4 - len(payload) % 4) % 4)
+            
+            # Decode the base64 encoded payload
+            decoded_bytes = base64.b64decode(payload)
+            decoded_payload = json.loads(decoded_bytes)
+            
+            # Print the times
+            print(f"IAT (Issued At): {datetime.fromtimestamp(decoded_payload['iat'])}")
+            print(f"EXP (Expires At): {datetime.fromtimestamp(decoded_payload['exp'])}")
+            print(f"Current time: {datetime.now()}")
+    except Exception as e:
+        print(f"Error decoding token: {e}")
+    
     
     return jsonify({
     'token': access_token,

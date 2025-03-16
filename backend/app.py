@@ -5,6 +5,10 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 import os
 from backend.routes.user import user_bp
+from backend.routes.dashboard import dashboard_bp
+import datetime
+print(datetime.datetime.now())
+
 
 load_dotenv()
 
@@ -53,6 +57,7 @@ def create_app(config_name='development'):
     app.register_blueprint(analytics_bp, url_prefix='/api/analytics')
     app.register_blueprint(ping_bp, url_prefix='/api')
     app.register_blueprint(user_bp, url_prefix='/api/user')
+    app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
 
     # Error handlers
     @app.errorhandler(404)

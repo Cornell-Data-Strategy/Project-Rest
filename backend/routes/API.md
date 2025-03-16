@@ -26,3 +26,14 @@ Register a new user account with an associated business.
     "business_type": "restaurant"
   }
 }
+
+
+To login :
+
+{
+  "email": "newemail@example.com",
+  "password": "newpassword123"
+}
+
+Make sure to get the token first from login and then use it to access
+user profile or anything about the businesses
