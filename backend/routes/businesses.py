@@ -39,7 +39,6 @@ def update_business(business_id):
     
     JSON Payload:
         name (str, optional): Business name
-        url (str, optional): Business URL
         location (str, optional): Business location
         business_type (str, optional): Type of business
     

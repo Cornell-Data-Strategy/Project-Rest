@@ -88,12 +88,11 @@ def get_user_business_reviews():
     if not user:
         return jsonify({"error": "User not found"}), 404
     
-    # Get all businesses belonging to this user
-    businesses = user.businesses  # Assuming this relationship exists
+
+    businesses = user.businesses 
     
     all_reviews = []
     for business in businesses:
-        # Get reviews for this business
         reviews = Review.query.filter_by(business_id=business.id).all()
         business_reviews = []
         for review in reviews:
@@ -114,7 +113,6 @@ def get_user_review_stats():
     if not user:
         return jsonify({"error": "User not found"}), 404
     
-    # Get all businesses belonging to this user
     businesses = user.businesses  # Assuming this relationship exists
     
     stats = {
@@ -194,6 +192,7 @@ def change_password():
     user.set_password(data['new_password'])
     db.session.commit()
     return jsonify({"message": "Password updated successfully"}), 200
+
 
 @user_bp.route('/account', methods=['DELETE'])
 @jwt_required()
