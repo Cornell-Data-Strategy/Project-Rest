@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
@@ -35,9 +35,9 @@ def create_app(config_name='development'):
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-jwt-secret-key')
     app.config['GOOGLE_CLOUD_API_KEY'] = os.environ.get('GOOGLE_CLOUD_API_KEY', 'dev-google-cloud-api-key')
     
-    # Enable CORS
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
-    CORS(app, supports_credentials=True)
+    # Enable CORS for specific origin
+    frontend_origin = os.environ.get('FRONTEND_ORIGIN', 'http://localhost:5173')  # Frontend origin from .env
+    CORS(app, resources={r"/*": {"origins": frontend_origin}}, supports_credentials=True)  # Updated to allow all routes
     
     # Initialize JWT
     jwt = JWTManager(app)
@@ -68,7 +68,13 @@ def create_app(config_name='development'):
     def server_error(error):
         return jsonify({'error': 'Internal server error'}), 500
     
-   
+    # Handle preflight requests
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+        return response
+
     @app.route('/')
     def index():
         return jsonify({

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../utils/config";
 
 interface LoginProps {
   onLogin: () => void;
@@ -16,7 +17,11 @@ function Login({ onLogin }: LoginProps) {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post("/login", { email, password });
+      const response = await axios.post(
+        `${API_URL}/api/auth/login`, // Updated endpoint
+        { email, password },
+        { withCredentials: true } // Ensure credentials are sent
+      );
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
@@ -24,7 +29,7 @@ function Login({ onLogin }: LoginProps) {
       navigate("/dashboard");
     } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
-            setError(err.response?.data?.error || "Login failed");
+            setError(err.response?.data?.error || "Invalid email or password");
         } else {
             setError("An unexpected error occurred");
         }
