@@ -1,19 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Sidebar from './components/Sidebar.tsx'
 import Dashboard from './pages/Dashboard.tsx'
 import Reviews from './pages/Reviews.tsx'
 import Login from './pages/Login.tsx'
+import './App.css'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem('token')
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
   const handleLogin = () => setIsLoggedIn(true)
 
   return (
-    <div className="flex">
+    <div className="flex h-screen bg-gray-50">
       <Sidebar />
-      <div className="ml-56 p-5 w-full">
+      <div className="flex-1 overflow-auto">
         <Routes>
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route
