@@ -24,6 +24,7 @@ exceptiongroup==1.2.2
 Flask==3.1.0
 flask-cors==5.0.1
 Flask-JWT-Extended==4.7.1
+Flask-Login==0.6.3
 Flask-Migrate==4.1.0
 Flask-SQLAlchemy==3.1.1
 fonttools==4.56.0
@@ -58,7 +59,7 @@ packaging==24.2
 pandas==2.2.3
 pillow==11.1.0
 preshed==3.0.9
--e git+https://github.com/Cornell-Data-Strategy/Project-Rest.git@a3e8f55f32b7d7c9bf16649be7116076a703ad38#egg=Project_Rest
+-e git+https://github.com/Cornell-Data-Strategy/Project-Rest.git@29d3368f088e6b14d27c5e5efc7cc544709cbf5a#egg=Project_Rest
 proto-plus==1.26.0
 protobuf==5.29.3
 pyarrow==19.0.1
