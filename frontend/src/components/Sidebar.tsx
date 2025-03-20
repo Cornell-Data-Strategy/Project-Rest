@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HomeIcon, DocumentTextIcon, LockClosedIcon } from '@heroicons/react/24/solid';
 
 function Sidebar() {
@@ -18,8 +19,8 @@ function Sidebar() {
             
             <nav className="flex flex-col items-center pt-8 space-y-8 w-full">
                 {/* Dashboard Icon */}
-                <a 
-                    href="/dashboard" 
+                <Link 
+                    to="/dashboard" 
                     className={`flex justify-center items-center w-12 h-12 rounded-lg transition-all ${
                         isActive('/dashboard') 
                             ? 'bg-blue-500 text-white' 
@@ -27,11 +28,11 @@ function Sidebar() {
                     }`}
                 >
                     <HomeIcon className="h-6 w-6 text-white" />
-                </a>
+                </Link>
 
                 {/* Reviews Icon */}
-                <a 
-                    href="/reviews" 
+                <Link 
+                    to="/reviews" 
                     className={`flex justify-center items-center w-12 h-12 rounded-lg transition-all ${
                         isActive('/reviews') 
                             ? 'bg-blue-500 text-white' 
@@ -39,11 +40,11 @@ function Sidebar() {
                     }`}
                 >
                     <DocumentTextIcon className="h-6 w-6 text-white" />
-                </a>
+                </Link>
 
                 {/* Login Icon */}
-                <a 
-                    href="/login" 
+                <Link 
+                    to="/login" 
                     className={`flex justify-center items-center w-12 h-12 rounded-lg transition-all ${
                         isActive('/login') 
                             ? 'bg-blue-500 text-white' 
@@ -51,7 +52,7 @@ function Sidebar() {
                     }`}
                 >
                     <LockClosedIcon className="h-6 w-6 text-white" />
-                </a>
+                </Link>
             </nav>
         </div>
     )

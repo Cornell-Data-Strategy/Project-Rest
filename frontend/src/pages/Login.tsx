@@ -17,22 +17,26 @@ function Login({ onLogin }: LoginProps) {
     e.preventDefault();
     setError("");
     try {
+      // The withCredentials is crucial for Flask-Login to work
       const response = await axios.post(
-        `${API_URL}/api/auth/login`, // Updated endpoint
+        `${API_URL}/api/auth/login`,
         { email, password },
-        { withCredentials: true } // Ensure credentials are sent
+        { withCredentials: true }
       );
-      const { token, user } = response.data;
-      localStorage.setItem("token", token);
+      
+      // With Flask-Login, we don't need to store the token (it's in the cookie)
+      // Just store the user info
+      const { user } = response.data;
       localStorage.setItem("user", JSON.stringify(user));
+      
       onLogin();
       navigate("/dashboard");
     } catch (err: unknown) {
-        if (axios.isAxiosError(err)) {
-            setError(err.response?.data?.error || "Invalid email or password");
-        } else {
-            setError("An unexpected error occurred");
-        }
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.error || "Invalid email or password");
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
   };
 
@@ -71,8 +75,8 @@ function Login({ onLogin }: LoginProps) {
               required
             />
           </div>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
           >
             Sign in
