@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkAuthStatus } from "../utils/authUtils";
+import { checkAuthStatus, logout } from "../utils/authUtils";
 import { UserData } from "../types";
 
 function Reviews() {
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
 
     const navigate = useNavigate();
@@ -12,21 +13,39 @@ function Reviews() {
     useEffect(() => {
         const verifyAuth = async () => {
             try {
+                console.log('Verifying authentication in Reviews page...');
+                setIsLoading(true);
+                setError(null);
+                
                 const user = await checkAuthStatus();
+                console.log('User data received in Reviews:', user);
+                
                 if (!user) {
+                    console.log('No user data, redirecting to login from Reviews');
                     navigate('/login');
                     return;
                 }
+                
                 setUserData(user);
                 setIsLoading(false);
             } catch (error) {
-                console.error("Failed to verify authentication:", error);
-                navigate('/login');
+                console.error("Failed to verify authentication in Reviews:", error);
+                setError("Authentication failed. Please try logging in again.");
+                setIsLoading(false);
             }
         };
 
         verifyAuth();
     }, [navigate]);
+
+    const handleLogout = async () => {
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        } else {
+            console.error("Logout failed");
+        }
+    };
 
     if (isLoading) {
         return (
@@ -36,10 +55,34 @@ function Reviews() {
         );
     }
 
+    if (error) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <div className="text-xl text-red-600 font-semibold p-4 bg-red-50 rounded-lg">
+                    {error}
+                    <div className="mt-4">
+                        <button 
+                            onClick={() => navigate('/login')}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+                        >
+                            Back to Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="h-full p-6">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold text-gray-800">Reviews</h1>
+                <button 
+                    onClick={handleLogout}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
+                >
+                    Logout
+                </button>
             </div>
 
             <div className="bg-white shadow rounded-lg p-6">

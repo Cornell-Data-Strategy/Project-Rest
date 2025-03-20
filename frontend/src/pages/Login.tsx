@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/config";
+import { setAuthData, checkAuthStatus } from "../utils/authUtils";
 
 interface LoginProps {
   onLogin: () => void;
@@ -11,23 +12,40 @@ function Login({ onLogin }: LoginProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const user = await checkAuthStatus();
+        if (user) {
+          console.log('User already logged in, redirecting to dashboard');
+          navigate('/dashboard');
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     try {
-      // The withCredentials is crucial for Flask-Login to work
       const response = await axios.post(
         `${API_URL}/api/auth/login`,
-        { email, password },
-        { withCredentials: true }
+        { email, password }
       );
       
-      // With Flask-Login, we don't need to store the token (it's in the cookie)
-      // Just store the user info
-      const { user } = response.data;
-      localStorage.setItem("user", JSON.stringify(user));
+      const { access_token, refresh_token, user } = response.data;
+      
+      // Store tokens and user data
+      setAuthData(access_token, refresh_token, user);
       
       onLogin();
       navigate("/dashboard");
@@ -39,6 +57,14 @@ function Login({ onLogin }: LoginProps) {
       }
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="text-xl font-semibold">Checking authentication status...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
