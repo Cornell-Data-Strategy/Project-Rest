@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../utils/config";
+import { setAuthData } from "../utils/authUtils";
 
 interface LoginProps {
   onLogin: () => void;
@@ -17,17 +18,15 @@ function Login({ onLogin }: LoginProps) {
     e.preventDefault();
     setError("");
     try {
-      // The withCredentials is crucial for Flask-Login to work
       const response = await axios.post(
         `${API_URL}/api/auth/login`,
-        { email, password },
-        { withCredentials: true }
+        { email, password }
       );
       
-      // With Flask-Login, we don't need to store the token (it's in the cookie)
-      // Just store the user info
-      const { user } = response.data;
-      localStorage.setItem("user", JSON.stringify(user));
+      const { access_token, refresh_token, user } = response.data;
+      
+      // Store tokens and user data
+      setAuthData(access_token, refresh_token, user);
       
       onLogin();
       navigate("/dashboard");
