@@ -1,47 +1,39 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { checkAuthStatus, logout } from "../utils/authUtils";
+import { UserData } from "../types";
 
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
+    const [userData, setUserData] = useState<UserData | null>(null);
     const navigate = useNavigate();
     
     useEffect(() => {
-        // Check for authentication token
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/login');
-            return;
-        }
-        
-        // Set auth token for API requests
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        
-        // You could fetch dashboard data here
-        const fetchDashboardData = async () => {
+        const verifyAuth = async () => {
             try {
-                // Example: const response = await axios.get('/api/dashboard-data');
-                // Process dashboard data...
+                const user = await checkAuthStatus();
+                if (!user) {
+                    navigate('/login');
+                    return;
+                }
+                setUserData(user);
                 setIsLoading(false);
             } catch (error) {
-                console.error("Failed to load dashboard data:", error);
-                // If authentication fails, redirect to login
-                if (axios.isAxiosError(error) && error.response?.status === 401) {
-                    localStorage.removeItem('token');
-                    navigate('/login');
-                }
-                setIsLoading(false);
+                console.error("Failed to verify authentication:", error);
+                navigate('/login');
             }
         };
         
-        fetchDashboardData();
+        verifyAuth();
     }, [navigate]);
     
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        delete axios.defaults.headers.common['Authorization'];
-        navigate('/login');
+    const handleLogout = async () => {
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        } else {
+            console.error("Logout failed");
+        }
     };
 
     if (isLoading) {
@@ -67,6 +59,12 @@ function Dashboard() {
             <div className="bg-white shadow rounded-lg p-6">
                 <h2 className="text-xl font-semibold mb-4 text-gray-700">Welcome to your dashboard!</h2>
                 <p className="text-gray-600">This is where your dashboard content will go.</p>
+                {userData && (
+                    <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p className="font-medium">Logged in as: {userData.first_name} {userData.last_name}</p>
+                        <p className="text-sm text-gray-600">{userData.email}</p>
+                    </div>
+                )}
             </div>
         </div>
     );

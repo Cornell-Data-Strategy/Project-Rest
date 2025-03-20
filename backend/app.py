@@ -1,14 +1,14 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from dotenv import load_dotenv
-from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 import os
+from datetime import timedelta  # Add this import
 from backend.routes.user import user_bp
 from backend.routes.dashboard import dashboard_bp
 import datetime
 print(datetime.datetime.now())
-
+from flask_login import LoginManager, current_user
 
 load_dotenv()
 
@@ -34,21 +34,27 @@ def create_app(config_name='development'):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-jwt-secret-key')
     app.config['GOOGLE_CLOUD_API_KEY'] = os.environ.get('GOOGLE_CLOUD_API_KEY', 'dev-google-cloud-api-key')
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # 'Strict' in production
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
     
     # Enable CORS for specific origin
     frontend_origin = os.environ.get('FRONTEND_ORIGIN', 'http://localhost:5173')  # Frontend origin from .env
     CORS(app, resources={r"/*": {"origins": frontend_origin}}, supports_credentials=True)  # Updated to allow all routes
-    
-    # Initialize JWT
-    jwt = JWTManager(app)
-    app.config['JWT_JSON_KEY_ENABLED'] = False
     
     # Initialize database
     init_db(app)
 
     migrate = Migrate(app, db)
 
-    
+    # Initialize Flask-Login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
     
     # Register blueprints of the other route
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -83,10 +89,17 @@ def create_app(config_name='development'):
             'status': 'online'
         })
     
+    # Remove duplicated routes since they're now in the auth blueprint
+    # (login, logout, get_user, register, dashboard)
+
     return app
 
 
 app = create_app()
+
+# Create database tables
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
