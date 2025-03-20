@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkAuthStatus } from "../utils/authUtils";
+import { checkAuthStatus, logout } from "../utils/authUtils";
 import { UserData } from "../types";
 
 function Reviews() {
@@ -38,6 +38,15 @@ function Reviews() {
         verifyAuth();
     }, [navigate]);
 
+    const handleLogout = async () => {
+        const success = await logout();
+        if (success) {
+            navigate('/login');
+        } else {
+            console.error("Logout failed");
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="h-screen flex items-center justify-center">
@@ -68,6 +77,12 @@ function Reviews() {
         <div className="h-full p-6">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold text-gray-800">Reviews</h1>
+                <button 
+                    onClick={handleLogout}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
+                >
+                    Logout
+                </button>
             </div>
 
             <div className="bg-white shadow rounded-lg p-6">
