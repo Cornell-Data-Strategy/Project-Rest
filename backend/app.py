@@ -3,12 +3,12 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_migrate import Migrate
 import os
-from datetime import timedelta  # Add this import
+from datetime import timedelta
 from backend.routes.user import user_bp
 from backend.routes.dashboard import dashboard_bp
 import datetime
 print(datetime.datetime.now())
-from flask_login import LoginManager, current_user
+from flask_jwt_extended import JWTManager
 
 load_dotenv()
 
@@ -33,6 +33,8 @@ def create_app(config_name='development'):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project_rest.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.environ.get('JWT_SECRET_KEY', 'dev-jwt-secret-key')
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)  # token expiration
+    app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)  # refresh token expiration
     app.config['GOOGLE_CLOUD_API_KEY'] = os.environ.get('GOOGLE_CLOUD_API_KEY', 'dev-google-cloud-api-key')
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production
@@ -48,13 +50,8 @@ def create_app(config_name='development'):
 
     migrate = Migrate(app, db)
 
-    # Initialize Flask-Login
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+    # Initialize JWT
+    jwt = JWTManager(app)
     
     # Register blueprints of the other route
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
@@ -88,9 +85,6 @@ def create_app(config_name='development'):
             'version': '0.1.0',
             'status': 'online'
         })
-    
-    # Remove duplicated routes since they're now in the auth blueprint
-    # (login, logout, get_user, register, dashboard)
 
     return app
 
