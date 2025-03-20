@@ -6,9 +6,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 business_bp = Blueprint('business', __name__)
 
 
-
-
-
 @business_bp.route('/<int:business_id>', methods=['GET'])
 @jwt_required()
 def get_business(business_id):
@@ -24,8 +21,19 @@ def get_business(business_id):
         403: Forbidden if business doesn't belong to user
         404: Not found if business doesn't exist
     """
-    pass
-
+    # Get current user
+    current_user_id = get_jwt_identity()
+    business = Business.query.get(business_id)
+    
+    # If the business does not exist
+    if not business:
+        return jsonify({"error": "Business not found"}), 404
+    
+    # If the business does not belong to the user
+    if business.owner_id != current_user_id:
+        return jsonify({"error": "Forbidden: Business does not belong to user"}), 403
+    
+    return jsonify(business.to_dict()), 200
 
 
 @business_bp.route('/<int:business_id>', methods=['PUT'])
@@ -49,8 +57,40 @@ def update_business(business_id):
         403: Forbidden if business doesn't belong to user
         404: Not found if business doesn't exist
     """
-    pass
+    # Get current user
+    current_user_id = get_jwt_identity()
+    business = Business.query.get(business_id)
+    
+    # If the business does not exist
+    if not business:
+        return jsonify({"error": "Business not found"}), 404
+    
+    # If the business does not belong to the user
+    if business.owner_id != current_user_id:
+        return jsonify({"error": "Forbidden: Business does not belong to user"}), 403
+    
+    # Get JSON data from request
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+    
+    # Update business fields if provided
+    if 'name' in data:
+        business.name = data['name']
+    
+    if 'location' in data:
+        business.location = data['location']
+    
+    if 'business_type' in data:
+        business.business_type = data['business_type']
 
+     # Save changes to database
+    try:
+        db.session.commit()
+        return jsonify(business.to_dict()), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": f"Failed to update profile: {str(e)}"}), 500
 
 
 @business_bp.route('/<int:business_id>', methods=['DELETE'])
@@ -68,5 +108,27 @@ def delete_business(business_id):
         403: Forbidden if business doesn't belong to user
         404: Not found if business doesn't exist
     """
-    pass
+        # Get current user
+    current_user_id = get_jwt_identity()
+    business = Business.query.get(business_id)
+    
+    # If the business does not exist
+    if not business:
+        return jsonify({"error": "Business not found"}), 404
+    
+    # If the business does not belong to the user
+    if business.owner_id != current_user_id:
+        return jsonify({"error": "Forbidden: Business does not belong to user"}), 403
+    
+    try:
+            # Delete related reviews
+            for review in business.reviews:
+                db.session.delete(review)
 
+            # Delete business
+            db.session.delete(business)
+            db.session.commit()
+            return '', 204  # No content
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": f"Failed to delete business: {str(e)}"}), 500
