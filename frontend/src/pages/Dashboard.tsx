@@ -5,22 +5,42 @@ import { UserData } from "../types";
 
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
     const navigate = useNavigate();
     
     useEffect(() => {
         const verifyAuth = async () => {
             try {
-                const user = await checkAuthStatus();
-                if (!user) {
+                console.log('Verifying authentication...');
+                setIsLoading(true);
+                setError(null);
+                
+                // check if user info is already in localStorage
+                const storedToken = localStorage.getItem('token');
+                
+                if (!storedToken) {
+                    console.log('No token found, redirecting to login');
                     navigate('/login');
                     return;
                 }
+                
+                // get user data from the server
+                const user = await checkAuthStatus();
+                console.log('User data received:', user);
+                
+                if (!user) {
+                    console.log('No user data, redirecting to login');
+                    navigate('/login');
+                    return;
+                }
+                
                 setUserData(user);
                 setIsLoading(false);
             } catch (error) {
                 console.error("Failed to verify authentication:", error);
-                navigate('/login');
+                setError("Authentication failed. Please try logging in again.");
+                setIsLoading(false);
             }
         };
         
@@ -40,6 +60,24 @@ function Dashboard() {
         return (
             <div className="h-screen flex items-center justify-center">
                 <div className="text-xl font-semibold">Loading dashboard...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <div className="text-xl text-red-600 font-semibold p-4 bg-red-50 rounded-lg">
+                    {error}
+                    <div className="mt-4">
+                        <button 
+                            onClick={() => navigate('/login')}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+                        >
+                            Back to Login
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }

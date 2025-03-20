@@ -5,6 +5,7 @@ import { UserData } from "../types";
 
 function Reviews() {
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
 
     const navigate = useNavigate();
@@ -12,16 +13,25 @@ function Reviews() {
     useEffect(() => {
         const verifyAuth = async () => {
             try {
+                console.log('Verifying authentication in Reviews page...');
+                setIsLoading(true);
+                setError(null);
+                
                 const user = await checkAuthStatus();
+                console.log('User data received in Reviews:', user);
+                
                 if (!user) {
+                    console.log('No user data, redirecting to login from Reviews');
                     navigate('/login');
                     return;
                 }
+                
                 setUserData(user);
                 setIsLoading(false);
             } catch (error) {
-                console.error("Failed to verify authentication:", error);
-                navigate('/login');
+                console.error("Failed to verify authentication in Reviews:", error);
+                setError("Authentication failed. Please try logging in again.");
+                setIsLoading(false);
             }
         };
 
@@ -32,6 +42,24 @@ function Reviews() {
         return (
             <div className="h-screen flex items-center justify-center">
                 <div className="text-xl font-semibold">Loading reviews...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="h-screen flex items-center justify-center">
+                <div className="text-xl text-red-600 font-semibold p-4 bg-red-50 rounded-lg">
+                    {error}
+                    <div className="mt-4">
+                        <button 
+                            onClick={() => navigate('/login')}
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+                        >
+                            Back to Login
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from backend.models.database import db
 from backend.models.user import User
 from backend.models.review import Review
@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from backend.models.business import Business
 from backend.services.scraper import scrape_reviews_for_business
 from backend.services.review import process_reviews
+
 auth_bp = Blueprint('auth', __name__)
 
 
@@ -21,26 +22,45 @@ def login():
     if user is None or not user.check_password(password):
         return jsonify({'error': 'Invalid email or password'}), 401
     
-    # Log in user with Flask-Login
-    login_user(user, remember=True)
+    # Create JWT tokens
+    access_token = create_access_token(identity=str(user.id))
+    refresh_token = create_refresh_token(identity=str(user.id))
     
-    # Return user info without JWT token (session cookie is used)
     return jsonify({
+        'access_token': access_token,
+        'refresh_token': refresh_token,
         'user': user.to_dict()
     })
 
 
 @auth_bp.route('/logout', methods=['POST'])
-@login_required
 def logout():
-    logout_user()
     return jsonify({'message': 'Logged out successfully'})
 
 
 @auth_bp.route('/user', methods=['GET'])
-@login_required
+@jwt_required()
 def get_user():
-    return jsonify(current_user.to_dict())
+    current_user_id = get_jwt_identity()
+    try:
+        user_id = int(current_user_id)
+        user = User.query.get(user_id)
+        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+            
+        return jsonify(user.to_dict())
+    except Exception as e:
+        return jsonify({'error': f'Error retrieving user: {str(e)}'}), 500
+
+
+@auth_bp.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+def refresh():
+    """Refresh the access token using refresh token"""
+    current_user_id = get_jwt_identity()
+    access_token = create_access_token(identity=current_user_id)
+    return jsonify(access_token=access_token)
 
 
 @auth_bp.route('/register', methods=['POST'])
@@ -90,7 +110,6 @@ def register():
             reviews_data = scraped_data.get('reviews', [])
         except Exception as scrape_error:
             print(f"Error scraping reviews: {scrape_error}")
-            return jsonify({'error': 'Error scraping reviews'}), 500
             reviews_data = []  # Empty list if scraping fails
         
         # process the reviews
@@ -98,8 +117,14 @@ def register():
         process_reviews(reviews_data, new_business.id)
         db.session.commit()
 
+        # Create tokens for new user
+        access_token = create_access_token(identity=str(new_user.id))
+        refresh_token = create_refresh_token(identity=str(new_user.id))
+
         return jsonify({
             'message': 'Registration successful',
+            'access_token': access_token,
+            'refresh_token': refresh_token,
             'user': new_user.to_dict(),
             'business': new_business.to_dict()
         }), 201
