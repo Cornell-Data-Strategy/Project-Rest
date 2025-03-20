@@ -1,13 +1,12 @@
 from flask import Blueprint, request, jsonify
+from flask_login import login_user, logout_user, login_required, current_user
 from backend.models.database import db
 from backend.models.user import User
 from backend.models.review import Review
-from flask_jwt_extended import create_access_token
 from datetime import datetime, timezone
 from backend.models.business import Business
 from backend.services.scraper import scrape_reviews_for_business
 from backend.services.review import process_reviews
-import jwt
 auth_bp = Blueprint('auth', __name__)
 
 
@@ -15,45 +14,34 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     """Authenticate user and return access token"""
     data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
     
-
-    if not data or not data.get('email') or not data.get('password'):
-        return jsonify({'error': 'Missing required fields'}), 400
-    
-    user = User.query.filter_by(email=data['email']).first()
-    if not user or not user.check_password(data['password']):
+    user = User.query.filter_by(email=email).first()
+    if user is None or not user.check_password(password):
         return jsonify({'error': 'Invalid email or password'}), 401
     
-    access_token = create_access_token(identity=str(user.id))
-    try:
-        # Properly decode the JWT token for debugging
-        import base64
-        import json
-        
-        # Split the token and get the payload part (second segment)
-        parts = access_token.split(".")
-        if len(parts) >= 2:
-            # Add padding if needed
-            payload = parts[1]
-            payload += "=" * ((4 - len(payload) % 4) % 4)
-            
-            # Decode the base64 encoded payload
-            decoded_bytes = base64.b64decode(payload)
-            decoded_payload = json.loads(decoded_bytes)
-            
-            # Print the times
-            print(f"IAT (Issued At): {datetime.fromtimestamp(decoded_payload['iat'])}")
-            print(f"EXP (Expires At): {datetime.fromtimestamp(decoded_payload['exp'])}")
-            print(f"Current time: {datetime.now()}")
-    except Exception as e:
-        print(f"Error decoding token: {e}")
+    # Log in user with Flask-Login
+    login_user(user, remember=True)
     
-    
+    # Return user info without JWT token (session cookie is used)
     return jsonify({
-    'token': access_token,
-    'user': user.to_dict()  
-    }), 200
- 
+        'user': user.to_dict()
+    })
+
+
+@auth_bp.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'message': 'Logged out successfully'})
+
+
+@auth_bp.route('/user', methods=['GET'])
+@login_required
+def get_user():
+    return jsonify(current_user.to_dict())
+
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
