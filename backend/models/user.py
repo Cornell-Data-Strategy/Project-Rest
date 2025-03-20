@@ -1,9 +1,9 @@
-
 from backend.models.database import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timezone
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'user'
     """User model for authentication"""
     id = db.Column(db.Integer, primary_key=True)
@@ -32,6 +32,9 @@ class User(db.Model):
             'created_at': self.created_at.isoformat(),
             'businesses': [business.to_dict() for business in self.businesses]
         }
+    
+    def get_id(self):
+        return str(self.id)
     
     def __repr__(self):
         return f'<User {self.first_name} {self.last_name}>'
