@@ -24,14 +24,16 @@ export interface Business {
     location: string | null;
     business_type: string | null;
     created_at: string;
-    reviews?: Review[]; // Optional because it might not be included in all responses
+    reviews?: Review[]; 
 }
 
 export interface UserData {
     id: number;
+    email: string;
     first_name: string;
     last_name: string;
-    email: string;
-    created_at: string;
-    businesses: Business[];
+    businesses: {
+        id: number;
+        name: string;
+    }[];
 }

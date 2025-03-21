@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../utils/config";
 import { setAuthData, checkAuthStatus } from "../utils/authUtils";
+import { login } from "../api/endpoints";
 
 interface LoginProps {
   onLogin: () => void;
@@ -20,8 +20,8 @@ function Login({ onLogin }: LoginProps) {
       try {
         const user = await checkAuthStatus();
         if (user) {
-          console.log('User already logged in, redirecting to dashboard');
-          navigate('/dashboard');
+          // console.log("User already logged in, redirecting to dashboard");
+          navigate("/dashboard");
         }
       } catch (error) {
         console.error("Auth check failed:", error);
@@ -37,16 +37,11 @@ function Login({ onLogin }: LoginProps) {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post(
-        `${API_URL}/api/auth/login`,
-        { email, password }
-      );
-      
+      const response = await login(email, password);
       const { access_token, refresh_token, user } = response.data;
-      
-      // Store tokens and user data
+
       setAuthData(access_token, refresh_token, user);
-      
+
       onLogin();
       navigate("/dashboard");
     } catch (err: unknown) {
@@ -61,7 +56,9 @@ function Login({ onLogin }: LoginProps) {
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-xl font-semibold">Checking authentication status...</div>
+        <div className="text-xl font-semibold">
+          Checking authentication status...
+        </div>
       </div>
     );
   }
@@ -70,7 +67,9 @@ function Login({ onLogin }: LoginProps) {
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
         <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Welcome Back</h1>
+          <h1 className="font-halyard text-3xl font-semibold text-gray-900 mb-2">
+            Welcome Back
+          </h1>
           <p className="text-sm text-gray-600 mb-6">Sign in to your account</p>
         </div>
 
@@ -82,7 +81,9 @@ function Login({ onLogin }: LoginProps) {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email Address
+            </label>
             <input
               type="email"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
@@ -92,7 +93,9 @@ function Login({ onLogin }: LoginProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
             <input
               type="password"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"

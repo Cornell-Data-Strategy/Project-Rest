@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+  font-family: 'halyard', sans-serif;
+}
+
 #root {
   width: 100%;
   min-height: 100vh;
@@ -16,6 +20,12 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.main-container {
+border-radius: 15px;
+background: #FFF;
+box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes logo-spin {
