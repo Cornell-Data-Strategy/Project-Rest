@@ -14,12 +14,43 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    // Check if user is already logged in
-    const token = localStorage.getItem('token')
-    if (token) {
-      setIsLoggedIn(true)
-    }
-  }, [])
+    const verifyAuth = async () => {
+      try {
+        console.log("Verifying authentication...");
+        setIsLoading(true);
+        setError(null);
+
+        const storedToken = localStorage.getItem("token");
+        if (!storedToken) {
+          console.log("No token found");
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          return;
+        }
+
+        const user = await checkAuthStatus();
+        console.log("User data received:", user);
+
+        if (!user) {
+          console.log("No user data");
+          setIsLoggedIn(false);
+          localStorage.removeItem("token");
+        } else {
+          setIsLoggedIn(true);
+          setUserData(user);
+        }
+      } catch (error) {
+        console.error("Failed to verify authentication:", error);
+        setError("Authentication failed. Please try logging in again.");
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    verifyAuth();
+  }, []);
 
   const handleLogin = () => setIsLoggedIn(true)
 
@@ -34,17 +65,26 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
-            element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
+            element={
+              isLoggedIn ? (
+                <Dashboard userData={userData} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route
             path="/reviews"
             element={isLoggedIn ? <Reviews /> : <Navigate to="/login" />}
           />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route
+            path="*"
+            element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />}
+          />
         </Routes>
       </div>
     </div>
-  )
+  );
 }
 
 export default App

@@ -235,6 +235,7 @@ class GoogleMapsScraper:
 
         return place_data
 
+
     def __parse(self, review):
 
         item = {}
@@ -292,6 +293,7 @@ class GoogleMapsScraper:
         item['url_user'] = user_url
 
         return item
+
 
     def __parse_place(self, response, url):
 
@@ -360,6 +362,7 @@ class GoogleMapsScraper:
         place['long'] = long
 
         return place
+
 
     def _gen_search_points_from_square(self, keyword_list=None):
 
@@ -440,7 +443,6 @@ class GoogleMapsScraper:
         input_driver.get(GM_WEBPAGE)
 
         return input_driver
-
 
 
     def __click_on_cookie_agreement(self):

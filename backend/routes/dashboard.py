@@ -151,7 +151,7 @@ def get_sentiment_analysis(business_id):
                 'review_count': 0
             }
     elif period == 'quarter':
-        # Monthly buckets for quarter
+
         for i in range(3):
             bucket_date = now - timedelta(days=90-i*30)
             time_buckets[bucket_date.strftime('%Y-%m')] = {
@@ -160,7 +160,6 @@ def get_sentiment_analysis(business_id):
                 'review_count': 0
             }
     else:  # year
-        # Quarterly buckets for year
         for i in range(4):
             bucket_date = now - timedelta(days=365-i*90)
             time_buckets[bucket_date.strftime('%Y-Q%d' % ((bucket_date.month-1)//3+1))] = {
