@@ -1,15 +1,57 @@
 @import "tailwindcss";
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
-  -webkit-text-fill-color: #000000;
+
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-/* Add any custom styles here if needed */
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HalyardDisplay';
+  src: url('/fonts/Halyard_Display_Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
