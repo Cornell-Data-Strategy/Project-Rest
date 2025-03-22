@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { register } from "../api/endpoints";
 import axios from "axios";
 import { API_URL } from "../../config";
 
@@ -22,16 +23,17 @@ function Register() {
     setError("");
 
     try {
-      await axios.post(`${API_URL}/api/auth/register`, {
-        firstName,
-        lastName,
+      await register({
         email,
         password,
-        businessName,
-        businessAddress,
-        gMapsLink,
-        tripAdvisorLink,
-        yelpLink,
+        first_name: firstName,
+        last_name: lastName,
+        business: {
+          name: businessName,
+          url: gMapsLink || tripAdvisorLink || yelpLink, // Prioritize gMapsLink, then tripAdvisorLink, then yelpLink
+          location: businessAddress,
+          business_type: "restaurant", // Assuming a default type, adjust as needed
+        },
       });
       navigate("/login");
     } catch (err: unknown) {
