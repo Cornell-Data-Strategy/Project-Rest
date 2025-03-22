@@ -5,9 +5,13 @@ import Dashboard from './pages/Dashboard.tsx'
 import Reviews from './pages/Reviews.tsx'
 import Login from './pages/Login.tsx'
 import './App.css'
+import Register from './pages/Register.tsx'
+import { useLocation } from "react-router-dom";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const location = useLocation();
 
   useEffect(() => {
     // Check if user is already logged in
@@ -19,12 +23,15 @@ function App() {
 
   const handleLogin = () => setIsLoggedIn(true)
 
+  const isAuthRoute = location.pathname === "/login" || location.pathname === "/register";
+
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar />
+      {!isAuthRoute && <Sidebar />}
       <div className="flex-1 overflow-auto">
         <Routes>
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
             element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
