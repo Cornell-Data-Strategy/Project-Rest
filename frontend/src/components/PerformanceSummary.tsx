@@ -115,10 +115,12 @@ const PerformanceSummary: React.FC<PerformanceSummaryProps> = ({ businessId, met
                   </div>
                 </div>
 
-                <div className="text-sm font-medium text-gray-500">
-                  {/* TODO implement placeholder */}
-                  ↑ 0% 
-                </div>
+                {metric.label !== "Most Mentioned" && (
+                  <div className="text-sm font-medium text-gray-500">
+                    {/* TODO implement placeholder */}
+                    ↑ 0% 
+                  </div>
+                )}
               </div>
 
               <p className="text-3xl text-gray-900 mt-3">{metric.value}</p>
