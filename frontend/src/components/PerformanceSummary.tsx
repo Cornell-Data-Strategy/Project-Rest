@@ -71,7 +71,7 @@ const PerformanceSummary: React.FC<PerformanceSummaryProps> = ({ businessId, met
       subtext: "All"
     },
     {
-      label: "Most Mentioned",
+      label: "Most Mentioned Topic",
       value: metrics?.mostMentionedTopic || "No data",
       subtext: "Top customer topic"
     }
@@ -80,8 +80,8 @@ const PerformanceSummary: React.FC<PerformanceSummaryProps> = ({ businessId, met
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm shadow-orange gray-border">
       <div className="flex flex-col justify-start items-start mb-6">
-        <h2 className="text-xl font-medium text-coolgray">Performance Summary</h2>
-        <button className="text-sm text-gray-600 hover:text-gray-800 hover:underline">
+        <h2 className="text-xl font-regular text-coolgray">Performance Summary</h2>
+        <button className="text-sm text-gray-400 hover:text-gray-800 underline">
           View your latest reviews and insights
         </button>
       </div>
