@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Review {
-  id: string;
-  authorName: string;
-  date: string;
+  id: number;
+  source: string;
   content: string;
   rating: number;
-  reviewerType: string;
-  topics: string[];
-  avatarLetter?: string;
+  retrieved_at: string;
+  review_date: number | null;
+  review_date_estimate: string;
+  username: string;
+  user_review_count: number | null;
+  user_profile_url: string | null;
+  business_id: number;
+  senti_score: number;
+  sentiment_magnitude: number;
+  sentiment_description: string;
+  is_suggestion: boolean;
+  topics: string | null;
 }
 
 const RecentReviews: React.FC = () => {
@@ -16,9 +24,9 @@ const RecentReviews: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch reviews from the backend for a specific business (e.g., business_id = 1)
   useEffect(() => {
-    // Replace with your actual API endpoint for fetching recent reviews.
-    fetch("/api/reviews/recent")
+    fetch("/api/reviews/1")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch reviews");
@@ -26,7 +34,7 @@ const RecentReviews: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        // Assume the API returns an object with a reviews array.
+        // Assuming the API returns { reviews: Review[] }
         setReviews(data.reviews || []);
         setLoading(false);
       })
@@ -47,32 +55,20 @@ const RecentReviews: React.FC = () => {
 
   return (
     <div className="gray-border rounded-lg p-4">
-      <h2 className="text-xl font-bold mb-4">Most Recent Reviews</h2>
-      {reviews.length === 0 ? (
-        <p>No reviews found.</p>
-      ) : (
-        <ul>
-          {reviews.map((review) => (
-            <li key={review.id} className="border-b border-gray-200 py-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center mr-4">
-                  {review.avatarLetter || review.authorName.charAt(0)}
-                </div>
-                <div>
-                  <p className="font-semibold">{review.authorName}</p>
-                  <p className="text-sm text-gray-500">
-                    {new Date(review.date).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-              <p className="mt-2">{review.content}</p>
-              <p className="mt-1 text-sm text-gray-600">
-                Rating: {review.rating} / 5
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <h2>Most Recent Reviews</h2>
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id} className="mb-4">
+            <div>
+              <strong>{review.username}</strong> -{" "}
+              {new Date(review.review_date_estimate).toLocaleDateString()}
+            </div>
+            <div>{review.content}</div>
+            <div>Rating: {review.rating}</div>
+            <div>Sentiment: {review.sentiment_description}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
