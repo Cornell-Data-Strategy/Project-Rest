@@ -33,6 +33,11 @@ function Login({ onLogin }: LoginProps) {
     checkAuth();
   }, [navigate]);
 
+  useEffect(() => {
+    // Clear error when the user starts typing again
+    setError("");
+  }, [email, password]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -42,8 +47,11 @@ function Login({ onLogin }: LoginProps) {
 
       setAuthData(access_token, refresh_token, user);
 
+      //onLogin();
+      //navigate("/dashboard");
+
       onLogin();
-      navigate("/dashboard");
+      window.location.href = "/dashboard"; // hard reload ensures app picks up new token  
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         setError(err.response?.data?.error || "Invalid email or password");
