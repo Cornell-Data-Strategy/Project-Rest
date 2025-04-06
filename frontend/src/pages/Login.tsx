@@ -44,6 +44,7 @@ function Login({ onLogin }: LoginProps) {
     try {
       const response = await login(email, password);
       const { access_token, refresh_token, user } = response.data;
+      console.log("Access token:", access_token);
 
       setAuthData(access_token, refresh_token, user);
 
