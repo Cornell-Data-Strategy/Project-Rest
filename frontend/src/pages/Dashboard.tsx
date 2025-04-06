@@ -143,6 +143,9 @@ function Dashboard({ userData }: DashboardProps) {
     return <div className="text-red-500">{error}</div>;
   }
 
+   // Extract a valid business ID from userData. For example, using the first business.
+   const businessId = userData && userData.businesses.length > 0 ? userData.businesses[0].id : undefined;
+
   return (
     <>
       <div className="h-auto w-auto p-6 main-container mx-10 my-4">
@@ -162,7 +165,11 @@ function Dashboard({ userData }: DashboardProps) {
           <div className="grid grid-cols-2 gap-8">
           
             <SentimentAnalysis data={dashboardData.sentimentData} />
-            <RecentReviews reviews={dashboardData.recentReviews} />
+            {businessId ? (
+              <RecentReviews businessId={businessId} />
+            ) : (
+              <p>No business selected.</p>
+            )}
           </div>
 
           {/* Second Row: Sentiment Analysis and Recent Reviews */}
