@@ -11,6 +11,9 @@ interface Review {
   sentiment_score: number;
   topics: string | null;
   username: string;
+  is_suggestion: boolean;
+  // Optionally, an avatar URL could be added here
+  avatarUrl?: string;
 }
 
 interface RecentReviewsProps {
@@ -44,17 +47,17 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="text-red-500">{error}</div>;
   }
 
-  // Convert rating (1-5) into orange star icons
+  // Render rating stars (orange)
   const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <svg
           key={i}
-          className={`h-5 w-5 ${
+          className={`h-5 w-5 transition duration-200 ${
             i <= rating ? "text-orange-500" : "text-gray-300"
           }`}
           fill="currentColor"
@@ -78,63 +81,96 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">Most Recent Reviews</h2>
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="flex items-center justify-between mb-6 border-b pb-2">
+        <h2 className="text-2xl font-bold text-gray-800">Recent Reviews</h2>
         <button className="text-orange-500 hover:underline text-sm font-medium">
           View more
         </button>
       </div>
-
-      {reviews.length === 0 ? (
-        <p className="text-gray-600">No reviews found.</p>
-      ) : (
-        <div className="space-y-4">
-          {reviews.map((review) => (
-            <div key={review.id} className="border border-gray-200 rounded-lg p-4 shadow-sm">
-              {/* Top row: Username and date */}
-              <div className="flex items-center justify-between mb-1">
-                <div className="text-base font-semibold text-gray-700">
-                  {review.username || "Anonymous"}
+      {/* Reviews container with fixed height and vertical scrolling */}
+      <div className="max-h-96 overflow-y-auto space-y-4 pr-2">
+        {reviews.length === 0 ? (
+          <p className="text-gray-600">No reviews found.</p>
+        ) : (
+          reviews.map((review) => (
+            <div
+              key={review.id}
+              className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-lg transition duration-300"
+            >
+              {/* Top row: Avatar and Username on left; Stars on right */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  {/* Avatar Placeholder */}
+                  <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                    <span className="text-gray-500 font-semibold">
+                      {review.username.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="text-lg font-semibold text-gray-800">
+                    {review.username || "Anonymous"}
+                  </div>
                 </div>
-                <div className="text-sm text-gray-500">
-                  {formatDate(review.review_date)}
-                </div>
+                <div>{renderStars(review.rating)}</div>
               </div>
 
-              {/* Rating row */}
-              <div className="flex items-center mb-2">
-                {renderStars(review.rating)}
-                <span className="ml-2 text-sm text-gray-600">
-                  {review.source || "Basic Reviewer"}
-                </span>
+              {/* Middle row: Date and source on bottom left; Topics on bottom right */}
+              <div className="flex items-center justify-between mt-3">
+                <div className="text-sm text-gray-500">
+                  {formatDate(review.review_date)}{" "}
+                  <span className="font-medium text-gray-700 ml-1">
+                    {review.source || "Google"}
+                  </span>
+                </div>
+                {review.topics && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    {review.topics.split(",").map((topic) => (
+                      <span
+                        key={topic.trim()}
+                        className="px-2 py-1 border border-orange-300 text-orange-600 text-xs rounded-full"
+                      >
+                        {topic.trim()}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Review content */}
-              <p className="text-gray-700 mb-2 leading-relaxed">
-                {review.content || "No review content"}
-                <span className="text-orange-500 text-sm ml-1 hover:underline cursor-pointer">
+              <p className="text-gray-700 mt-3 leading-relaxed">
+                {review.content || "No review content"}{" "}
+                <span className="text-orange-500 text-sm ml-1 hover:underline transition duration-200 cursor-pointer">
                   Read more
                 </span>
               </p>
 
-              {/* Topics as pills (Wait, Food, Value, etc.) */}
-              {review.topics && (
-                <div className="flex flex-wrap items-center gap-2 mt-2">
-                  {review.topics.split(",").map((topic) => (
-                    <span
-                      key={topic.trim()}
-                      className="px-3 py-1 border border-orange-300 text-orange-600 text-xs rounded-full"
-                    >
-                      {topic.trim()}
-                    </span>
-                  ))}
+              {/* Sentiment and suggestion row */}
+              <div className="flex items-center justify-between mt-3">
+                <div className="text-sm font-medium">
+                  Sentiment:{" "}
+                  <span
+                    className={
+                      review.sentiment_score < 0
+                        ? "text-red-500"
+                        : review.sentiment_score > 0
+                        ? "text-green-500"
+                        : "text-gray-500"
+                    }
+                  >
+                    {review.sentiment_description} (
+                    {review.sentiment_score.toFixed(2)})
+                  </span>
                 </div>
-              )}
+                {review.is_suggestion && (
+                  <div className="text-sm text-blue-500 font-semibold">
+                    Suggestion
+                  </div>
+                )}
+              </div>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };
