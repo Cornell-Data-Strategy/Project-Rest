@@ -86,8 +86,10 @@ interface DashboardData {
 }
 
 function Dashboard({ userData }: DashboardProps) {
+  console.log("Dashboard userData:", userData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
   const [dashboardData, setDashboardData] = useState<DashboardData>({
     reviewCount: 1353,
     averageRating: 4.2,
@@ -168,7 +170,7 @@ function Dashboard({ userData }: DashboardProps) {
 
    // Extract a valid business ID from userData. For example, using the first business.
    const businessId = userData && userData.businesses.length > 0 ? userData.businesses[0].id : undefined;
-
+   console.log("Extracted businessId:", businessId);
   return (
     <>
       <div className="h-auto w-auto p-6 main-container mx-10 my-4">
