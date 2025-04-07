@@ -10,7 +10,6 @@ interface Review {
   topics: string | null;
   username: string;
   is_suggestion: boolean;
-  // Optionally include an avatar URL if available
   avatarUrl?: string;
 }
 
@@ -65,7 +64,24 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
         </svg>
       );
     }
-    return <div className="flex">{stars}</div>;
+    return <div className="flex items-center">{stars}</div>;
+  };
+
+  // Render a badge based on rating
+  const renderRatingBadge = (rating: number) => {
+    if (rating > 3) {
+      return (
+        <span className="ml-2 text-sm font-bold text-green-500">Excellent</span>
+      );
+    } else if (rating < 3) {
+      return (
+        <span className="ml-2 text-sm font-bold text-red-500">Needs Improvement</span>
+      );
+    } else {
+      return (
+        <span className="ml-2 text-sm font-bold text-yellow-500">Average</span>
+      );
+    }
   };
 
   // Format the date as "Feb 5, 2025"
@@ -81,12 +97,12 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-6 border-b pb-2">
-        <h2 className="text-2xl font-bold text-gray-800">Recent Reviews</h2>
+        <h2 className="text-xl font-regular text-gray-800">Recent Reviews</h2>
         <button className="text-orange-500 hover:underline text-sm font-medium">
           View more
         </button>
       </div>
-      {/* Scrollable container for reviews */}
+      {/* Scrollable container */}
       <div className="max-h-96 overflow-y-auto space-y-4 pr-2">
         {reviews.length === 0 ? (
           <p className="text-gray-600">No reviews found.</p>
@@ -96,10 +112,9 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
               key={review.id}
               className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
             >
-              {/* Top row: Avatar + Username on left, Stars on right */}
+              {/* Top row: Avatar + Username on left; Stars and badge on right */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  {/* Avatar Placeholder */}
                   <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
                     <span className="text-gray-500 font-semibold">
                       {review.username.charAt(0).toUpperCase()}
@@ -109,10 +124,13 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
                     {review.username || "Anonymous"}
                   </div>
                 </div>
-                <div>{renderStars(review.rating)}</div>
+                <div className="flex items-center">
+                  {renderStars(review.rating)}
+                  {renderRatingBadge(review.rating)}
+                </div>
               </div>
 
-              {/* Middle row: Date and Source on left, Topics on right */}
+              {/* Middle row: Date and source on bottom left; Topics on bottom right */}
               <div className="flex items-center justify-between mt-3">
                 <div className="text-sm text-gray-500">
                   {formatDate(review.review_date)}{" "}
