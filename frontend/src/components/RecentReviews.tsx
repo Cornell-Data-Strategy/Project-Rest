@@ -7,12 +7,10 @@ interface Review {
   content: string | null;
   rating: number;
   review_date: string;
-  sentiment_description: string;
-  sentiment_score: number;
   topics: string | null;
   username: string;
   is_suggestion: boolean;
-  // Optionally, an avatar URL could be added here
+  // Optionally include an avatar URL if available
   avatarUrl?: string;
 }
 
@@ -43,11 +41,11 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   }, [businessId]);
 
   if (isLoading) {
-    return <div>Loading recent reviews...</div>;
+    return <div className="p-4">Loading recent reviews...</div>;
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <div className="text-red-500 p-4">{error}</div>;
   }
 
   // Render rating stars (orange)
@@ -88,7 +86,7 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
           View more
         </button>
       </div>
-      {/* Reviews container with fixed height and vertical scrolling */}
+      {/* Scrollable container for reviews */}
       <div className="max-h-96 overflow-y-auto space-y-4 pr-2">
         {reviews.length === 0 ? (
           <p className="text-gray-600">No reviews found.</p>
@@ -96,9 +94,9 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
           reviews.map((review) => (
             <div
               key={review.id}
-              className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-lg transition duration-300"
+              className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
             >
-              {/* Top row: Avatar and Username on left; Stars on right */}
+              {/* Top row: Avatar + Username on left, Stars on right */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   {/* Avatar Placeholder */}
@@ -114,7 +112,7 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
                 <div>{renderStars(review.rating)}</div>
               </div>
 
-              {/* Middle row: Date and source on bottom left; Topics on bottom right */}
+              {/* Middle row: Date and Source on left, Topics on right */}
               <div className="flex items-center justify-between mt-3">
                 <div className="text-sm text-gray-500">
                   {formatDate(review.review_date)}{" "}
@@ -143,30 +141,6 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
                   Read more
                 </span>
               </p>
-
-              {/* Sentiment and suggestion row */}
-              <div className="flex items-center justify-between mt-3">
-                <div className="text-sm font-medium">
-                  Sentiment:{" "}
-                  <span
-                    className={
-                      review.sentiment_score < 0
-                        ? "text-red-500"
-                        : review.sentiment_score > 0
-                        ? "text-green-500"
-                        : "text-gray-500"
-                    }
-                  >
-                    {review.sentiment_description} (
-                    {review.sentiment_score.toFixed(2)})
-                  </span>
-                </div>
-                {review.is_suggestion && (
-                  <div className="text-sm text-blue-500 font-semibold">
-                    Suggestion
-                  </div>
-                )}
-              </div>
             </div>
           ))
         )}
