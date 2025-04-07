@@ -24,7 +24,6 @@ export const checkAuthStatus = async (): Promise<UserData | null> => {
       return null;
     }
     
- 
     try {
       const tokenParts = token.split('.');
       if (tokenParts.length !== 3) {
@@ -38,11 +37,23 @@ export const checkAuthStatus = async (): Promise<UserData | null> => {
       return null;
     }
     
-    console.log('Making request to /api/auth/user');
-    const response = await getUserProfileEndpoint();
-    console.log('Auth response:', response.data);
-    
-    return response.data;
+    try {
+      console.log('Making request to /api/auth/user');
+      const response = await getUserProfileEndpoint();
+      console.log('Auth response:', response.data);
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.status === 401) {
+        // Token might be expired, try to refresh
+        const newToken = await refreshToken();
+        if (newToken) {
+          // Retry the request with the new token
+          const response = await getUserProfileEndpoint();
+          return response.data;
+        }
+      }
+      throw error;
+    }
   } catch (error: unknown) {
     console.error('Error checking auth status:', error);
     clearAuthData();
