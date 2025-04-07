@@ -10,6 +10,8 @@ import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
 import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface DashboardProps {
   userData: UserData | null;
@@ -116,24 +118,45 @@ function Dashboard({ userData }: DashboardProps) {
     aiInsights: [], // TODO: Add sample data
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const loadDashboardData = async () => {
+    // Check for authentication token
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    
+    // Set auth token for API requests
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    
+    // You could fetch dashboard data here
+    const fetchDashboardData = async () => {
       try {
-        setIsLoading(true);
-        setError(null);
-        // TODO: Load your dashboard data here and update setDashboardData
+        // Example: const response = await axios.get('/api/dashboard-data');
+        // Process dashboard data...
+        setIsLoading(false);
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
-        setError("Failed to load dashboard data. Please try again.");
-      } finally {
+        // If authentication fails, redirect to login
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          localStorage.removeItem('access_token');
+          navigate('/login');
+        }
         setIsLoading(false);
       }
     };
-
-    if (userData) {
-      loadDashboardData();
-    }
-  }, [userData]);
+    
+    fetchDashboardData();
+  }, [navigate]);
+  
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
+    delete axios.defaults.headers.common['Authorization'];
+    navigate('/login');
+  };
 
   if (isLoading) {
     return <div>Loading dashboard...</div>;
