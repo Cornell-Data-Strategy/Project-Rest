@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getRecentReviews } from "../api/endpoints";
 
-// Define the Review interface to match your API response
 interface Review {
   id: number;
   source: string;
@@ -14,7 +13,6 @@ interface Review {
   username: string;
 }
 
-// Props for the RecentReviews component
 interface RecentReviewsProps {
   businessId: number;
 }
@@ -49,17 +47,15 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
     return <div>{error}</div>;
   }
 
-  // Helper to display star rating
+  // Convert rating (1-5) into orange star icons
   const renderStars = (rating: number) => {
-    // clamp rating from 1 to 5 just in case
-    const clamped = Math.min(Math.max(rating, 1), 5);
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
         <svg
           key={i}
           className={`h-5 w-5 ${
-            i <= clamped ? "text-yellow-400" : "text-gray-300"
+            i <= rating ? "text-orange-500" : "text-gray-300"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -68,10 +64,10 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
         </svg>
       );
     }
-    return <div className="flex items-center">{stars}</div>;
+    return <div className="flex">{stars}</div>;
   };
 
-  // Format the date as "Mar 3, 2025" style
+  // Format the date as "Feb 5, 2025"
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -85,8 +81,7 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
     <div className="bg-white p-4 rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold text-gray-800">Most Recent Reviews</h2>
-        {/* "View more" button - link to a reviews page or modal */}
-        <button className="text-blue-500 hover:underline text-sm font-medium">
+        <button className="text-orange-500 hover:underline text-sm font-medium">
           View more
         </button>
       </div>
@@ -96,13 +91,10 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
       ) : (
         <div className="space-y-4">
           {reviews.map((review) => (
-            <div
-              key={review.id}
-              className="border border-gray-200 rounded-lg p-4 shadow-sm"
-            >
+            <div key={review.id} className="border border-gray-200 rounded-lg p-4 shadow-sm">
               {/* Top row: Username and date */}
-              <div className="flex items-center justify-between mb-2">
-                <div className="font-semibold text-gray-700">
+              <div className="flex items-center justify-between mb-1">
+                <div className="text-base font-semibold text-gray-700">
                   {review.username || "Anonymous"}
                 </div>
                 <div className="text-sm text-gray-500">
@@ -110,31 +102,29 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
                 </div>
               </div>
 
-              {/* Rating stars */}
+              {/* Rating row */}
               <div className="flex items-center mb-2">
                 {renderStars(review.rating)}
                 <span className="ml-2 text-sm text-gray-600">
-                  {/* For example: "Regular Reviewer" or "Local Guide" */}
-                  {review.source || "Regular Reviewer"}
+                  {review.source || "Basic Reviewer"}
                 </span>
               </div>
 
               {/* Review content */}
-              <p className="text-gray-700 mb-2">
+              <p className="text-gray-700 mb-2 leading-relaxed">
                 {review.content || "No review content"}
-                {" "}
-                <span className="text-blue-500 text-sm hover:underline cursor-pointer">
+                <span className="text-orange-500 text-sm ml-1 hover:underline cursor-pointer">
                   Read more
                 </span>
               </p>
 
-              {/* Topics or tags (e.g. "Service", "Food", "Value") */}
+              {/* Topics as pills (Wait, Food, Value, etc.) */}
               {review.topics && (
                 <div className="flex flex-wrap items-center gap-2 mt-2">
                   {review.topics.split(",").map((topic) => (
                     <span
                       key={topic.trim()}
-                      className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full"
+                      className="px-3 py-1 border border-orange-300 text-orange-600 text-xs rounded-full"
                     >
                       {topic.trim()}
                     </span>
