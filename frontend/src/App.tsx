@@ -21,15 +21,21 @@ function App() {
         setIsLoading(true);
         setError(null);
 
+        const storedToken = localStorage.getItem("access_token");
+        if (!storedToken) {
+          console.log("No token found");
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          return;
+        }
+
         const user = await checkAuthStatus();
         console.log("User data received:", user);
 
         if (!user) {
           console.log("No user data");
           setIsLoggedIn(false);
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refreshToken');
-          localStorage.removeItem('user');
+          localStorage.removeItem("access_token");
         } else {
           setIsLoggedIn(true);
           setUserData(user);
@@ -38,9 +44,7 @@ function App() {
         console.error("Failed to verify authentication:", error);
         setError("Authentication failed. Please try logging in again.");
         setIsLoggedIn(false);
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('user');
+        localStorage.removeItem("access_token");
       } finally {
         setIsLoading(false);
       }

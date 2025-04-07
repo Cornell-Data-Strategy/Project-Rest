@@ -1,15 +1,15 @@
 import { logout as logoutEndpoint, refreshToken as refreshTokenEndpoint, getUserProfile as getUserProfileEndpoint } from '../api/endpoints';
 import { UserData } from '../types';
 
-export const setAuthData = (accessToken: string, refreshToken: string, userData: Record<string, unknown>) => {
-  localStorage.setItem('access_token', accessToken);
-  localStorage.setItem('refreshToken', refreshToken);
+export const setAuthData = (token: string, refreshToken: string, userData: Record<string, unknown>) => {
+  localStorage.setItem('access_token', token);
+  localStorage.setItem('refresh_token', refreshToken);
   localStorage.setItem('user', JSON.stringify(userData));
 };
 
 export const clearAuthData = () => {
   localStorage.removeItem('access_token');
-  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('refresh_token');
   localStorage.removeItem('user');
 };
 
@@ -24,6 +24,7 @@ export const checkAuthStatus = async (): Promise<UserData | null> => {
       return null;
     }
     
+ 
     try {
       const tokenParts = token.split('.');
       if (tokenParts.length !== 3) {
@@ -37,23 +38,11 @@ export const checkAuthStatus = async (): Promise<UserData | null> => {
       return null;
     }
     
-    try {
-      console.log('Making request to /api/auth/user');
-      const response = await getUserProfileEndpoint();
-      console.log('Auth response:', response.data);
-      return response.data;
-    } catch (error: any) {
-      if (error.response?.status === 401) {
-        // Token might be expired, try to refresh
-        const newToken = await refreshToken();
-        if (newToken) {
-          // Retry the request with the new token
-          const response = await getUserProfileEndpoint();
-          return response.data;
-        }
-      }
-      throw error;
-    }
+    console.log('Making request to /api/auth/user');
+    const response = await getUserProfileEndpoint();
+    console.log('Auth response:', response.data);
+    
+    return response.data;
   } catch (error: unknown) {
     console.error('Error checking auth status:', error);
     clearAuthData();
@@ -76,14 +65,14 @@ export const logout = async () => {
 
 export const refreshToken = async () => {
   try {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = localStorage.getItem('refresh_token');
     if (!refreshToken) {
       throw new Error('No refresh token available');
     }
     
     const response = await refreshTokenEndpoint();
-    localStorage.setItem('access_token', response.data.access_token);
-    return response.data.access_token;
+    localStorage.setItem('access_token', response.data.token);
+    return response.data.token;
   } catch (error) {
     console.error('Failed to refresh token:', error);
     clearAuthData();
