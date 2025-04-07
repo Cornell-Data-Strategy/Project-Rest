@@ -17,35 +17,13 @@ interface RecentReviewsProps {
   businessId: number;
 }
 
-const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+// Single review card component with AI Insights toggle
+const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
+  const [showAI, setShowAI] = useState(false);
 
-  useEffect(() => {
-    const fetchRecentReviews = async () => {
-      try {
-        const response = await getRecentReviews(businessId);
-        console.log("API response:", response.data);
-        setReviews(response.data.reviews || []);
-      } catch (err) {
-        console.error("Error fetching reviews:", err);
-        setError("Failed to fetch recent reviews");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchRecentReviews();
-  }, [businessId]);
-
-  if (isLoading) {
-    return <div className="p-4">Loading recent reviews...</div>;
-  }
-
-  if (error) {
-    return <div className="text-red-500 p-4">{error}</div>;
-  }
+  const toggleAI = () => {
+    setShowAI((prev) => !prev);
+  };
 
   // Render rating stars (orange)
   const renderStars = (rating: number) => {
@@ -64,7 +42,7 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
         </svg>
       );
     }
-    return <div className="flex items-center">{stars}</div>;
+    return <div className="flex">{stars}</div>;
   };
 
   // Render a badge based on rating
@@ -95,6 +73,108 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   };
 
   return (
+    <div className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-xl transition duration-300">
+      {/* Top row: Avatar + Username on left; Stars and badge on right */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+            <span className="text-gray-500 font-semibold">
+              {review.username.charAt(0).toUpperCase()}
+            </span>
+          </div>
+          <div className="text-lg font-semibold text-gray-800">
+            {review.username || "Anonymous"}
+          </div>
+        </div>
+        <div className="flex items-center">
+          {renderStars(review.rating)}
+          {renderRatingBadge(review.rating)}
+        </div>
+      </div>
+
+      {/* Middle row: Date and source on left; Topics on right */}
+      <div className="flex items-center justify-between mt-3">
+        <div className="text-sm text-gray-500">
+          {formatDate(review.review_date)}{" "}
+          <span className="font-medium text-gray-700 ml-1">
+            {review.source || "Google"}
+          </span>
+        </div>
+        {review.topics && (
+          <div className="flex flex-wrap items-center gap-2">
+            {review.topics.split(",").map((topic) => (
+              <span
+                key={topic.trim()}
+                className="px-2 py-1 border border-orange-300 text-orange-600 text-xs rounded-full"
+              >
+                {topic.trim()}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Review content */}
+      <p className="text-gray-700 mt-3 leading-relaxed">
+        {review.content || "No review content"}{" "}
+        <span className="text-orange-500 text-sm ml-1 hover:underline transition duration-200 cursor-pointer">
+          Read more
+        </span>
+      </p>
+
+      {/* AI Insights Button */}
+      <div className="mt-3">
+        <button
+          onClick={toggleAI}
+          className="text-sm font-semibold text-blue-500 hover:underline transition duration-200"
+        >
+          {showAI ? "Hide AI Insights" : "Show AI Insights"}
+        </button>
+      </div>
+
+      {/* AI Insights Placeholder */}
+      {showAI && (
+        <div className="mt-2 p-3 border border-dashed border-gray-300 rounded-lg bg-gray-50">
+          <p className="text-sm text-gray-600">
+            AI Insights: This review highlights excellent service and quality. Our AI analysis suggests that the positive sentiment is driven by the consistent quality of the food and friendly staff.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchRecentReviews = async () => {
+      try {
+        const response = await getRecentReviews(businessId);
+        console.log("API response:", response.data);
+        setReviews(response.data.reviews || []);
+      } catch (err) {
+        console.error("Error fetching reviews:", err);
+        setError("Failed to fetch recent reviews");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRecentReviews();
+  }, [businessId]);
+
+  if (isLoading) {
+    return <div className="p-4">Loading recent reviews...</div>;
+  }
+
+  if (error) {
+    return <div className="text-red-500 p-4">{error}</div>;
+  }
+
+  return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-6 border-b pb-2">
         <h2 className="text-xl font-regular text-gray-800">Recent Reviews</h2>
@@ -102,65 +182,12 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
           View more
         </button>
       </div>
-      {/* Scrollable container */}
+      {/* Scrollable container for reviews */}
       <div className="max-h-96 overflow-y-auto space-y-4 pr-2">
         {reviews.length === 0 ? (
           <p className="text-gray-600">No reviews found.</p>
         ) : (
-          reviews.map((review) => (
-            <div
-              key={review.id}
-              className="border border-gray-200 rounded-lg p-4 shadow-sm transform hover:-translate-y-1 hover:shadow-xl transition duration-300"
-            >
-              {/* Top row: Avatar + Username on left; Stars and badge on right */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                    <span className="text-gray-500 font-semibold">
-                      {review.username.charAt(0).toUpperCase()}
-                    </span>
-                  </div>
-                  <div className="text-lg font-semibold text-gray-800">
-                    {review.username || "Anonymous"}
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  {renderStars(review.rating)}
-                  {renderRatingBadge(review.rating)}
-                </div>
-              </div>
-
-              {/* Middle row: Date and source on bottom left; Topics on bottom right */}
-              <div className="flex items-center justify-between mt-3">
-                <div className="text-sm text-gray-500">
-                  {formatDate(review.review_date)}{" "}
-                  <span className="font-medium text-gray-700 ml-1">
-                    {review.source || "Google"}
-                  </span>
-                </div>
-                {review.topics && (
-                  <div className="flex flex-wrap items-center gap-2">
-                    {review.topics.split(",").map((topic) => (
-                      <span
-                        key={topic.trim()}
-                        className="px-2 py-1 border border-orange-300 text-orange-600 text-xs rounded-full"
-                      >
-                        {topic.trim()}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Review content */}
-              <p className="text-gray-700 mt-3 leading-relaxed">
-                {review.content || "No review content"}{" "}
-                <span className="text-orange-500 text-sm ml-1 hover:underline transition duration-200 cursor-pointer">
-                  Read more
-                </span>
-              </p>
-            </div>
-          ))
+          reviews.map((review) => <ReviewCard key={review.id} review={review} />)
         )}
       </div>
     </div>
