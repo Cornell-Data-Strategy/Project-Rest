@@ -39,7 +39,7 @@ function Login({ onLogin }: LoginProps) {
     try {
       const response = await login(email, password);
       const { access_token, refresh_token, user } = response.data;
-      console.log("Access token received:", access_token);
+      console.log("Full response data:", response.data); // Log full data
 
       setAuthData(access_token, refresh_token, user);
 
