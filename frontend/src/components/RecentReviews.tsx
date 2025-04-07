@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getRecentReviews } from "../api/endpoints";
 import api from "../api/axios"; // Adjust the import path as needed
 
 // Define the Review interface to match your API response
@@ -27,7 +28,7 @@ const RecentReviews: React.FC<RecentReviewsProps> = ({ businessId }) => {
   useEffect(() => {
     const fetchRecentReviews = async () => {
       try {
-        const response = await api.get(`/business/${businessId}/reviews/recent`);
+        const response = await getRecentReviews(businessId);
         console.log("API response:", response.data);
         // Ensure reviews is an array by using a fallback
         setReviews(response.data.reviews || []);
