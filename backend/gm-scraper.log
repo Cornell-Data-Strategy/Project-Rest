@@ -841,3 +841,15 @@
 2025-03-15 15:49:54,918 - INFO - Scraped 10 reviews. Total so far: 160
 2025-03-15 15:49:56,924 - INFO - Finished scraping loop after 15 iterations
 2025-03-15 15:49:56,924 - INFO - Successfully scraped 160 reviews
+2025-04-10 18:53:46,302 - INFO - Fetching reviews starting from offset 0
+2025-04-10 18:53:48,516 - INFO - Scraped 20 reviews. Total so far: 20
+2025-04-10 18:53:50,521 - INFO - Fetching reviews starting from offset 20
+2025-04-10 18:53:52,737 - INFO - Scraped 10 reviews. Total so far: 30
+2025-04-10 18:53:54,742 - INFO - Fetching reviews starting from offset 30
+2025-04-10 18:53:56,981 - INFO - Scraped 10 reviews. Total so far: 40
+2025-04-10 18:53:58,983 - INFO - Fetching reviews starting from offset 40
+2025-04-10 18:54:01,332 - INFO - Scraped 10 reviews. Total so far: 50
+2025-04-10 18:54:03,337 - INFO - Fetching reviews starting from offset 50
+2025-04-10 18:54:05,633 - INFO - Scraped 10 reviews. Total so far: 60
+2025-04-10 18:54:07,638 - INFO - Fetching reviews starting from offset 60
+2025-04-10 18:54:09,889 - INFO - Scraped 10 reviews. Total so far: 70
