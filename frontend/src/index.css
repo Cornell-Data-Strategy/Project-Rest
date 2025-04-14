@@ -1,145 +1,91 @@
 @import "tailwindcss";
 
-
-
+/* Font Faces */
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Bold.otf') format('opentype');
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_ExtraLight.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_SemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Book.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Regular.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Bold.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Medium.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Light.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_ExtraLight.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_ExtraLight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_SemiBold.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
-
 @font-face {
-  font-family: 'HalyardDisplay';
-  src: url('/fonts/Halyard_Display_Book.otf') format('opentype');
+  font-family: 'halyard';
+  src: url('/fonts/fonnts.com-Halyard_Display_Book.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
-
-
+/* CSS Variables */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: light dark;
-  color: #213547;
-  background-color: #f5f7fa;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-halyard: 'halyard', sans-serif;
+
+  --color-darkGray: #212529;
+  --color-mediumGray: #495057;
+  --color-lightGray: #adb5bd;
+  --color-backgroundGray: #f8f9fa;
+  --color-successLight: #d3f1d8;
+  --color-successDark: #0d6832;
+  --color-warningLight: #ffe8cc;
+  --color-warningDark: #995480;
+  --color-orange: #F7671F;
+  --color-offWhite: #faf7f5;
+  --color-beige: #FBF9F7;
+  --color-focus: #FFB48F;
+  --color-coolgray: #212529;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* Utility Classes */
+.shadow-orange {
+  box-shadow: 0px 8px 0px 0px #F7671F;
 }
+
+.gray-border {
+  border: 1px solid #E5E5E5;
+}
+
+/* Base Styles */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-halyard);
+}
+
 a:hover {
   color: #535bf2;
   text-decoration: underline;
 }
 
-
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: 'HalyardDisplay', sans-serif;
-}
-
-/* Remove default button styles to avoid conflicts with Tailwind */
-button {
-  cursor: pointer;
-}
-
-/* Override dark mode preferences for consistent look */
+/* Dark Mode Override */
 @media (prefers-color-scheme: dark) {
   :root {
     color: #213547;
