@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { API_URL } from "../utils/config";
+import { API_URL } from "../../config";
 import { setAuthData, checkAuthStatus } from "../utils/authUtils";
-import { login } from "../api/endpoints";
 
 interface LoginProps {
   onLogin: () => void;
@@ -53,7 +52,6 @@ function Login({ onLogin }: LoginProps) {
       }
     }
   };
-
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center bg-white">
