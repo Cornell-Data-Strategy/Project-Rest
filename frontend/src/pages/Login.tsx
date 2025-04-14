@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { API_URL } from "../../config";
 import { setAuthData, checkAuthStatus } from "../utils/authUtils";
-import { login } from "../api/endpoints";
 
 interface LoginProps {
   onLogin: () => void;
