@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import Sidebar from './components/Sidebar.tsx'
-import Dashboard from './pages/Dashboard.tsx'
-import Reviews from './pages/Reviews.tsx'
-import Login from './pages/Login.tsx'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Sidebar from "./components/Sidebar.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
+import Reviews from "./pages/Reviews.tsx";
+import Login from "./pages/Login.tsx";
+import { checkAuthStatus, logout } from "./utils/authUtils.ts";
+import { UserData } from "./types";
+import "./App.css";
 import Register from './pages/Register.tsx'
 import { useLocation } from "react-router-dom";
 
-
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -18,7 +21,6 @@ function App() {
       try {
         console.log("Verifying authentication...");
         setIsLoading(true);
-        setError(null);
 
         const storedToken = localStorage.getItem("token");
         if (!storedToken) {
@@ -39,9 +41,8 @@ function App() {
           setIsLoggedIn(true);
           setUserData(user);
         }
-      } catch (error) {
-        console.error("Failed to verify authentication:", error);
-        setError("Authentication failed. Please try logging in again.");
+      } catch (err) {
+        console.error("Failed to verify authentication:", err);
         setIsLoggedIn(false);
         localStorage.removeItem("token");
       } finally {
@@ -52,16 +53,41 @@ function App() {
     verifyAuth();
   }, []);
 
-  const handleLogin = () => setIsLoggedIn(true)
+  const handleLogin = () => setIsLoggedIn(true);
 
   const isAuthRoute = location.pathname === "/login" || location.pathname === "/register";
 
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+      setIsLoggedIn(false);
+      setUserData(null);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-beige">
+        Loading...
+      </div>
+    );
+  }
+
   return (
-    <div className="flex h-screen bg-gray-50">
-      {!isAuthRoute && <Sidebar />}
+    <div className="flex h-screen bg-beige pt-3">
+      {!isAuthRoute && <Sidebar onLogout={handleLogout}/>}
       <div className="flex-1 overflow-auto">
         <Routes>
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="/login"
+            element={
+              isLoggedIn ? (
+                <Navigate to="/dashboard" />
+              ) : (
+                <Login onLogin={handleLogin} />
+              )
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
@@ -87,4 +113,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
