@@ -67,14 +67,14 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-beige">
+      <div className="flex h-screen items-center justify-center bg-[#FBF9F7]">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-beige pt-3">
+    <div className="flex h-screen bg-[#FBF9F7]">
       {!isAuthRoute && <Sidebar onLogout={handleLogout}/>}
       <div className="flex-1 overflow-auto">
         <Routes>
