@@ -31,4 +31,4 @@ export const getRating = (business_id: number) =>
 
 // Business summary endpoint
 export const getBusinessSummary = (business_id: number) => 
-  api.get(`/api/business/${business_id}/summary`);
+  api.get(`/api/dashboard/business/${business_id}/summary`);

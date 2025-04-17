@@ -117,7 +117,7 @@ def register():
         process_reviews(reviews_data, new_business.id)
         db.session.commit()
 
-        # Create tokens for new user
+        
         access_token = create_access_token(identity=str(new_user.id))
         refresh_token = create_refresh_token(identity=str(new_user.id))
 

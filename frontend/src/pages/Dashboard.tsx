@@ -10,6 +10,7 @@ import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
 import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
+import { getBusinessSummary } from "../api/endpoints";
 
 interface DashboardProps {
   userData: UserData | null;
@@ -20,6 +21,11 @@ interface DashboardData {
   averageRating: number;
   sentimentScore: number;
   mostMentionedTopic: string;
+
+  // Static percentages for metrics until backend supports them
+  reviewCountPercentChange: string;
+  averageRatingPercentChange: string;
+  sentimentScorePercentChange: string;
 
   // Sentiment Analysis Data
   sentimentData: Array<{ timestamp: string; sentiment: number }>;
@@ -86,42 +92,75 @@ interface DashboardData {
 function Dashboard({ userData }: DashboardProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [dashboardData, setDashboardData] = useState<DashboardData>({
-    reviewCount: 1353,
-    averageRating: 4.2,
-    sentimentScore: 8.9,
-    mostMentionedTopic: "Service",
+  
 
-    sentimentData: [], // TODO: Add sample data
-    recentReviews: [], // TODO: Add sample data
+  const [dashboardData, setDashboardData] = useState<DashboardData>({
+    reviewCount: 0,
+    averageRating: 0,
+    sentimentScore: 0,
+    mostMentionedTopic: "",
+
+    // Static percent changes
+    reviewCountPercentChange: "↑ 12%",
+    averageRatingPercentChange: "↑ 5%",
+    sentimentScorePercentChange: "↑ 8%",
+
+    sentimentData: [],
+    recentReviews: [],
 
     ratingsDistribution: [
-      { rating: 5, count: 500, percentage: 45 },
-      { rating: 4, count: 300, percentage: 27 },
-      { rating: 3, count: 150, percentage: 14 },
-      { rating: 2, count: 100, percentage: 9 },
-      { rating: 1, count: 50, percentage: 5 },
+      { rating: 5, count: 0, percentage: 0 },
+      { rating: 4, count: 0, percentage: 0 },
+      { rating: 3, count: 0, percentage: 0 },
+      { rating: 2, count: 0, percentage: 0 },
+      { rating: 1, count: 0, percentage: 0 },
     ],
 
-    reviewSegments: [
-      // todo
-    ],
-
-    criticalReviews: [], // TODO: Add sample data
-
-    topicRatings: [
-      // todo
-    ],
-
-    aiInsights: [], // TODO: Add sample data
+    reviewSegments: [],
+    criticalReviews: [],
+    topicRatings: [],
+    aiInsights: [],
   });
 
   useEffect(() => {
-    const loadDashboardData = async () => {
+    const fetchDashboardData = async () => {
+      if (!userData || !userData.businesses || !userData.businesses[0]) {
+        setError("No business data available");
+        return;
+      }
+
       try {
         setIsLoading(true);
         setError(null);
-        // TODO: Load your dashboard data here and update setDashboardData
+        
+        const businessId = userData.businesses[0].id;
+        
+        // Call your API to fetch data
+        const response = await getBusinessSummary(businessId);
+
+        console.log("API Response:", response.data);
+        
+        // Update dashboard data with API response
+        setDashboardData(prevData => ({
+          reviewCount: response.data.review_count,
+          averageRating: response.data.average_rating,
+          sentimentScore: response.data.overall_sentiment_score,
+          mostMentionedTopic: response.data.most_mentioned_topic || "None",
+          
+          // Keep static percent changes for now
+          reviewCountPercentChange: prevData.reviewCountPercentChange,
+          averageRatingPercentChange: prevData.averageRatingPercentChange,
+          sentimentScorePercentChange: prevData.sentimentScorePercentChange,
+          
+          // Preserve other data that isn't being fetched yet
+          sentimentData: prevData.sentimentData,
+          recentReviews: prevData.recentReviews,
+          ratingsDistribution: prevData.ratingsDistribution,
+          reviewSegments: prevData.reviewSegments,
+          criticalReviews: prevData.criticalReviews,
+          topicRatings: prevData.topicRatings,
+          aiInsights: prevData.aiInsights,
+        }));
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
         setError("Failed to load dashboard data. Please try again.");
@@ -131,7 +170,7 @@ function Dashboard({ userData }: DashboardProps) {
     };
 
     if (userData) {
-      loadDashboardData();
+      fetchDashboardData();
     }
   }, [userData]);
 
@@ -156,37 +195,44 @@ function Dashboard({ userData }: DashboardProps) {
 
         <div className="space-y-8">
           {/* Performance Summary */}
-          <PerformanceSummary metrics={dashboardData} />
+          <PerformanceSummary 
+            businessId={userData?.businesses[0]?.id} 
+            metrics={{
+              reviewCount: dashboardData.reviewCount,
+              averageRating: dashboardData.averageRating,
+              sentimentScore: dashboardData.sentimentScore,
+              mostMentionedTopic: dashboardData.mostMentionedTopic,
+             
+              reviewCountPercentChange: dashboardData.reviewCountPercentChange,
+              averageRatingPercentChange: dashboardData.averageRatingPercentChange,
+              sentimentScorePercentChange: dashboardData.sentimentScorePercentChange
+            }} 
+          />
 
-          {/* First Row: Ratings Distribution and Review Segmentation */}
+          {/* First Row: Sentiment Analysis and Recent Reviews */}
           <div className="grid grid-cols-2 gap-8">
-          
             <SentimentAnalysis data={dashboardData.sentimentData} />
             <RecentReviews reviews={dashboardData.recentReviews} />
           </div>
 
-          {/* Second Row: Sentiment Analysis and Recent Reviews */}
+          {/* Second Row: Ratings Distribution and Review Segmentation */}
           <div className="flex gap-4 p-4">
-
-          <div className="flex w-1/2 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-md flex-1">
-              <RatingsDistribution ratings={dashboardData.ratingsDistribution} />
+            <div className="flex w-1/2 gap-4">
+              <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+                <RatingsDistribution ratings={dashboardData.ratingsDistribution} />
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+                <ReviewSegmentation segments={dashboardData.reviewSegments} />
+              </div>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-md flex-1">
-              <ReviewSegmentation segments={dashboardData.reviewSegments} />
+
+            {/* Right Side: Critical Reviews */}
+            <div className="bg-white p-4 rounded-lg shadow-md w-1/2">
+              <CriticalReviews reviews={dashboardData.criticalReviews} />
             </div>
           </div>
 
-          {/* Right Side: Critical Reviews */}
-          <div className="bg-white p-4 rounded-lg shadow-md w-1/2">
-            <CriticalReviews reviews={dashboardData.criticalReviews} />
-          </div>
-        </div>
-
-
-
-
-          {/* Fourth Row: AI Insights (Full Width) */}
+          {/* Fourth Row: Topic Ratings and AI Insights */}
           <div className="w-full flex flex-col gap-8">
             <TopicRatings ratings={dashboardData.topicRatings} />
             <AIInsights insights={dashboardData.aiInsights} />
