@@ -1,36 +1,51 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkAuthStatus, logout } from "../utils/authUtils";
-import { UserData } from "../types";
+import { Review, UserData } from "../types";
+import ReviewComponent from "../components/ReviewComponent";
 
 function Reviews() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [userData, setUserData] = useState<UserData | null>(null);
+    const [reviews, setReviews] = useState<Review[]>([]); // replace with typed Review[] if available
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        const fetchReviews = async (businessId: number) => {
+            try {
+                const response = await fetch(`/reviews/${businessId}`);
+                const data = await response.json();
+                setReviews(data.reviews || []);
+            } catch (err) {
+                console.error("Failed to fetch reviews:", err);
+                setError("Could not load reviews.");
+            }
+        };
+
         const verifyAuth = async () => {
             try {
-                console.log('Verifying authentication in Reviews page...');
                 setIsLoading(true);
                 setError(null);
                 
                 const user = await checkAuthStatus();
-                console.log('User data received in Reviews:', user);
-                
                 if (!user) {
-                    console.log('No user data, redirecting to login from Reviews');
                     navigate('/login');
                     return;
                 }
-                
+
                 setUserData(user);
+                
+                if (user.businesses && user.businesses.length > 0) {
+                    const businessId = user.businesses[0].id;
+                    await fetchReviews(businessId);
+                }
+
                 setIsLoading(false);
             } catch (error) {
-                console.error("Failed to verify authentication in Reviews:", error);
-                setError("Authentication failed. Please try logging in again.");
+                console.error("Failed to verify authentication:", error);
+                setError("Authentication failed.");
                 setIsLoading(false);
             }
         };
@@ -38,67 +53,43 @@ function Reviews() {
         verifyAuth();
     }, [navigate]);
 
-    const handleLogout = async () => {
-        const success = await logout();
-        if (success) {
-            navigate('/login');
-        } else {
-            console.error("Logout failed");
-        }
-    };
-
-    if (isLoading) {
-        return (
-            <div className="h-screen flex items-center justify-center">
-                <div className="text-xl font-semibold">Loading reviews...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="h-screen flex items-center justify-center">
-                <div className="text-xl text-red-600 font-semibold p-4 bg-red-50 rounded-lg">
-                    {error}
-                    <div className="mt-4">
-                        <button 
-                            onClick={() => navigate('/login')}
-                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
-                        >
-                            Back to Login
-                        </button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div className="text-red-500">{error}</div>;
 
     return (
         <div className="h-full p-6">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold text-gray-800">Reviews</h1>
-                <button 
-                    onClick={handleLogout}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
+                <button
+                    onClick={logout}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
                 >
                     Logout
                 </button>
             </div>
 
             <div className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4 text-gray-700">Recent Reviews</h2>
-                <p className="text-gray-600">Here you can view and manage your reviews.</p>
+                <h2 className="text-xl font-semibold mb-4 text-gray-700">
+                    Recent Reviews for {userData?.businesses[0].name}
+                </h2>
 
-                {userData && userData.businesses && userData.businesses.length > 0 ? (
-                    <div className="mt-6">
-                        <p className="font-medium mb-2">Reviews for {userData.businesses[0].name}</p>
-                        {/* Future enhancement: Add actual reviews here */}
-                        <p className="text-sm text-gray-500">Review content will be displayed here.</p>
+                {reviews.length > 0 ? (
+                    <div className="space-y-4">
+                        {reviews.map((review, idx) => (
+                            <ReviewComponent
+                                key={idx}
+                                reviewerName={review.username || "Anonymous"}
+                                date={String(review.review_date || review.review_date_estimate)}
+                                title={review.source}
+                                content={review.content || ""}
+                                rating={review.rating || 0}
+                                tags={review.topics ? review.topics.split(",") : []}
+                                trusted={review.user_review_count ? review.user_review_count > 10 : false}
+                            />
+                        ))}
                     </div>
                 ) : (
-                    <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
-                        <p className="text-sm text-yellow-700">No business or reviews found.</p>
-                    </div>
+                    <p className="text-sm text-gray-500">No reviews found.</p>
                 )}
             </div>
         </div>
