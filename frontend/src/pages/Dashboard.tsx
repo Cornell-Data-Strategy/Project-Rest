@@ -10,6 +10,8 @@ import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
 import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { getBusinessSummary } from "../api/endpoints";
 
 interface DashboardProps {
@@ -90,6 +92,7 @@ interface DashboardData {
 }
 
 function Dashboard({ userData }: DashboardProps) {
+  console.log("Dashboard userData:", userData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -121,6 +124,8 @@ function Dashboard({ userData }: DashboardProps) {
     topicRatings: [],
     aiInsights: [],
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -163,8 +168,11 @@ function Dashboard({ userData }: DashboardProps) {
         }));
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
-        setError("Failed to load dashboard data. Please try again.");
-      } finally {
+        // If authentication fails, redirect to login
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          localStorage.removeItem('access_token');
+          navigate('/login');
+        }
         setIsLoading(false);
       }
     };
@@ -182,6 +190,9 @@ function Dashboard({ userData }: DashboardProps) {
     return <div className="text-red-500">{error}</div>;
   }
 
+   // Extract a valid business ID from userData. For example, using the first business.
+   const businessId = userData && userData.businesses.length > 0 ? userData.businesses[0].id : undefined;
+   console.log("Extracted businessId:", businessId);
   return (
     <>
       <div className="h-auto w-auto p-6 main-container mx-10 my-4">
@@ -212,7 +223,11 @@ function Dashboard({ userData }: DashboardProps) {
           {/* First Row: Sentiment Analysis and Recent Reviews */}
           <div className="grid grid-cols-2 gap-8">
             <SentimentAnalysis data={dashboardData.sentimentData} />
-            <RecentReviews reviews={dashboardData.recentReviews} />
+            {businessId ? (
+              <RecentReviews businessId={businessId} />
+            ) : (
+              <p>No business selected.</p>
+            )}
           </div>
 
           {/* Second Row: Ratings Distribution and Review Segmentation */}
