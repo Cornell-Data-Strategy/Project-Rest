@@ -7,19 +7,20 @@ import Login from "./pages/Login.tsx";
 import { checkAuthStatus, logout } from "./utils/authUtils.ts";
 import { UserData } from "./types";
 import "./App.css";
+import Register from './pages/Register.tsx'
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const verifyAuth = async () => {
       try {
         console.log("Verifying authentication...");
         setIsLoading(true);
-        setError(null);
 
         const storedToken = localStorage.getItem("access_token");
         if (!storedToken) {
@@ -40,9 +41,8 @@ function App() {
           setIsLoggedIn(true);
           setUserData(user);
         }
-      } catch (error) {
-        console.error("Failed to verify authentication:", error);
-        setError("Authentication failed. Please try logging in again.");
+      } catch (err) {
+        console.error("Failed to verify authentication:", err);
         setIsLoggedIn(false);
         localStorage.removeItem("access_token");
       } finally {
@@ -55,6 +55,8 @@ function App() {
 
   const handleLogin = () => setIsLoggedIn(true);
 
+  const isAuthRoute = location.pathname === "/login" || location.pathname === "/register";
+
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
@@ -65,15 +67,15 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-beige">
+      <div className="flex h-screen items-center justify-center bg-[#FBF9F7]">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-beige pt-3">
-      {isLoggedIn && <Sidebar onLogout={handleLogout} />}
+    <div className="flex h-screen bg-[#FBF9F7]">
+      {!isAuthRoute && <Sidebar onLogout={handleLogout}/>}
       <div className="flex-1 overflow-auto">
         <Routes>
           <Route
@@ -86,6 +88,7 @@ function App() {
               )
             }
           />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/dashboard"
             element={

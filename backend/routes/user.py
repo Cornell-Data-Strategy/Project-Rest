@@ -5,8 +5,7 @@ from backend.models.review import Review
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from datetime import datetime, timezone
 
-# Fix: Remove the asterisks around __name__
-user_bp = Blueprint('user', __name__)  # This was incorrect with **name**
+user_bp = Blueprint('user', __name__)  
 
 @user_bp.route('/profile', methods=['GET'])
 @jwt_required()

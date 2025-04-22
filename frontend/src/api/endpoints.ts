@@ -29,7 +29,8 @@ export const register = (registerData: {
 export const getRating = (business_id: number) => 
   api.get(`/api/business/${business_id}/rating`);
 
-// define endpoints and call
-
 export const getRecentReviews = (business_id: number) => 
   api.get(`/api/dashboard/business/${business_id}/reviews/recent`);
+// Business summary endpoint
+export const getBusinessSummary = (business_id: number) => 
+  api.get(`/api/dashboard/business/${business_id}/summary`);
