@@ -7,8 +7,7 @@ from backend.models.review import Review
 from backend.models.database import db
 
 import random
-import os
-import time
+
 import pickle
 
 with open('services/suggestion_detector.pkl', 'rb') as f:
@@ -109,7 +108,7 @@ def analyze_sentiment(review):
     # Extract top 3 entities
     top_entities = [(entity.name, entity.type_.name, entity.salience) for entity in entities[:3]]
     
-    # Add sentiment analysis fields to the review object
+
     review.senti_score = sentiment.score
     review.sentiment_magnitude = sentiment.magnitude
     review.sentiment_description = sentiment_description
@@ -144,7 +143,7 @@ def analyze_sentiment_mock(review):
     topics = ["service", "food", "ambiance", "price", "location"]
     top_entities = random.sample(topics, min(3, len(topics)))
 
-    # Add sentiment analysis fields to the review object
+
     review.senti_score = sentiment_score
     review.sentiment_magnitude = sentiment_magnitude
     review.sentiment_description = sentiment_description

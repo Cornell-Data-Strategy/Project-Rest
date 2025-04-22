@@ -14,15 +14,6 @@ def analyze_reviews():
     results = process_reviews(reviews)
     return jsonify(results)
 
-# @reviews_bp.route('/scrape', methods=['POST'])
-# def initiate_scraping():
-#     """Initiate review scraping for a business URL across specified platforms"""
-#     data = request.get_json()
-#     business_url = data.get('business_url')
-#     platforms = data.get('platforms', ['google', 'yelp'])
-#     # Function logic here
-#     return jsonify({'job_id': 'scraping_job_id'})
-
 
 
 @reviews_bp.route('/<int:business_id>', methods=['GET'])

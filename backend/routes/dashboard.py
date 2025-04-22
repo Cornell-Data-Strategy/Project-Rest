@@ -49,7 +49,6 @@ def get_business_summary(business_id):
     topic_counts = {}
     for review in reviews:
         if review.topics:
-            # Split topics if stored as comma-separated string
             if isinstance(review.topics, str):
                 review_topics = review.topics.split(',')
             else:
@@ -238,13 +237,13 @@ def get_recent_reviews(business_id):
     if not business:
         return jsonify({"error": "Business not found or access denied"}), 404
     
-    # Get limit from query params (default to 5)
+
     try:
         limit = int(request.args.get('limit', 5))
     except ValueError:
         limit = 5
     
-    # Get most recent reviews
+  
     reviews = Review.query.filter_by(business_id=business_id).order_by(
         Review.review_date_estimate.desc()
     ).limit(limit).all()
