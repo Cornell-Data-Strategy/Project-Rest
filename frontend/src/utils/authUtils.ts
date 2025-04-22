@@ -1,15 +1,15 @@
 import { logout as logoutEndpoint, refreshToken as refreshTokenEndpoint, getUserProfile as getUserProfileEndpoint } from '../api/endpoints';
 import { UserData } from '../types';
 
-export const setAuthData = (accessToken: string, refreshToken: string, userData: Record<string, unknown>) => {
-  localStorage.setItem('token', accessToken);
-  localStorage.setItem('refreshToken', refreshToken);
+export const setAuthData = (token: string, refreshToken: string, userData: Record<string, unknown>) => {
+  localStorage.setItem('access_token', token);
+  localStorage.setItem('refresh_token', refreshToken);
   localStorage.setItem('user', JSON.stringify(userData));
 };
 
 export const clearAuthData = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
   localStorage.removeItem('user');
 };
 
@@ -17,7 +17,7 @@ export const clearAuthData = () => {
 export const checkAuthStatus = async (): Promise<UserData | null> => {
   try {
     console.log('Checking auth status...');
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     
     if (!token) {
       console.log('No token found in localStorage');
@@ -65,17 +65,19 @@ export const logout = async () => {
 
 export const refreshToken = async () => {
   try {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = localStorage.getItem('refresh_token');
     if (!refreshToken) {
       throw new Error('No refresh token available');
     }
     
     const response = await refreshTokenEndpoint();
-    localStorage.setItem('token', response.data.access_token);
-    return response.data.access_token;
+    localStorage.setItem('access_token', response.data.token);
+    return response.data.token;
   } catch (error) {
     console.error('Failed to refresh token:', error);
     clearAuthData();
     return null;
   }
 };
+
+

@@ -22,7 +22,7 @@ function App() {
         console.log("Verifying authentication...");
         setIsLoading(true);
 
-        const storedToken = localStorage.getItem("token");
+        const storedToken = localStorage.getItem("access_token");
         if (!storedToken) {
           console.log("No token found");
           setIsLoggedIn(false);
@@ -36,7 +36,7 @@ function App() {
         if (!user) {
           console.log("No user data");
           setIsLoggedIn(false);
-          localStorage.removeItem("token");
+          localStorage.removeItem("access_token");
         } else {
           setIsLoggedIn(true);
           setUserData(user);
@@ -44,7 +44,7 @@ function App() {
       } catch (err) {
         console.error("Failed to verify authentication:", err);
         setIsLoggedIn(false);
-        localStorage.removeItem("token");
+        localStorage.removeItem("access_token");
       } finally {
         setIsLoading(false);
       }
