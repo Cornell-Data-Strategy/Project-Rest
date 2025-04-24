@@ -196,7 +196,7 @@ function Dashboard({ userData }: DashboardProps) {
         <div className="space-y-8">
           {/* Performance Summary */}
           <PerformanceSummary 
-            businessId={userData?.businesses[0]?.id} 
+            businessId={userData!.businesses[0]!.id} 
             metrics={{
               reviewCount: dashboardData.reviewCount,
               averageRating: dashboardData.averageRating,
@@ -212,7 +212,7 @@ function Dashboard({ userData }: DashboardProps) {
           {/* First Row: Sentiment Analysis and Recent Reviews */}
           <div className="grid grid-cols-2 gap-8">
             <SentimentAnalysis data={dashboardData.sentimentData} />
-            <RecentReviews reviews={dashboardData.recentReviews} />
+            <RecentReviews businessId={userData!.businesses[0]!.id} />
           </div>
 
           {/* Second Row: Ratings Distribution and Review Segmentation */}
