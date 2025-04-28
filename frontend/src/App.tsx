@@ -4,10 +4,11 @@ import Sidebar from "./components/Sidebar.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Reviews from "./pages/Reviews.tsx";
 import Login from "./pages/Login.tsx";
+import Register from './pages/Register.tsx';
+import Landing from './pages/Landing.tsx'; // Import the Landing component
 import { checkAuthStatus, logout } from "./utils/authUtils.ts";
 import { UserData } from "./types";
 import "./App.css";
-import Register from './pages/Register.tsx'
 import { useLocation } from "react-router-dom";
 
 function App() {
@@ -21,7 +22,6 @@ function App() {
       try {
         console.log("Verifying authentication...");
         setIsLoading(true);
-
         const storedToken = localStorage.getItem("token");
         if (!storedToken) {
           console.log("No token found");
@@ -29,10 +29,8 @@ function App() {
           setIsLoading(false);
           return;
         }
-
         const user = await checkAuthStatus();
         console.log("User data received:", user);
-
         if (!user) {
           console.log("No user data");
           setIsLoggedIn(false);
@@ -49,14 +47,14 @@ function App() {
         setIsLoading(false);
       }
     };
-
     verifyAuth();
   }, []);
 
   const handleLogin = () => setIsLoggedIn(true);
-
-  const isAuthRoute = location.pathname === "/login" || location.pathname === "/register";
-
+  
+  // Include landing in non-auth routes
+  const isAuthRoute = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/";
+  
   const handleLogout = async () => {
     const success = await logout();
     if (success) {
@@ -76,8 +74,13 @@ function App() {
   return (
     <div className="flex h-screen bg-[#FBF9F7]">
       {!isAuthRoute && <Sidebar onLogout={handleLogout}/>}
-      <div className="flex-1 overflow-auto">
+      <div className={`${isAuthRoute ? 'w-full' : 'flex-1'} overflow-auto`}>
         <Routes>
+          {/* Landing page route */}
+          <Route 
+            path="/" 
+            element={isLoggedIn ? <Navigate to="/dashboard" /> : <Landing />} 
+          />
           <Route
             path="/login"
             element={
@@ -105,7 +108,7 @@ function App() {
           />
           <Route
             path="*"
-            element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />}
+            element={<Navigate to={isLoggedIn ? "/dashboard" : "/"} />}
           />
         </Routes>
       </div>
