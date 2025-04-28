@@ -1,4 +1,11 @@
-function HeroSection({ handleLoginClick, handleRegisterClick }) {
+import React from 'react';
+
+interface HeroSectionProps {
+  handleLoginClick: () => void;
+  handleRegisterClick: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ handleLoginClick, handleRegisterClick }) => {
   return (
     <div className="relative pt-16 md:pt-20 overflow-hidden">
       {/* Background Decorations */}
@@ -145,6 +152,6 @@ function HeroSection({ handleLoginClick, handleRegisterClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default HeroSection;

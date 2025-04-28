@@ -1,4 +1,10 @@
-function TestimonialsSection({ handleRegisterClick }) {
+import React from 'react';
+
+interface TestimonialsSectionProps {
+  handleRegisterClick: () => void;
+}
+
+const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ handleRegisterClick }) => {
   return (
     <div id="testimonials" className="w-full py-24 bg-black text-white relative overflow-hidden">
       {/* Background pattern */}
@@ -110,6 +116,6 @@ function TestimonialsSection({ handleRegisterClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default TestimonialsSection;

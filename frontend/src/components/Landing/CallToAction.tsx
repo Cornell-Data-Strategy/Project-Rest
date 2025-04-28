@@ -1,4 +1,9 @@
-function CallToAction({ handleLoginClick, handleRegisterClick }) {
+interface CallToActionProps {
+  handleLoginClick: () => void;
+  handleRegisterClick: () => void;
+}
+
+function CallToAction({ handleLoginClick, handleRegisterClick }: CallToActionProps) {
   return (
     <div className="bg-[#F7671F] text-white py-20 px-4 md:px-8 text-center relative overflow-hidden">
       {/* Background decoration */}
@@ -10,20 +15,19 @@ function CallToAction({ handleLoginClick, handleRegisterClick }) {
           <path fill="rgba(255, 255, 255, 0.05)" d="M0,0 L32,0 L16,32 z"></path>
         </svg>
       </div>
-      
       <div className="max-w-4xl mx-auto relative z-10">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Transform Your Restaurant Reviews?</h2>
         <p className="text-xl md:text-2xl mb-10 opacity-90">
           Join hundreds of restaurant owners who are making smarter business decisions with our platform.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <button 
+          <button
             onClick={handleRegisterClick}
             className="px-8 py-4 bg-white text-[#F7671F] font-bold rounded-[5px] hover:bg-gray-100 transition transform hover:scale-105 shadow-lg"
           >
             Start Your Free Trial
           </button>
-          <button 
+          <button
             onClick={handleLoginClick}
             className="px-8 py-4 border-2 border-white text-white font-semibold rounded-[5px] hover:bg-white hover:text-[#F7671F] transition"
           >

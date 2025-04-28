@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 // Component Imports
 import Navbar from '../components/Landing/Navbar';
 import HeroSection from '../components/Landing/HeroSection';
-import AnalyticsSection from '../components/AnalyticsSection';
-import AIInsightsSection from '../components/AIInsightsSection';
-import SmartTaggingSection from '../components/SmartTaggingSection';
-import TopicTrendsSection from '../components/TopicTrendsSection';
-import PricingSection from '../components/PricingSection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import CallToAction from '../components/CallToAction';
-import Footer from '../components/Footer';
+import AnalyticsSection from '../components/Landing/AnalyticsSection';
+import AIInsightsSection from '../components/Landing/AIInsightsSection';
+import SmartTaggingSection from '../components/Landing/SmartTaggingSection';
+import TopicTrendsSection from '../components/Landing/TopicTrendsSection';
+
+import TestimonialsSection from '../components/Landing/TestimonialsSection';
+import CallToAction from '../components/Landing/CallToAction';
+import Footer from '../components/Landing/Footer';
 
 function Landing() {
   const navigate = useNavigate();
@@ -57,17 +57,18 @@ function Landing() {
       {/* Analytics Section */}
       <AnalyticsSection handleRegisterClick={handleRegisterClick} />
 
+            {/* Smart Tagging Section */}
+      <SmartTaggingSection handleRegisterClick={handleRegisterClick} />
+
       {/* AI Insights Section */}
       <AIInsightsSection handleRegisterClick={handleRegisterClick} />
 
-      {/* Smart Tagging Section */}
-      <SmartTaggingSection handleRegisterClick={handleRegisterClick} />
+
 
       {/* Topic Trends Section */}
       <TopicTrendsSection handleRegisterClick={handleRegisterClick} />
         
-      {/* Pricing Section */}
-      <PricingSection handleRegisterClick={handleRegisterClick} />
+
         
       {/* Testimonials */}
       <TestimonialsSection handleRegisterClick={handleRegisterClick} />

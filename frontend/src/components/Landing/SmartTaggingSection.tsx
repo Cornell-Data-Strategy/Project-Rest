@@ -1,8 +1,12 @@
 import React from 'react';
 
-function SmartTaggingSection({ handleRegisterClick }) {
+interface SmartTaggingSectionProps {
+  handleRegisterClick: () => void;
+}
+
+const SmartTaggingSection: React.FC<SmartTaggingSectionProps> = ({ handleRegisterClick }) => {
   return (
-    <div id="tagging" className="w-full py-24 bg-[#F7671F] text-white overflow-hidden relative">
+    <div id="tagging" className="w-full py-24 bg-white text-gray-950 overflow-hidden relative">
       {/* Decorative background */}
       <div className="absolute inset-0 z-0">
         <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -29,8 +33,8 @@ function SmartTaggingSection({ handleRegisterClick }) {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Smart Review Classification</h2>
-          <p className="max-w-2xl mx-auto text-lg opacity-90">
+          <h2 className="text-3xl text-[#F7671F] md:text-4xl font-bold mb-6">Smart Review Classification</h2>
+          <p className="max-w-2xl mx-auto text-[#F7671F]text-lg opacity-90">
             Every review is automatically tagged and categorized, making it easy to understand exactly what customers are talking about.
           </p>
         </div>
@@ -87,7 +91,7 @@ function SmartTaggingSection({ handleRegisterClick }) {
             </div>
             
             <div className="mt-10">
-              <button onClick={handleRegisterClick} className="inline-flex items-center px-6 py-3 border-2 border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white hover:text-[#F7671F] transition">
+              <button onClick={handleRegisterClick} className="inline-flex items-center px-6 py-3 border-2 border-black text-base font-medium rounded-md text-black bg-transparent hover:bg-white hover:text-[#F7671F] transition">
                 Try Smart Tagging
                 <svg className="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -118,7 +122,7 @@ function SmartTaggingSection({ handleRegisterClick }) {
                       <div className="ml-2 flex">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg key={star} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292z"/>
                           </svg>
                         ))}
                       </div>
@@ -154,7 +158,7 @@ function SmartTaggingSection({ handleRegisterClick }) {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <span className="text-xs font-medium text-gray-500 w-24">Menu Items:</span>
                     <div className="flex flex-wrap gap-2">
@@ -162,7 +166,7 @@ function SmartTaggingSection({ handleRegisterClick }) {
                       <span className="animated-tag delay-400 px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">Wine Selection</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <span className="text-xs font-medium text-gray-500 w-24">Sentiment:</span>
                     <div className="flex flex-wrap gap-2">
@@ -187,7 +191,7 @@ function SmartTaggingSection({ handleRegisterClick }) {
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg key={star} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292z" />
                           </svg>
                         ))}
                       </div>
@@ -201,11 +205,11 @@ function SmartTaggingSection({ handleRegisterClick }) {
                       <div className="flex">
                         {[1, 2, 3, 4].map((star) => (
                           <svg key={star} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292z" />
                           </svg>
                         ))}
                         <svg className="w-3 h-3 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292z" />
                         </svg>
                       </div>
                     </div>
@@ -238,6 +242,6 @@ function SmartTaggingSection({ handleRegisterClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default SmartTaggingSection;

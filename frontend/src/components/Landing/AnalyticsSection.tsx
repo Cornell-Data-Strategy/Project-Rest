@@ -1,4 +1,11 @@
-function AnalyticsSection({ handleRegisterClick }) {
+import React from 'react';
+import dashboardpic from '../../assets/dashboard.png';
+
+interface AnalyticsSectionProps {
+  handleRegisterClick: () => void;
+}
+
+const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick }) => {
   return (
     <div id="analytics" className="w-full py-24 relative bg-white overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#FBF9F7] to-white"></div>
@@ -38,11 +45,11 @@ function AnalyticsSection({ handleRegisterClick }) {
                 </div>
                 
                 {/* Placeholder Dashboard Image */}
-                <div className="p-6 bg-gradient-to-br from-gray-900 to-gray-800">
+                <div className="p-2 bg-gradient-to-br from-gray-900 to-gray-800">
                   <img
-                    src="/api/placeholder/600/400"
+                    src={dashboardpic}
                     alt="Analytics Dashboard"
-                    className="w-full rounded-lg border border-gray-800"
+                    className="w-full rounded-lg border-gray-800"
                   />
                 </div>
               </div>
@@ -122,6 +129,6 @@ function AnalyticsSection({ handleRegisterClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default AnalyticsSection;

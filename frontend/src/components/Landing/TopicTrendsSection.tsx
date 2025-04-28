@@ -1,4 +1,10 @@
-function TopicTrendsSection({ handleRegisterClick }) {
+import React from 'react';
+
+interface TopicTrendsSectionProps {
+  handleRegisterClick: () => void;
+}
+
+const TopicTrendsSection: React.FC<TopicTrendsSectionProps> = ({ handleRegisterClick }) => {
   return (
     <div id="trends" className="w-full py-24 bg-white relative overflow-hidden">
       {/* Background grid */}
@@ -154,6 +160,6 @@ function TopicTrendsSection({ handleRegisterClick }) {
       </div>
     </div>
   );
-}
+};
 
 export default TopicTrendsSection;
