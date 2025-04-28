@@ -1,6 +1,5 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import Carve from "../assets/carve.png";
 
 function Landing() {
   const navigate = useNavigate();
@@ -69,17 +68,27 @@ function Landing() {
               </button>
             </div>
             
-            {/* Trust indicators */}
+            {/* Clean Statistics - No Boxes or Icons */}
             <div className="mt-12">
-              <p className="text-sm text-[#7A7A78] mb-4 font-halyard">Trusted by popular restaurants</p>
-              <div className="flex space-x-8">
-                <a href="https://cafe.carve.cc" target="_blank" rel="noopener noreferrer">
-               <img 
-                  src={Carve} 
-                  alt="Carve Logo" 
-                  className="w-30 h-16 rounded-full" 
-                />
-                </a>
+              <p className="text-sm text-[#7A7A78] mb-6 font-halyard">Why restaurant owners choose us</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Statistic 1 */}
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-[#F7671F] mb-2">100+</p>
+                  <p className="text-gray-700">Reviews analyzed in seconds</p>
+                </div>
+
+                {/* Statistic 2 */}
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-[#F7671F] mb-2">Top 3</p>
+                  <p className="text-gray-700">Improvement priorities identified</p>
+                </div>
+
+                {/* Statistic 3 */}
+                <div className="text-center">
+                  <p className="text-4xl font-bold text-[#F7671F] mb-2">4x</p>
+                  <p className="text-gray-700">Faster trend detection</p>
+                </div>
               </div>
             </div>
           </div>
