@@ -17,18 +17,6 @@ const SmartTaggingSection: React.FC<SmartTaggingSectionProps> = ({ handleRegiste
           </defs>
           <rect width="100%" height="100%" fill="url(#diagonalHatch)" />
         </svg>
-        
-        <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-          <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="rgba(255, 255, 255, 0.05)" d="M57.5,-50.8C71.9,-33.7,79.2,-8.9,74.7,13.5C70.2,35.8,53.9,55.7,33.1,65.5C12.3,75.3,-13,75,-34.9,65.1C-56.8,55.2,-75.4,35.6,-79.6,12.8C-83.7,-10,-73.5,-36.1,-56.3,-53.6C-39.1,-71,-19.5,-79.9,2.3,-81.9C24.2,-83.9,48.4,-78.9,57.5,-50.8Z" transform="translate(100 100)" />
-          </svg>
-        </div>
-        
-        <div className="absolute bottom-0 left-0 transform -translate-x-1/4 translate-y-1/4">
-          <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="rgba(255, 255, 255, 0.05)" d="M57.5,-50.8C71.9,-33.7,79.2,-8.9,74.7,13.5C70.2,35.8,53.9,55.7,33.1,65.5C12.3,75.3,-13,75,-34.9,65.1C-56.8,55.2,-75.4,35.6,-79.6,12.8C-83.7,-10,-73.5,-36.1,-56.3,-53.6C-39.1,-71,-19.5,-79.9,2.3,-81.9C24.2,-83.9,48.4,-78.9,57.5,-50.8Z" transform="translate(100 100)" />
-          </svg>
-        </div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -7,9 +7,6 @@ import HeroSection from '../components/Landing/HeroSection';
 import AnalyticsSection from '../components/Landing/AnalyticsSection';
 import AIInsightsSection from '../components/Landing/AIInsightsSection';
 import SmartTaggingSection from '../components/Landing/SmartTaggingSection';
-import TopicTrendsSection from '../components/Landing/TopicTrendsSection';
-
-import TestimonialsSection from '../components/Landing/TestimonialsSection';
 import CallToAction from '../components/Landing/CallToAction';
 import Footer from '../components/Landing/Footer';
 
@@ -63,16 +60,6 @@ function Landing() {
       {/* AI Insights Section */}
       <AIInsightsSection handleRegisterClick={handleRegisterClick} />
 
-
-
-      {/* Topic Trends Section */}
-      <TopicTrendsSection handleRegisterClick={handleRegisterClick} />
-        
-
-        
-      {/* Testimonials */}
-      <TestimonialsSection handleRegisterClick={handleRegisterClick} />
-        
       {/* Call to Action */}
       <CallToAction 
         handleLoginClick={handleLoginClick} 
