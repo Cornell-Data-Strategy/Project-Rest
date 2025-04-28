@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import Carve from "../assets/carve.png";
 
 function Landing() {
   const navigate = useNavigate();
@@ -72,10 +73,13 @@ function Landing() {
             <div className="mt-12">
               <p className="text-sm text-[#7A7A78] mb-4 font-halyard">Trusted by popular restaurants</p>
               <div className="flex space-x-8">
-                {/* Replace with actual restaurant logos */}
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">Logo 1</div>
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">Logo 2</div>
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-500">Logo 3</div>
+                <a href="https://cafe.carve.cc" target="_blank" rel="noopener noreferrer">
+               <img 
+                  src={Carve} 
+                  alt="Carve Logo" 
+                  className="w-30 h-16 rounded-full" 
+                />
+                </a>
               </div>
             </div>
           </div>
