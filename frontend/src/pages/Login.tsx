@@ -74,11 +74,13 @@ function Login({ onLogin }: LoginProps) {
       {/* Right Panel - Login Form */}
       <div className="w-1/2 bg-white flex flex-col justify-center px-16 relative">
         {/* Logo top-left */}
-        <img
-          src="/logowtext.png"
-          alt="Logo"
-          className="absolute top-8 left-8 w-[200px] h-[35px] object-contain"
-        />
+        <Link to="/">
+          <img
+            src="/logowtext.png"
+            alt="Logo"
+            className="absolute top-8 left-8 w-[200px] h-[35px] object-contain cursor-pointer"
+          />
+        </Link>
 
         {/* Centered Form */}
         <div className="mx-auto w-[310px] mt-[5vh]">
