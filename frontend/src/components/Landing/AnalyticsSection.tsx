@@ -32,7 +32,7 @@ const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick
           <div className="w-full lg:w-3/5 mb-10 lg:mb-0 order-2 lg:order-1">
             {/* Mock Dashboard - Simplified with placeholder image */}
             <div className="relative perspective-dashboard">
-              <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform rotate-y-5 rotate-x-10 scale-[0.85] md:scale-100">
+              <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform rotate-y-5 rotate-x-10 scale-[0.65] md:scale-[0.75] origin-top">
                 <div className="bg-gray-800 h-14 flex items-center px-4">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -54,8 +54,8 @@ const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick
                 </div>
               </div>
               
-              {/* Shadow */}
-              <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-4/5 h-10 bg-black opacity-10 blur-md rounded-full"></div>
+              {/* Enhanced Shadow */}
+              <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-full h-20 bg-black opacity-10 blur-md rounded-full"></div>
             </div>
           </div>
           
