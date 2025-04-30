@@ -4,8 +4,10 @@ from backend.models.business import Business
 from backend.models.review import Review
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import func, desc
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import json
+from flask import current_app
+from openai import OpenAI
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -589,3 +591,52 @@ def get_topic_ratings(business_id):
     }
     
     return jsonify(response), 200
+
+#  AI Insights
+@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET'])
+@jwt_required()
+def get_ai_insights(business_id):
+    """
+    Get AI-generated insights for a business based on reviews
+    """
+    OPENROUTER_API_KEY = current_app.config['OPENROUTER_API_KEY']
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=OPENROUTER_API_KEY,
+    )
+    TIMEFRAMES = {
+        'last week': timedelta(weeks=1),
+        'last month': timedelta(days=30),
+        'last six month': timedelta(days=182),
+        'last year': timedelta(days=365),
+    }
+    timeframe = TIMEFRAMES.get('last month')
+    since_date = datetime.now(timezone.utc) - TIMEFRAMES[timeframe]
+    reviews = Review.query.filter(
+        Review.business_id == business_id,
+        Review.review_date_estimate >= since_date
+    ).all()
+    if not reviews:
+        return jsonify({"message": "No reviews found in this timeframe."})
+    
+    #prompt
+    prompt_text = "Give a one paragraph summary analyzing the following restaurant reviews to provide insights on common complaints, suggestions for improvement, and recurring themes:\n\n"
+    for review in reviews:
+        content = review.content or "[No Content]"
+        sentiment = review.sentiment_description or "unknown"
+        prompt_text += f"Review: {content}\nSentiment: {sentiment}\n\n"
+    
+    # Call OpenRouter DeepSeek R1
+    try:
+        completion = client.chat.completions.create(
+            extra_body={},
+            model="deepseek/deepseek-r1:free",
+            messages=[
+                {"role": "system", "content": "You are a restaurant owner wanting to understand insights on customer feedback."},
+                {"role": "user", "content": prompt_text},
+            ]
+        )
+        analysis = completion.choices[0].message.content
+        return jsonify({"analysis": analysis})
+    except Exception as e:
+        return jsonify({"error": f"Failed to generate summary: {str(e)}"}), 500

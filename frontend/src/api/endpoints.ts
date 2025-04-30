@@ -35,3 +35,6 @@ export const getBusinessSummary = (business_id: number) =>
 
 export const getRecentReviews = (business_id: number) => 
   api.get(`/api/dashboard/business/${business_id}/reviews/recent`);
+
+export const getAIInsights = (business_id: number) => 
+  api.get(`/api/dashboard/business/${business_id}/insights`);

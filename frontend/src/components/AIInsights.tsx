@@ -1,4 +1,5 @@
 import React from "react";
+import { getAIInsights } from "../api/endpoints";
 
 interface Insight {
   id: string;
