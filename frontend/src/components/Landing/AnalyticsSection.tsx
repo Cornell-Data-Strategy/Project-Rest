@@ -7,7 +7,7 @@ interface AnalyticsSectionProps {
 
 const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick }) => {
   return (
-    <div id="analytics" className="w-full py-24 relative bg-white overflow-hidden">
+<div id="analytics" className="w-full py-24 relative bg-gradient-to-br from-white to-orange-50 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#FBF9F7] to-white"></div>
       
       {/* Decorative elements */}
@@ -22,15 +22,14 @@ const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Visual Analytics Dashboard</h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-600">
-            Bring all your Google reviews into one powerful visual interface. Monitor performance, spot trends, and identify opportunities.
-          </p>
-        </div>
+          <h2 className="text-3xl text-[#F7671F] md:text-4xl font-bold mb-6">Visual Analytics Dashboard</h2>
+
+        </div >
         
         <div className="flex flex-col lg:flex-row items-center">
-          <div className="w-full lg:w-3/5 mb-10 lg:mb-0 order-2 lg:order-1">
+          <div className="w-full lg:w-3/5 mb-10 lg:-mb-50 order-2 lg:order-1">
             {/* Mock Dashboard - Simplified with placeholder image */}
+            <div className="flex justify-center">
             <div className="relative perspective-dashboard">
               <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform rotate-y-5 rotate-x-10 scale-[0.65] md:scale-[0.75] origin-top">
                 <div className="bg-gray-800 h-14 flex items-center px-4">
@@ -56,6 +55,7 @@ const AnalyticsSection: React.FC<AnalyticsSectionProps> = ({ handleRegisterClick
               
               {/* Enhanced Shadow */}
               <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 w-full h-20 bg-black opacity-10 blur-md rounded-full"></div>
+            </div>
             </div>
           </div>
           
