@@ -10,7 +10,7 @@ import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
 import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
-import { getBusinessSummary } from "../api/endpoints";
+import { getBusinessSummary, getRatingsDistribution } from "../api/endpoints";
 
 interface DashboardProps {
   userData: UserData | null;
@@ -139,7 +139,10 @@ function Dashboard({ userData }: DashboardProps) {
         const summaryResponse = await getBusinessSummary(businessId);
         console.log("API Response:", summaryResponse.data);
         
-        // Update dashboard data with API response
+        // Fetch ratings distribution data
+        const ratingsResponse = await getRatingsDistribution(businessId);
+        
+        // Update dashboard data with API responses
         setDashboardData(prevData => ({
           reviewCount: summaryResponse.data.review_count,
           averageRating: summaryResponse.data.average_rating,
@@ -151,10 +154,12 @@ function Dashboard({ userData }: DashboardProps) {
           averageRatingPercentChange: prevData.averageRatingPercentChange,
           sentimentScorePercentChange: prevData.sentimentScorePercentChange,
           
+          // Update ratings distribution with fetched data
+          ratingsDistribution: ratingsResponse.data.ratings,
+          
           // Preserve other data that isn't being fetched yet
           sentimentData: prevData.sentimentData,
           recentReviews: prevData.recentReviews,
-          ratingsDistribution: prevData.ratingsDistribution,
           reviewSegments: prevData.reviewSegments,
           criticalReviews: prevData.criticalReviews,
           topicRatings: prevData.topicRatings,

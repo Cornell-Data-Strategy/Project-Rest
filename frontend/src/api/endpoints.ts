@@ -41,3 +41,6 @@ export const getAIInsights = (business_id: number) =>
 
 export const generateAIInsight = (business_id: number) =>
   api.post(`/api/dashboard/business/${business_id}/insights/generate`);
+
+export const getRatingsDistribution = (business_id: number) =>
+  api.get(`/api/reviews/${business_id}/ratings-distribution`);
