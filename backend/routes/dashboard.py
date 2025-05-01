@@ -631,8 +631,13 @@ def get_ai_insights(business_id):
         return jsonify({"message": "No reviews found in this timeframe."})
 
     prompt_lines = [
-        "Give a one paragraph summary analyzing the following restaurant reviews to provide insights on common complaints, suggestions for improvement, and recurring themes:",
-        ""
+        (
+            "As a business analyst, write a plain-text report addressed to the restaurant owner. "
+            "First, provide a concise summary of the overall customer feedback from the following reviews. "
+            "Then, give a clear breakdown of recurring themes, common complaints, and suggestions for improvement. "
+            "Use a friendly, professional tone. Do not include any lists or bullet points—write in paragraphs for the owner to read."
+            "\n\nHere are the reviews:"
+        ),
     ]
 
     # Add all
