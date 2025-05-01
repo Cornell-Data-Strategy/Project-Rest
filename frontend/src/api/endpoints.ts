@@ -39,5 +39,5 @@ export const getRecentReviews = (business_id: number) =>
 export const getAIInsights = (business_id: number) => 
   api.get(`/api/dashboard/business/${business_id}/insights`);
 
-export const postAIInsight = (business_id: number, content: string) =>
-  api.post(`/api/dashboard/business/${business_id}/insights`, { content });
+export const generateAIInsight = (business_id: number) =>
+  api.post(`/api/dashboard/business/${business_id}/insights/generate`);

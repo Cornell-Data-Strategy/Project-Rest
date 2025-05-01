@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getAIInsights, postAIInsight } from "../api/endpoints";
+import { getAIInsights, generateAIInsight } from "../api/endpoints";
 interface Insight {
   id: string;
   title: string;
@@ -45,7 +44,6 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
       }
     };
     fetchLatestInsight();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [businessId]);
 
   // When insights update, notify parent component
@@ -60,42 +58,20 @@ const handleGenerateInsights = async () => {
     setLoading(true);
     setError(null);
 
-    // Create an AbortController to handle timeout manually
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => {
-      controller.abort();
-    }, 30000); // 30 seconds timeout
-
-    try {
-      // Always call GET to generate or fetch the latest insight
-      const response = await getAIInsights(businessId);
-      clearTimeout(timeoutId);
-
-      if (response.data.insights) {
-        // Save to DB if not already saved (if no insight_id in response)
-        if (!response.data.insight_id) {
-          await postAIInsight(businessId, response.data.insights);
-        }
-        const newInsight: Insight = {
-          id: response.data.insight_id ? response.data.insight_id.toString() : Date.now().toString(),
-          title: "Latest AI Analysis",
-          description: response.data.insights,
-          relatedReviews: 0,
-          date: response.data.created_at ? response.data.created_at : new Date().toISOString(),
-        };
-        const updatedInsights = [newInsight, ...insights];
-        setInsights(updatedInsights);
-      }
-    } catch (err) {
-      clearTimeout(timeoutId);
-      if (axios.isCancel(err)) {
-        setError("The request took too long to complete. AI analysis requires processing a lot of data and may sometimes timeout. Please try again.");
-      } else if (err && typeof err === 'object' && 'code' in err && err.code === 'ECONNABORTED') {
-        setError("The request timed out. Our AI server might be experiencing high load. Please try again in a moment.");
-      } else {
-        console.error("Error generating insights:", err);
-        setError("Failed to generate insights. Please try again later.");
-      }
+    const genResponse = await generateAIInsight(businessId);
+    if (genResponse.data && genResponse.data.insight) {
+      const newInsight: Insight = {
+        id: genResponse.data.insight.id ? genResponse.data.insight.id.toString() : Date.now().toString(),
+        title: "Latest AI Analysis",
+        description: genResponse.data.insight.content,
+        relatedReviews: 0,
+        date: genResponse.data.insight.created_at ? genResponse.data.insight.created_at : new Date().toISOString(),
+      };
+      setInsights([newInsight]);
+    } else if (genResponse.data && genResponse.data.message) {
+      setError(genResponse.data.message);
+    } else {
+      setError("Failed to generate a new insight.");
     }
   } catch (err) {
     console.error("Unexpected error:", err);
@@ -104,7 +80,6 @@ const handleGenerateInsights = async () => {
     setLoading(false);
   }
 };
-
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
       <div className="flex justify-between items-center mb-6">
@@ -114,11 +89,6 @@ const handleGenerateInsights = async () => {
             AI-powered analysis of your reviews
           </p>
         </div>
-        {insights.length > 3 && (
-          <button className="text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1">
-            View all <span className="text-xs">→</span>
-          </button>
-        )}
       </div>
 
       {error && (
@@ -136,8 +106,8 @@ const handleGenerateInsights = async () => {
             </p>
           </div>
         ) : (
-          insights.slice(0, 3).map((insight) => (
-            <div key={insight.id} className="border border-gray-200 rounded-md p-4">
+          insights.slice(0, 3).map((insight, idx) => (
+            <div key={insight.id + '-' + idx} className="border border-gray-200 rounded-md p-4">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h3 className="text-md font-medium">{insight.title}</h3>

@@ -592,37 +592,28 @@ def get_topic_ratings(business_id):
     
     return jsonify(response), 200
 
-from backend.models.insight import Insight
-
-@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET', 'POST'])
+@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET'])
 @jwt_required()
-def ai_insights_handler(business_id):
-    """
-    GET: Return the latest saved AI insight for a business, or generate/save if not present.
-    POST: Save a new AI insight for a business.
-    """
+def get_ai_insight(business_id):
     current_user_id = get_jwt_identity()
     business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
     if not business:
         return jsonify({"error": "Business not found or access denied"}), 404
 
-    if request.method == 'POST':
-        data = request.get_json()
-        content = data.get('content')
-        if not content:
-            return jsonify({"error": "Content is required"}), 400
-        insight = Insight(business_id=business_id, content=content)
-        db.session.add(insight)
-        db.session.commit()
-        return jsonify({"message": "Insight saved", "insight": insight.to_dict()}), 201
-
-    # GET method
-    # Try to fetch the latest saved insight
     latest_insight = Insight.query.filter_by(business_id=business_id).order_by(Insight.created_at.desc()).first()
     if latest_insight:
         return jsonify({"insights": latest_insight.content, "insight_id": latest_insight.id, "created_at": latest_insight.created_at}), 200
+    else:
+        return jsonify({"insights": None}), 200
 
-    # If not found, generate, save, and return
+@dashboard_bp.route('/business/<int:business_id>/insights/generate', methods=['POST'])
+@jwt_required()
+def generate_ai_insight(business_id):
+    current_user_id = get_jwt_identity()
+    business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
+    if not business:
+        return jsonify({"error": "Business not found or access denied"}), 404
+
     OPENROUTER_API_KEY = current_app.config.get('OPENROUTER_API_KEY')
     if not OPENROUTER_API_KEY:
         return jsonify({"error": "OpenRouter API key not configured"}), 500
@@ -648,7 +639,7 @@ def ai_insights_handler(business_id):
     ).all()
 
     if not reviews:
-        return jsonify({"message": "No reviews found in this timeframe."})
+        return jsonify({"message": "No reviews found in this timeframe."}), 200
 
     prompt_lines = [
         "write a plain-text summary of the reviews",
@@ -662,7 +653,6 @@ def ai_insights_handler(business_id):
         "Use a friendly, professional tone. Do not include any lists or bullet points—write in paragraphs for the owner to read.",
         "\n\nHere are the reviews:"
     ]
-
     for review in sorted(reviews, key=lambda r: r.review_date_estimate, reverse=True):
         line = f"- [{review.review_date_estimate.strftime('%Y-%m-%d')}] {review.content} (Rating: {review.rating}, Sentiment: {review.sentiment_description}, Topics: {review.topics})"
         prompt_lines.append(line)
@@ -678,10 +668,9 @@ def ai_insights_handler(business_id):
             ],
         )
         ai_summary = response.choices[0].message.content.strip()
-        # Save to DB
         new_insight = Insight(business_id=business_id, content=ai_summary)
         db.session.add(new_insight)
         db.session.commit()
-        return jsonify({"insights": ai_summary, "insight_id": new_insight.id, "created_at": new_insight.created_at}), 200
+        return jsonify({"insight": new_insight.to_dict()}), 201
     except Exception as e:
         return jsonify({"error": f"Error generating insights: {str(e)}"}), 500
