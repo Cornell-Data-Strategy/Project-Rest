@@ -4,7 +4,6 @@ import axios from "axios";
 
 interface Insight {
   id: string;
-  type: "positive" | "negative" | "neutral" | "suggestion";
   title: string;
   description: string;
   relatedReviews: number;
@@ -51,7 +50,6 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
           // Create a new insight from the analysis
           const newInsight: Insight = {
             id: Date.now().toString(),
-            type: "neutral", // Default type
             title: "Latest AI Analysis",
             description: response.data.insights,
             relatedReviews: 0, 
@@ -82,18 +80,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
     }
   };
 
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "positive":
-        return "bg-green-100 text-green-800";
-      case "negative":
-        return "bg-red-100 text-red-800";
-      case "suggestion":
-        return "bg-blue-100 text-blue-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
+
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -129,10 +116,7 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
           insights.slice(0, 3).map((insight) => (
             <div key={insight.id} className="border border-gray-200 rounded-md p-4">
               <div className="flex justify-between items-start mb-2">
-                <div className="flex items-center space-x-2">
-                  <span className={`px-2 py-1 rounded-full text-xs ${getTypeColor(insight.type)}`}>
-                    {insight.type.charAt(0).toUpperCase() + insight.type.slice(1)}
-                  </span>
+                <div>
                   <h3 className="text-md font-medium">{insight.title}</h3>
                 </div>
                 <span className="text-xs text-gray-500">
