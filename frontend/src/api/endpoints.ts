@@ -44,3 +44,6 @@ export const generateAIInsight = (business_id: number) =>
 
 export const getRatingsDistribution = (business_id: number) =>
   api.get(`/api/reviews/${business_id}/ratings-distribution`);
+
+export const getTopicsFrequency = (business_id: number) =>
+  api.get(`/api/reviews/${business_id}/topics-frequency`);

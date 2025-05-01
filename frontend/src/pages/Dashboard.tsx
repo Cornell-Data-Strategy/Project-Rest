@@ -10,7 +10,7 @@ import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
 import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
-import { getBusinessSummary, getRatingsDistribution } from "../api/endpoints";
+import { getBusinessSummary, getRatingsDistribution, getTopicsFrequency } from "../api/endpoints";
 
 interface DashboardProps {
   userData: UserData | null;
@@ -142,6 +142,9 @@ function Dashboard({ userData }: DashboardProps) {
         // Fetch ratings distribution data
         const ratingsResponse = await getRatingsDistribution(businessId);
         
+        // Fetch topics frequency data
+        const topicsResponse = await getTopicsFrequency(businessId);
+        
         // Update dashboard data with API responses
         setDashboardData(prevData => ({
           reviewCount: summaryResponse.data.review_count,
@@ -157,10 +160,12 @@ function Dashboard({ userData }: DashboardProps) {
           // Update ratings distribution with fetched data
           ratingsDistribution: ratingsResponse.data.ratings,
           
+          // Update review segments with topics frequency data
+          reviewSegments: topicsResponse.data.topics,
+          
           // Preserve other data that isn't being fetched yet
           sentimentData: prevData.sentimentData,
           recentReviews: prevData.recentReviews,
-          reviewSegments: prevData.reviewSegments,
           criticalReviews: prevData.criticalReviews,
           topicRatings: prevData.topicRatings,
           aiInsights: prevData.aiInsights,
@@ -225,7 +230,7 @@ function Dashboard({ userData }: DashboardProps) {
                 <RatingsDistribution ratings={dashboardData.ratingsDistribution} />
               </div>
               <div className="bg-white p-4 rounded-lg shadow-md flex-1">
-                <ReviewSegmentation segments={dashboardData.reviewSegments} />
+                <ReviewSegmentation businessId={userData!.businesses[0].id} />
               </div>
             </div>
 

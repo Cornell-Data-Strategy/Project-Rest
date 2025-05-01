@@ -87,16 +87,16 @@ const RatingsDistribution: React.FC<RatingsDistributionProps> = ({
   
   return (
     <div className="w-full p-4">
-      <h3 className="font-normal   text-lg mb-4">Ratings Distribution</h3>
+      <h3 className="font-[500] text-2xl mb-4">Ratings Distribution</h3>
       
-      <div className="flex items-end justify-center gap-2 h-50">
+      <div className="flex items-end justify-center gap-4 h-60">
         {sortedRatings.map((item) => (
           <div key={item.rating} className="flex flex-col items-center">
             <div className="text-sm font-medium mb-2">
               {item.count}
             </div>
             <div 
-              className={`w-8 ${getStarColor(item.rating)} transition-all duration-300`}
+              className={`w-12 ${getStarColor(item.rating)} transition-all duration-300`}
               style={{ 
                 height: maxCount
                   ? `${Math.max((item.count / maxCount) * chartHeightPx, 10)}px`

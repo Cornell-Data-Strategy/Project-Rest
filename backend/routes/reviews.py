@@ -3,6 +3,9 @@ from backend.services.scraper import scrape_reviews_for_business
 from backend.services.llm import process_reviews
 from backend.models.database import db
 from backend.models.review import Review
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from backend.models.business import Business
+from sqlalchemy import func
 
 reviews_bp = Blueprint('reviews', __name__)
 
@@ -28,7 +31,6 @@ def get_reviews(business_id):
 @reviews_bp.route('/<int:business_id>/ratings-distribution', methods=['GET'])
 def get_ratings_distribution(business_id):
     """Get the distribution of ratings for a business"""
-    from sqlalchemy import func
     
     # Get reviews with non-null ratings for the specified business
     query_results = db.session.query(
@@ -60,3 +62,63 @@ def get_ratings_distribution(business_id):
         "ratings": ratings_data,
         "total_reviews": total_reviews
     })
+    
+@reviews_bp.route('/<int:business_id>/topics-frequency', methods=['GET'])
+@jwt_required()
+def get_topics_frequency(business_id):
+    """Get the frequency of topics from all reviews for a business
+    
+    Returns the top 4 most frequently mentioned topics across all reviews.
+    Each topic has a count, color, and a descriptive text.
+    """
+    # Get current user
+    current_user_id = get_jwt_identity()
+    
+    # Find the business and verify ownership
+    business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
+    if not business:
+        return jsonify({"error": "Business not found or access denied"}), 404
+    
+    # Get all reviews for this business
+    reviews = Review.query.filter_by(business_id=business_id).all()
+    
+    # Count topic frequencies
+    topic_counts = {}
+    
+    for review in reviews:
+        if not review.topics:
+            continue
+            
+        # Parse topics
+        if isinstance(review.topics, str):
+            topics = [topic.strip() for topic in review.topics.split(',')]
+        else:
+            topics = [review.topics]
+        
+        for topic in topics:
+            if not topic:
+                continue
+                
+            # Update topic counts
+            topic_counts[topic] = topic_counts.get(topic, 0) + 1
+    
+    # Get top 4 topics by frequency
+    top_topics = sorted(topic_counts.items(), key=lambda x: x[1], reverse=True)[:4]
+    
+    # Define colors for the top topics (updated colors)
+    colors = ["#3B82F6", "#F59E42", "#10B981", "#F43F5E"]
+    
+    # Prepare the response
+    topic_data = []
+    for i, (topic, count) in enumerate(top_topics):
+        topic_data.append({
+            "type": topic,
+            "count": count,
+            "color": colors[i % len(colors)],
+            "description": f"{topic} was mentioned in {count} reviews"
+        })
+    
+    return jsonify({
+        "topics": topic_data,
+        "total_reviews": len(reviews)
+    }), 200
