@@ -8,7 +8,7 @@ import RecentReviews from "../components/RecentReviews";
 import RatingsDistribution from "../components/RatingsDistribution";
 import ReviewSegmentation from "../components/ReviewSegmentation";
 import CriticalReviews from "../components/CriticalReviews";
-import TopicRatings from "../components/TopicRatings";
+// import TopicRatings from "../components/TopicRatings";
 import AIInsights from "../components/AIInsights";
 import { getBusinessSummary, getRatingsDistribution, getTopicsFrequency } from "../api/endpoints";
 
@@ -242,7 +242,7 @@ function Dashboard({ userData }: DashboardProps) {
 
           {/* Fourth Row: Topic Ratings and AI Insights */}
           <div className="w-full flex flex-col gap-8">
-            <TopicRatings ratings={dashboardData.topicRatings} />
+            {/* <TopicRatings ratings={dashboardData.topicRatings} /> */}
             <AIInsights 
               insights={dashboardData.aiInsights} 
               businessId={userData!.businesses[0].id} 

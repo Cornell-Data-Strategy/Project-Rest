@@ -643,13 +643,17 @@ def generate_ai_insight(business_id):
 
     prompt_lines = [
         "write a plain-text summary of the reviews",
+        "IN ENGLISH",
+        "3-4 sentences about 100 words",
         "Do not say as a business analyst, no introductions, just start the report summarizing the reviews",
         "Do not include any formatting, no *s for bold or _s for italics, no lists or bullet points.",
+        "for certain strong positive words, write them as <span style=\"background-color:#bdf8b6\">{PUT WORDS HERE}</span> and use <span style=\"background-color:#fab2a3\">{PUT WORDS HERE}</span> for negative words",
         "Do not include any links or URLs.",
         "Do not include any disclaimers or legalese.",
         "Do not introduce yourself",
-        "First, provide a concise summary of the overall customer feedback from the following reviews. ",
-        "Then, give a clear breakdown of recurring themes, common complaints, and suggestions for improvement. ",
+        "Advise a restaurant owner on how to improve their business based on the reviews.",
+        "provide a concise summary of the overall customer feedback from the following reviews. ",
+        "give a clear breakdown of recurring themes, common complaints, and suggestions for improvement. ",
         "Use a friendly, professional tone. Do not include any lists or bullet points—write in paragraphs for the owner to read.",
         "\n\nHere are the reviews:"
     ]
@@ -661,7 +665,7 @@ def generate_ai_insight(business_id):
 
     try:
         response = client.chat.completions.create(
-            model="deepseek/deepseek-r1:free",
+            model="deepseek/deepseek-chat-v3-0324:free",
             messages=[
                 {"role": "system", "content": "You are an expert restaurant business analyst."},
                 {"role": "user", "content": prompt}

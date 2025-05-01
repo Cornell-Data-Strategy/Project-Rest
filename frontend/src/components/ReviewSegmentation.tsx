@@ -74,8 +74,8 @@ const ReviewSegmentation: React.FC<ReviewSegmentationProps> = ({
   
   // Calculate relative sizes for circles
   const getCircleSize = (count: number) => {
-    const minSize = 45; // Minimum size in pixels
-    const maxSize = 100; // Maximum size in pixels
+    const minSize = 20; // Minimum size in pixels
+    const maxSize = 120; // Maximum size in pixels
     return minSize + ((count / maxCount) * (maxSize - minSize));
   };
   

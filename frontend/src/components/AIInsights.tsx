@@ -86,7 +86,7 @@ const handleGenerateInsights = async () => {
         <div>
           <h2 className="text-xl font-regular">AI Insights</h2>
           <p className="text-sm text-gray-600 mt-1">
-            AI-powered analysis of your reviews
+            AI-powered analysis of your reviews from the last year
           </p>
         </div>
       </div>
@@ -129,10 +129,11 @@ const handleGenerateInsights = async () => {
                   {new Date(insight.date).toLocaleDateString()}
                 </span>
               </div>
-              <p className="text-gray-800 text-[15px] leading-relaxed mb-2">{insight.description}</p>
+              <p className="text-gray-800 text-[15px] leading-relaxed mb-2" 
+                 dangerouslySetInnerHTML={{ __html: insight.description }}></p>
               {insight.relatedReviews > 0 && (
                 <p className="text-xs text-gray-500 mt-1 italic">
-                  Based on {insight.relatedReviews} reviews
+                  Based on {insight.relatedReviews} reviews.
                 </p>
               )}
             </div>
