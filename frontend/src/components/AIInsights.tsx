@@ -107,18 +107,31 @@ const handleGenerateInsights = async () => {
           </div>
         ) : (
           insights.slice(0, 3).map((insight, idx) => (
-            <div key={insight.id + '-' + idx} className="border border-gray-200 rounded-md p-4">
+            <div
+              key={insight.id + '-' + idx}
+              className="relative border-l-4 border-orange-500 bg-white shadow-md rounded-md p-5 pl-7 transition hover:shadow-lg"
+            >
+              {/* AI icon/avatar */}
+              <div className="absolute -left-5 top-5 bg-orange-500 rounded-full h-8 w-8 flex items-center justify-center shadow">
+                <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+                  <path d="M9.5 10.5a2.5 2.5 0 015 0v1a2.5 2.5 0 01-5 0v-1z" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="12" cy="15.5" r="1" fill="currentColor" />
+                </svg>
+              </div>
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <h3 className="text-md font-medium">{insight.title}</h3>
+                  <h3 className="text-lg font-semibold text-orange-600 flex items-center gap-2">
+                    {insight.title}
+                  </h3>
                 </div>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-gray-400 mt-1">
                   {new Date(insight.date).toLocaleDateString()}
                 </span>
               </div>
-              <p className="text-gray-700 text-sm">{insight.description}</p>
+              <p className="text-gray-800 text-[15px] leading-relaxed mb-2">{insight.description}</p>
               {insight.relatedReviews > 0 && (
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-gray-500 mt-1 italic">
                   Based on {insight.relatedReviews} reviews
                 </p>
               )}

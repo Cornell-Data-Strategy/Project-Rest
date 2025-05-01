@@ -89,7 +89,7 @@ const RatingsDistribution: React.FC<RatingsDistributionProps> = ({
     <div className="w-full p-4">
       <h3 className="font-[500] text-2xl mb-4">Ratings Distribution</h3>
       
-      <div className="flex items-end justify-center gap-4 h-60">
+      <div className="flex items-end justify-center gap-2 h-55">
         {sortedRatings.map((item) => (
           <div key={item.rating} className="flex flex-col items-center">
             <div className="text-sm font-medium mb-2">

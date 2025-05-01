@@ -87,9 +87,9 @@ const ReviewSegmentation: React.FC<ReviewSegmentationProps> = ({
         <div className="w-full flex flex-col">
 
           {/* First row with 2 circles */}
-          <div className="flex justify-around mb-4">
+          <div className="flex justify-center gap-x-4 mb-4">
             {topics.slice(0, 2).map((topic, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <div key={index} className="flex flex-col items-center ">
                 <div 
                   className="flex items-center justify-center rounded-full text-white text-sm font-medium transition-all duration-300"
                   style={{ 
@@ -107,7 +107,7 @@ const ReviewSegmentation: React.FC<ReviewSegmentationProps> = ({
           </div>
           
           {/* Second row with the other 2 circles, offset to create zigzag */}
-          <div className="flex justify-around mt-2 px-10">
+          <div className="flex justify-center gap-x-4 mt-2 pl-8">
             {topics.slice(2).map((topic, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div 
