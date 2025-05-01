@@ -1,11 +1,13 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from backend.models.database import db
 from backend.models.business import Business
 from backend.models.review import Review
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import func, desc
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import json
+from openai import OpenAI
+from backend.models.insight import Insight
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -589,3 +591,86 @@ def get_topic_ratings(business_id):
     }
     
     return jsonify(response), 200
+
+@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET'])
+@jwt_required()
+def get_ai_insight(business_id):
+    current_user_id = get_jwt_identity()
+    business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
+    if not business:
+        return jsonify({"error": "Business not found or access denied"}), 404
+
+    latest_insight = Insight.query.filter_by(business_id=business_id).order_by(Insight.created_at.desc()).first()
+    if latest_insight:
+        return jsonify({"insights": latest_insight.content, "insight_id": latest_insight.id, "created_at": latest_insight.created_at}), 200
+    else:
+        return jsonify({"insights": None}), 200
+
+@dashboard_bp.route('/business/<int:business_id>/insights/generate', methods=['POST'])
+@jwt_required()
+def generate_ai_insight(business_id):
+    current_user_id = get_jwt_identity()
+    business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
+    if not business:
+        return jsonify({"error": "Business not found or access denied"}), 404
+
+    OPENROUTER_API_KEY = current_app.config.get('OPENROUTER_API_KEY')
+    if not OPENROUTER_API_KEY:
+        return jsonify({"error": "OpenRouter API key not configured"}), 500
+
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=OPENROUTER_API_KEY,
+        timeout=None
+    )
+
+    TIMEFRAMES = {
+        'last week': timedelta(weeks=1),
+        'last month': timedelta(days=30),
+        'last six month': timedelta(days=182),
+        'last year': timedelta(days=365),
+    }
+    timeframe = 'last year'
+    since_date = datetime.now(timezone.utc) - TIMEFRAMES[timeframe]
+
+    reviews = Review.query.filter(
+        Review.business_id == business_id,
+        Review.review_date_estimate >= since_date
+    ).all()
+
+    if not reviews:
+        return jsonify({"message": "No reviews found in this timeframe."}), 200
+
+    prompt_lines = [
+        "write a plain-text summary of the reviews",
+        "Do not say as a business analyst, no introductions, just start the report summarizing the reviews",
+        "Do not include any formatting, no *s for bold or _s for italics, no lists or bullet points.",
+        "Do not include any links or URLs.",
+        "Do not include any disclaimers or legalese.",
+        "Do not introduce yourself",
+        "First, provide a concise summary of the overall customer feedback from the following reviews. ",
+        "Then, give a clear breakdown of recurring themes, common complaints, and suggestions for improvement. ",
+        "Use a friendly, professional tone. Do not include any lists or bullet points—write in paragraphs for the owner to read.",
+        "\n\nHere are the reviews:"
+    ]
+    for review in sorted(reviews, key=lambda r: r.review_date_estimate, reverse=True):
+        line = f"- [{review.review_date_estimate.strftime('%Y-%m-%d')}] {review.content} (Rating: {review.rating}, Sentiment: {review.sentiment_description}, Topics: {review.topics})"
+        prompt_lines.append(line)
+
+    prompt = "\n".join(prompt_lines)
+
+    try:
+        response = client.chat.completions.create(
+            model="deepseek/deepseek-r1:free",
+            messages=[
+                {"role": "system", "content": "You are an expert restaurant business analyst."},
+                {"role": "user", "content": prompt}
+            ],
+        )
+        ai_summary = response.choices[0].message.content.strip()
+        new_insight = Insight(business_id=business_id, content=ai_summary)
+        db.session.add(new_insight)
+        db.session.commit()
+        return jsonify({"insight": new_insight.to_dict()}), 201
+    except Exception as e:
+        return jsonify({"error": f"Error generating insights: {str(e)}"}), 500

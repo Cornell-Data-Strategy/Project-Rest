@@ -44,6 +44,9 @@ def create_app(config_name="development"):
     app.config["GOOGLE_CLOUD_API_KEY"] = os.environ.get(
         "GOOGLE_CLOUD_API_KEY", "dev-google-cloud-api-key"
     )
+    app.config["OPENROUTER_API_KEY"] = os.environ.get(
+        "OPENROUTER_API_KEY", "dev-openrouter-api-key"
+    )
     app.config["SESSION_COOKIE_HTTPONLY"] = True
     app.config["SESSION_COOKIE_SECURE"] = False  # Set to True in production
     app.config["SESSION_COOKIE_SAMESITE"] = "Lax"  # 'Strict' in production

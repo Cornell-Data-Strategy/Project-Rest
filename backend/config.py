@@ -20,6 +20,9 @@ class Config:
     # Google Cloud settings
     GOOGLE_CLOUD_API_KEY = os.environ.get('GOOGLE_CLOUD_API_KEY')
     
+    # OpenRouter settings
+    OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
+    
     # scraping settings
     # TODO to be determined what's needed
 
@@ -28,11 +31,13 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     GOOGLE_CLOUD_API_KEY = os.environ.get('GOOGLE_CLOUD_API_KEY')
+    OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
     
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     GOOGLE_CLOUD_API_KEY = os.environ.get('GOOGLE_CLOUD_API_KEY')
+    OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')
     
 class ProductionConfig(Config):
     DEBUG = False
