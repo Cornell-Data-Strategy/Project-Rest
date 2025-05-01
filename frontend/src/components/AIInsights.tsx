@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getAIInsights } from "../api/endpoints";
 import axios from "axios";
-
+import { getAIInsights, postAIInsight } from "../api/endpoints";
 interface Insight {
   id: string;
   title: string;
@@ -21,6 +20,34 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+    // On mount, try to load the latest saved insight
+  useEffect(() => {
+    const fetchLatestInsight = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await getAIInsights(businessId);
+        if (response.data.insights) {
+          const newInsight: Insight = {
+            id: response.data.insight_id ? response.data.insight_id.toString() : Date.now().toString(),
+            title: "Latest AI Analysis",
+            description: response.data.insights,
+            relatedReviews: 0,
+            date: response.data.created_at ? response.data.created_at : new Date().toISOString(),
+          };
+          setInsights([newInsight]);
+        }
+      } catch (err) {
+        console.error("Error fetching latest insight:", err);
+        setError("Failed to fetch the latest insight. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLatestInsight();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [businessId]);
+
   // When insights update, notify parent component
   useEffect(() => {
     if (onInsightsUpdated && insights !== initialInsights) {
@@ -28,59 +55,55 @@ const AIInsights: React.FC<AIInsightsProps> = ({ insights: initialInsights, busi
     }
   }, [insights, initialInsights, onInsightsUpdated]);
 
-  const handleGenerateInsights = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      // Create an AbortController to handle timeout manually
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => {
-        controller.abort();
-      }, 30000); // 30 seconds timeout
+const handleGenerateInsights = async () => {
+  try {
+    setLoading(true);
+    setError(null);
 
-      try {
-        const response = await getAIInsights(businessId);
-        clearTimeout(timeoutId);
-        
-        console.log("AI Insights Response:", response.data);
-        
-        // Process the insights from the API
-        if (response.data.insights) {
-          // Create a new insight from the analysis
-          const newInsight: Insight = {
-            id: Date.now().toString(),
-            title: "Latest AI Analysis",
-            description: response.data.insights,
-            relatedReviews: 0, 
-            date: new Date().toISOString(),
-          };
-          
-          // Add the new insight to the beginning of the array
-          const updatedInsights = [newInsight, ...insights];
-          setInsights(updatedInsights);
+    // Create an AbortController to handle timeout manually
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, 30000); // 30 seconds timeout
+
+    try {
+      // Always call GET to generate or fetch the latest insight
+      const response = await getAIInsights(businessId);
+      clearTimeout(timeoutId);
+
+      if (response.data.insights) {
+        // Save to DB if not already saved (if no insight_id in response)
+        if (!response.data.insight_id) {
+          await postAIInsight(businessId, response.data.insights);
         }
-      } catch (err) {
-        clearTimeout(timeoutId);
-        
-        if (axios.isCancel(err)) {
-          setError("The request took too long to complete. AI analysis requires processing a lot of data and may sometimes timeout. Please try again.");
-        } else if (err && typeof err === 'object' && 'code' in err && err.code === 'ECONNABORTED') {
-          setError("The request timed out. Our AI server might be experiencing high load. Please try again in a moment.");
-        } else {
-          console.error("Error generating insights:", err);
-          setError("Failed to generate insights. Please try again later.");
-        }
+        const newInsight: Insight = {
+          id: response.data.insight_id ? response.data.insight_id.toString() : Date.now().toString(),
+          title: "Latest AI Analysis",
+          description: response.data.insights,
+          relatedReviews: 0,
+          date: response.data.created_at ? response.data.created_at : new Date().toISOString(),
+        };
+        const updatedInsights = [newInsight, ...insights];
+        setInsights(updatedInsights);
       }
     } catch (err) {
-      console.error("Unexpected error:", err);
-      setError("An unexpected error occurred. Please try again.");
-    } finally {
-      setLoading(false);
+      clearTimeout(timeoutId);
+      if (axios.isCancel(err)) {
+        setError("The request took too long to complete. AI analysis requires processing a lot of data and may sometimes timeout. Please try again.");
+      } else if (err && typeof err === 'object' && 'code' in err && err.code === 'ECONNABORTED') {
+        setError("The request timed out. Our AI server might be experiencing high load. Please try again in a moment.");
+      } else {
+        console.error("Error generating insights:", err);
+        setError("Failed to generate insights. Please try again later.");
+      }
     }
-  };
-
-
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    setError("An unexpected error occurred. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="bg-white rounded-lg p-6 shadow-sm">

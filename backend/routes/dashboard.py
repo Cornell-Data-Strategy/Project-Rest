@@ -7,6 +7,7 @@ from sqlalchemy import func, desc
 from datetime import datetime, timedelta, timezone
 import json
 from openai import OpenAI
+from backend.models.insight import Insight
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -591,18 +592,37 @@ def get_topic_ratings(business_id):
     
     return jsonify(response), 200
 
-#  AI Insights
-@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET'])
+from backend.models.insight import Insight
+
+@dashboard_bp.route('/business/<int:business_id>/insights', methods=['GET', 'POST'])
 @jwt_required()
-def get_ai_insights(business_id):
+def ai_insights_handler(business_id):
     """
-    Get AI-generated insights for a business based on reviews using openrouter
+    GET: Return the latest saved AI insight for a business, or generate/save if not present.
+    POST: Save a new AI insight for a business.
     """
     current_user_id = get_jwt_identity()
     business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
     if not business:
         return jsonify({"error": "Business not found or access denied"}), 404
 
+    if request.method == 'POST':
+        data = request.get_json()
+        content = data.get('content')
+        if not content:
+            return jsonify({"error": "Content is required"}), 400
+        insight = Insight(business_id=business_id, content=content)
+        db.session.add(insight)
+        db.session.commit()
+        return jsonify({"message": "Insight saved", "insight": insight.to_dict()}), 201
+
+    # GET method
+    # Try to fetch the latest saved insight
+    latest_insight = Insight.query.filter_by(business_id=business_id).order_by(Insight.created_at.desc()).first()
+    if latest_insight:
+        return jsonify({"insights": latest_insight.content, "insight_id": latest_insight.id, "created_at": latest_insight.created_at}), 200
+
+    # If not found, generate, save, and return
     OPENROUTER_API_KEY = current_app.config.get('OPENROUTER_API_KEY')
     if not OPENROUTER_API_KEY:
         return jsonify({"error": "OpenRouter API key not configured"}), 500
@@ -610,7 +630,7 @@ def get_ai_insights(business_id):
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=OPENROUTER_API_KEY,
-        timeout=None  # Remove the timeout limit
+        timeout=None
     )
 
     TIMEFRAMES = {
@@ -643,7 +663,6 @@ def get_ai_insights(business_id):
         "\n\nHere are the reviews:"
     ]
 
-    # Add all
     for review in sorted(reviews, key=lambda r: r.review_date_estimate, reverse=True):
         line = f"- [{review.review_date_estimate.strftime('%Y-%m-%d')}] {review.content} (Rating: {review.rating}, Sentiment: {review.sentiment_description}, Topics: {review.topics})"
         prompt_lines.append(line)
@@ -659,6 +678,10 @@ def get_ai_insights(business_id):
             ],
         )
         ai_summary = response.choices[0].message.content.strip()
-        return jsonify({"insights": ai_summary}), 200
+        # Save to DB
+        new_insight = Insight(business_id=business_id, content=ai_summary)
+        db.session.add(new_insight)
+        db.session.commit()
+        return jsonify({"insights": ai_summary, "insight_id": new_insight.id, "created_at": new_insight.created_at}), 200
     except Exception as e:
         return jsonify({"error": f"Error generating insights: {str(e)}"}), 500
