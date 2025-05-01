@@ -136,16 +136,15 @@ function Dashboard({ userData }: DashboardProps) {
         const businessId = userData.businesses[0].id;
         
         // Call your API to fetch data
-        const response = await getBusinessSummary(businessId);
-
-        console.log("API Response:", response.data);
+        const summaryResponse = await getBusinessSummary(businessId);
+        console.log("API Response:", summaryResponse.data);
         
         // Update dashboard data with API response
         setDashboardData(prevData => ({
-          reviewCount: response.data.review_count,
-          averageRating: response.data.average_rating,
-          sentimentScore: response.data.overall_sentiment_score,
-          mostMentionedTopic: response.data.most_mentioned_topic || "None",
+          reviewCount: summaryResponse.data.review_count,
+          averageRating: summaryResponse.data.average_rating,
+          sentimentScore: summaryResponse.data.overall_sentiment_score,
+          mostMentionedTopic: summaryResponse.data.most_mentioned_topic || "None",
           
           // Keep static percent changes for now
           reviewCountPercentChange: prevData.reviewCountPercentChange,
@@ -202,10 +201,9 @@ function Dashboard({ userData }: DashboardProps) {
               averageRating: dashboardData.averageRating,
               sentimentScore: dashboardData.sentimentScore,
               mostMentionedTopic: dashboardData.mostMentionedTopic,
-             
-              reviewCountPercentChange: dashboardData.reviewCountPercentChange,
-              averageRatingPercentChange: dashboardData.averageRatingPercentChange,
-              sentimentScorePercentChange: dashboardData.sentimentScorePercentChange
+              // reviewCountPercentChange: dashboardData.reviewCountPercentChange,
+              // averageRatingPercentChange: dashboardData.averageRatingPercentChange,
+              // sentimentScorePercentChange: dashboardData.sentimentScorePercentChange
             }} 
           />
 
@@ -235,7 +233,10 @@ function Dashboard({ userData }: DashboardProps) {
           {/* Fourth Row: Topic Ratings and AI Insights */}
           <div className="w-full flex flex-col gap-8">
             <TopicRatings ratings={dashboardData.topicRatings} />
-            <AIInsights insights={dashboardData.aiInsights} />
+            <AIInsights 
+              insights={dashboardData.aiInsights} 
+              businessId={userData!.businesses[0].id} 
+            />
           </div>
         </div>
       </div>

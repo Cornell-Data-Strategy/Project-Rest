@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from backend.models.database import db
 from backend.models.business import Business
 from backend.models.review import Review
@@ -6,7 +6,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import func, desc
 from datetime import datetime, timedelta, timezone
 import json
-from flask import current_app
 from openai import OpenAI
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -597,46 +596,61 @@ def get_topic_ratings(business_id):
 @jwt_required()
 def get_ai_insights(business_id):
     """
-    Get AI-generated insights for a business based on reviews
+    Get AI-generated insights for a business based on reviews using openrouter
     """
-    OPENROUTER_API_KEY = current_app.config['OPENROUTER_API_KEY']
+    current_user_id = get_jwt_identity()
+    business = Business.query.filter_by(id=business_id, user_id=current_user_id).first()
+    if not business:
+        return jsonify({"error": "Business not found or access denied"}), 404
+
+    OPENROUTER_API_KEY = current_app.config.get('OPENROUTER_API_KEY')
+    if not OPENROUTER_API_KEY:
+        return jsonify({"error": "OpenRouter API key not configured"}), 500
+
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=OPENROUTER_API_KEY,
+        timeout=None  # Remove the timeout limit
     )
+
     TIMEFRAMES = {
         'last week': timedelta(weeks=1),
         'last month': timedelta(days=30),
         'last six month': timedelta(days=182),
         'last year': timedelta(days=365),
     }
-    timeframe = TIMEFRAMES.get('last month')
+    timeframe = 'last year'
     since_date = datetime.now(timezone.utc) - TIMEFRAMES[timeframe]
+
     reviews = Review.query.filter(
         Review.business_id == business_id,
         Review.review_date_estimate >= since_date
     ).all()
+
     if not reviews:
         return jsonify({"message": "No reviews found in this timeframe."})
-    
-    #prompt
-    prompt_text = "Give a one paragraph summary analyzing the following restaurant reviews to provide insights on common complaints, suggestions for improvement, and recurring themes:\n\n"
-    for review in reviews:
-        content = review.content or "[No Content]"
-        sentiment = review.sentiment_description or "unknown"
-        prompt_text += f"Review: {content}\nSentiment: {sentiment}\n\n"
-    
-    # Call OpenRouter DeepSeek R1
+
+    prompt_lines = [
+        "Give a one paragraph summary analyzing the following restaurant reviews to provide insights on common complaints, suggestions for improvement, and recurring themes:",
+        ""
+    ]
+
+    # Add all
+    for review in sorted(reviews, key=lambda r: r.review_date_estimate, reverse=True):
+        line = f"- [{review.review_date_estimate.strftime('%Y-%m-%d')}] {review.content} (Rating: {review.rating}, Sentiment: {review.sentiment_description}, Topics: {review.topics})"
+        prompt_lines.append(line)
+
+    prompt = "\n".join(prompt_lines)
+
     try:
-        completion = client.chat.completions.create(
-            extra_body={},
+        response = client.chat.completions.create(
             model="deepseek/deepseek-r1:free",
             messages=[
-                {"role": "system", "content": "You are a restaurant owner wanting to understand insights on customer feedback."},
-                {"role": "user", "content": prompt_text},
-            ]
+                {"role": "system", "content": "You are an expert restaurant business analyst."},
+                {"role": "user", "content": prompt}
+            ],
         )
-        analysis = completion.choices[0].message.content
-        return jsonify({"analysis": analysis})
+        ai_summary = response.choices[0].message.content.strip()
+        return jsonify({"insights": ai_summary}), 200
     except Exception as e:
-        return jsonify({"error": f"Failed to generate summary: {str(e)}"}), 500
+        return jsonify({"error": f"Error generating insights: {str(e)}"}), 500
