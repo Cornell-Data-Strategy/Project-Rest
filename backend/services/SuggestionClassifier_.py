@@ -102,7 +102,6 @@ class SuggestionClassifier:
         self.clf.fit(X_tfidf, y)
         self.is_fitted = True
         
-        # Return the proportion of suggestions found for reference
         return sum(y) / len(y)
     
     def predict(self, text, threshold=0.5):
