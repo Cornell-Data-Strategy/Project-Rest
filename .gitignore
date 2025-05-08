@@ -6,8 +6,7 @@ node_modules
 .DS_Store
 .venv/
 cache/
-*.env
 __pycache__/
 venv/
-backend/.env
 instance/project_rest.db
+*.env
